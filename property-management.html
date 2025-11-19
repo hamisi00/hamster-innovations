@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive property management system for landlords with rent tracking, tenant management, and maintenance scheduling">
+    <title>Property Management System | Hamster Innovations</title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/transitions.css">
+</head>
+<body>
+    <!-- Animated Background Layer -->
+    <div class="background-layer">
+        <div class="background-image"></div>
+        <div class="bokeh-overlay">
+            <div class="bokeh-element bokeh-1"></div>
+            <div class="bokeh-element bokeh-2"></div>
+            <div class="bokeh-element bokeh-3"></div>
+            <div class="bokeh-element bokeh-4"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/icon.png" alt="Hamster Innovations" class="logo-icon">
+                    <span class="company-name">Hamster Innovations</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#analytics" class="nav-link">Analytics</a></li>
+                <li><a href="#cta" class="nav-link">Get Started</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section" style="min-height: 60vh;">
+        <div class="hero-content">
+            <h1 class="hero-title" data-animate="title">
+                <span class="word">Property</span>
+                <span class="word">Management</span>
+                <span class="word">System</span>
+            </h1>
+            <p class="hero-tagline" data-animate="fade-up">
+                Complete Landlord & Tenant Management Solution
+            </p>
+            <p class="hero-subtitle" data-animate="fade-up">
+                Manage multiple properties, track rent payments, handle maintenance requests, and generate financial reports — all from one powerful desktop application
+            </p>
+        </div>
+    </section>
+
+    <!-- Product Screenshot Hero -->
+    <section style="padding: 2rem 0;">
+        <div class="content-container">
+            <div class="product-screenshot" data-animate="fade-up" style="text-align: center;">
+                <img src="images/products/property-management/hero-dashboard.png" alt="Property Dashboard with Occupancy Overview" style="max-width: 100%; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="features-tabs-section">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Core Features</h2>
+                <p class="section-subtitle">Everything you need to manage rental properties efficiently</p>
+            </div>
+
+            <!-- Feature Grid -->
+            <div class="bento-grid" data-animate="bento-reveal" style="margin-top: 3rem; grid-auto-rows: 150px;">
+                <!-- Feature 1: Multi-Property Support -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🏢</div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Multi-Property Support</h3>
+                        <p style="margin-bottom: 1rem;">Manage multiple properties and locations from one dashboard. Visual grid layout shows all units with real-time occupancy status. Track shops, residential units, and multiple floors across different buildings.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Visual Grid Layout</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Real-time Status</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Multi-Building</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Rent Collection -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">💰</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Rent Collection & Payments</h3>
+                        <p style="margin-bottom: 1rem;">Track paid, pending, overdue, and partial payments. Support for Cash, M-Pesa, Bank Transfer, and Cheque. Bulk rent reminders and automated payment notifications.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Multi-Payment</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Status Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Auto Reminders</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 3: Tenant Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">👥</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Tenant Management</h3>
+                        <p style="margin-bottom: 1rem;">Comprehensive tenant profiles with contact information, lease tracking, and payment history. Multi-month payment allocation with carryover balance handling and payment status filtering.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Tenant Profiles</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Lease Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Payment History</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Facility Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🔧</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Facility Management</h3>
+                        <p style="margin-bottom: 1rem;">Schedule and track maintenance, cleaning, security, landscaping, waste management, and pest control services. View service history and upcoming maintenance at a glance.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Service Scheduling</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Service History</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Maintenance Alerts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 5: Expense Tracking -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">💸</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Expense Tracking</h3>
+                        <p style="margin-bottom: 1rem;">Categorized expense tracking for supplies, maintenance, utilities, and management. Filter by time period, category, amount range with vendor/supplier management.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Categorized Expenses</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Vendor Management</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Date Filtering</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 6: Reports & Data Export -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📈</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Reports & Data Export</h3>
+                        <p style="margin-bottom: 1rem;">Generate detailed financial reports with customizable date ranges. Export to PDF and CSV formats. Google Sheets integration for cloud backup and synchronization. Performance metrics tracking.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Financial Reports</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Data Export</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Cloud Backup</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard Showcase -->
+    <section id="analytics" style="padding: 4rem 0; background: rgba(74, 144, 226, 0.02);">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up" style="text-align: center; margin-bottom: 2rem;">
+                <h2 class="section-title">Financial Analytics & Reports</h2>
+                <p class="section-subtitle">Make informed decisions with comprehensive property performance insights</p>
+            </div>
+            <div class="product-screenshot" data-animate="fade-up" style="text-align: center;">
+                <img src="images/products/property-management/analytics-dashboard.png" alt="Financial Dashboard with Occupancy & Revenue Analytics" style="max-width: 100%; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            </div>
+            <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">💰 Revenue Tracking</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Total revenue, collection rates, payment trends</p>
+                </div>
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">📊 Occupancy Analytics</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Vacancy rates, turnover analysis, unit performance</p>
+                </div>
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">📈 Performance Metrics</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Average rent, maintenance costs, profit margins</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="contact-section" style="padding: 4rem 0; text-align: center;">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Ready to Simplify Property Management?</h2>
+                <p class="section-subtitle">Let's discuss your needs</p>
+            </div>
+            <div class="hero-cta" data-animate="fade-up" style="margin-top: 2rem; justify-content: center;">
+                <a href="https://wa.me/254717205175?text=Hi!%20I'm%20interested%20in%20the%20Property%20Management%20System" target="_blank" class="btn btn-primary">Get Started</a>
+                <a href="index.html#contact" class="btn btn-secondary">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="content-container">
+            <p>&copy; 2025 Hamster Innovations. From Idea to Interface - We build what you Imagine.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/utils.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/page-transitions.js"></script>
+</body>
+</html>

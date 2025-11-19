@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hamster Innovations - Software development company delivering reliable, desktop-first applications for SMEs">
+    <title>Hamster Innovations | From Idea to Interface</title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/transitions.css">
+</head>
+<body>
+    <!-- Animated Background Layer -->
+    <div class="background-layer">
+        <div class="background-image"></div>
+        <div class="bokeh-overlay">
+            <div class="bokeh-element bokeh-1"></div>
+            <div class="bokeh-element bokeh-2"></div>
+            <div class="bokeh-element bokeh-3"></div>
+            <div class="bokeh-element bokeh-4"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#hero" class="logo-link">
+                    <img src="assets/icon.png" alt="Hamster Innovations" class="logo-icon">
+                    <span class="company-name">Hamster Innovations</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="#solutions" class="nav-link">Packages</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title" data-animate="title">
+                <span class="word">Hamster</span>
+                <span class="word">Innovations</span>
+            </h1>
+            <p class="hero-tagline" data-animate="fade-up">
+                From Idea to Interface
+            </p>
+            <p class="hero-subtitle" data-animate="fade-up">
+                We build what you imagine — reliable software for businesses and organizations that just works
+            </p>
+            <div class="hero-cta" data-animate="fade-up">
+                <a href="https://wa.me/254717205175" target="_blank" class="btn btn-primary">Chat on WhatsApp</a>
+                <a href="#contact" class="btn btn-secondary">Contact Us</a>
+            </div>
+        </div>
+        <div class="scroll-indicator" data-animate="fade-up">
+            <span>Scroll to explore</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">What We Do</h2>
+                <p class="section-subtitle">Pragmatic, local-first software that just works — even when the internet doesn't</p>
+            </div>
+            <div class="about-content" data-animate="parallax">
+                <div class="about-text" data-animate="fade-up">
+                    <p class="about-highlight">
+                        Many Kenyan businesses, organizations, and communities still manage operations using spreadsheets and paper. That causes lost sales,
+                        slow reconciliation, and fragile operations when connectivity fails.
+                    </p>
+                    <p>
+                        We turn messy workflows into reliable, desktop-first applications. From retail shops to gyms,
+                        chamas, and property management — we build systems that handle records, transactions, and
+                        analytics with confidence.
+                    </p>
+                </div>
+                <div class="about-image" data-animate="fade-up">
+                    <img src="images/home/about-dashboard.png" alt="Dashboard Overview" style="max-width: 100%; border-radius: 0.5rem;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features Section - Header Tabs Style -->
+    <section id="features" class="features-tabs-section">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Core Features</h2>
+                <p class="section-subtitle">Powerful capabilities built into every package</p>
+            </div>
+
+            <!-- Feature Tabs -->
+            <div class="feature-tabs" data-animate="fade-up">
+                <button class="feature-tab active" data-tab="offline">
+                    <span class="tab-icon">📴</span>
+                    <span class="tab-label">Offline-First</span>
+                </button>
+                <button class="feature-tab" data-tab="security">
+                    <span class="tab-icon">🔐</span>
+                    <span class="tab-label">Security & Roles</span>
+                </button>
+                <button class="feature-tab" data-tab="payments">
+                    <span class="tab-icon">💳</span>
+                    <span class="tab-label">Payments</span>
+                </button>
+                <button class="feature-tab" data-tab="analytics">
+                    <span class="tab-icon">📊</span>
+                    <span class="tab-label">Analytics</span>
+                </button>
+            </div>
+
+            <!-- Tab Content Panels -->
+            <div class="tab-content-container">
+                <!-- Offline Tab (FIRST - ACTIVE) -->
+                <div class="tab-panel active" id="offline">
+                    <div class="tab-inner">
+                        <div class="tab-text">
+                            <h3>Offline-First Architecture</h3>
+                            <p>Local queueing with Google Sheets backend synchronization and intelligent conflict resolution for uninterrupted work.</p>
+                            <div class="feature-list">
+                                <span class="feature-item">✓ Local Storage</span>
+                                <span class="feature-item">✓ Google Sheets Sync</span>
+                                <span class="feature-item">✓ Conflict Resolution</span>
+                            </div>
+                        </div>
+                        <div class="tab-image">
+                            <img src="images/home/features/offline-sync.png" alt="Offline Sync Status" style="max-width: 100%; border-radius: 0.5rem;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Tab -->
+                <div class="tab-panel" id="security">
+                    <div class="tab-inner">
+                        <div class="tab-text">
+                            <h3>Security & Access Control</h3>
+                            <p>Role-based access controls with granular permissions, comprehensive audit logs, and export controls for compliance.</p>
+                            <div class="feature-list">
+                                <span class="feature-item">✓ Role Management</span>
+                                <span class="feature-item">✓ Audit Logs</span>
+                                <span class="feature-item">✓ Granular Permissions</span>
+                            </div>
+                        </div>
+                        <div class="tab-image">
+                            <img src="images/home/features/security-dashboard.png" alt="Security Dashboard" style="max-width: 100%; border-radius: 0.5rem;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payments Tab -->
+                <div class="tab-panel" id="payments">
+                    <div class="tab-inner">
+                        <div class="tab-text">
+                            <h3>Transactions & Payments</h3>
+                            <p>MPESA and card payment integrations with automated reconciliation, digital receipts, and tax-compliant invoices.</p>
+                            <div class="feature-list">
+                                <span class="feature-item">✓ MPESA Integration</span>
+                                <span class="feature-item">✓ Card Payments</span>
+                                <span class="feature-item">✓ Auto-Reconciliation</span>
+                            </div>
+                        </div>
+                        <div class="tab-image">
+                            <img src="images/home/features/payment-processing.png" alt="Payment Processing" style="max-width: 100%; border-radius: 0.5rem;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Tab -->
+                <div class="tab-panel" id="analytics">
+                    <div class="tab-inner">
+                        <div class="tab-text">
+                            <h3>Reports & Analytics</h3>
+                            <p>Pre-built KPI dashboards showing MRR, daily sales, occupancy rates, and top-performing items with exportable reports.</p>
+                            <div class="feature-list">
+                                <span class="feature-item">✓ KPI Dashboards</span>
+                                <span class="feature-item">✓ Custom Reports</span>
+                                <span class="feature-item">✓ Data Export</span>
+                            </div>
+                        </div>
+                        <div class="tab-image">
+                            <img src="images/home/features/analytics-dashboard.png" alt="Analytics Dashboard" style="max-width: 100%; border-radius: 0.5rem;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Showcase - Cascading Cards -->
+    <section id="products" class="products-showcase-section">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Our Products</h2>
+                <p class="section-subtitle">Industry-specific solutions tailored to your needs</p>
+            </div>
+
+            <div class="cascading-cards-container">
+                <div class="cascading-card" data-product="1">
+                    <div class="cascade-card-header">
+                        <h3>Website Development</h3>
+                    </div>
+                    <div class="cascade-card-body">
+                        <p>We craft stunning, high-performance websites tailored to your specific needs. From simple landing pages to complex web applications — built with modern design principles, smooth animations, and mobile-first responsiveness.</p>
+                        <ul class="product-features">
+                            <li>✓ Custom Design & Branding</li>
+                            <li>✓ Responsive Mobile-First</li>
+                            <li>✓ Modern Animations</li>
+                            <li>✓ SEO Optimized</li>
+                            <li>✓ Fast Performance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="contribution-tracker.html" class="cascading-card" data-product="2">
+                    <div class="cascade-card-header">
+                        <h3>Contribution Tracker</h3>
+                        <span class="card-arrow">→</span>
+                    </div>
+                    <div class="cascade-card-body">
+                        <p>Group savings & contributions: member tracking, payment records, automated notifications, and transparent financial reports for chamas, SACCOs, and community groups.</p>
+                        <div class="product-screenshot">
+                            <img src="images/products/thumbnails/contribution-tracker.png" alt="Contribution Dashboard" style="max-width: 100%; border-radius: 0.5rem;">
+                        </div>
+                    </div>
+                </a>
+
+                <a href="gym-management.html" class="cascading-card" data-product="3">
+                    <div class="cascade-card-header">
+                        <h3>Gym Management System</h3>
+                        <span class="card-arrow">→</span>
+                    </div>
+                    <div class="cascade-card-body">
+                        <p>Complete gym operations: member registration, access control, billing, equipment tracking, and class scheduling.</p>
+                        <div class="product-screenshot">
+                            <img src="images/products/thumbnails/gym-management.png" alt="Gym Dashboard" style="max-width: 100%; border-radius: 0.5rem;">
+                        </div>
+                    </div>
+                </a>
+
+                <a href="property-management.html" class="cascading-card" data-product="5">
+                    <div class="cascade-card-header">
+                        <h3>Property Management</h3>
+                        <span class="card-arrow">→</span>
+                    </div>
+                    <div class="cascade-card-body">
+                        <p>Landlord & tenant management: rent tracking, lease management, maintenance requests, and automated payment reminders.</p>
+                        <div class="product-screenshot">
+                            <img src="images/products/thumbnails/property-management.png" alt="Property Dashboard" style="max-width: 100%; border-radius: 0.5rem;">
+                        </div>
+                    </div>
+                </a>
+
+                <a href="retail-pos.html" class="cascading-card" data-product="6">
+                    <div class="cascade-card-header">
+                        <h3>Retail Point of Sale</h3>
+                        <span class="card-arrow">→</span>
+                    </div>
+                    <div class="cascade-card-body">
+                        <p>Streamlined retail operations: inventory management, sales processing, MPESA/card payments, and real-time reports.</p>
+                        <div class="product-screenshot">
+                            <img src="images/products/thumbnails/retail-pos.png" alt="POS Interface" style="max-width: 100%; border-radius: 0.5rem;">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Package Tiers Section -->
+    <section id="solutions" class="packages-section">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Package Tiers</h2>
+                <p class="section-subtitle">Scalable solutions that grow with your business</p>
+            </div>
+            <div class="packages-stack">
+                <!-- Package Card 1: Basic -->
+                <div class="package-card" data-index="0">
+                    <div class="package-icon">📦</div>
+                    <h3 class="package-title">Basic</h3>
+                    <p class="package-description">Core operations: registration, billing, equipment</p>
+                    <ul class="package-features">
+                        <li>✓ Essential Features</li>
+                        <li>✓ Local Data Storage</li>
+                        <li>✓ Basic Reporting</li>
+                    </ul>
+                </div>
+
+                <!-- Package Card 2: Standard -->
+                <div class="package-card" data-index="1">
+                    <div class="package-icon">📊</div>
+                    <h3 class="package-title">Standard</h3>
+                    <p class="package-description">Basic + Google Sheets backend integration</p>
+                    <ul class="package-features">
+                        <li>✓ All Basic Features</li>
+                        <li>✓ Google Sheets Sync</li>
+                        <li>✓ Cloud Backup</li>
+                    </ul>
+                </div>
+
+                <!-- Package Card 3: Pro -->
+                <div class="package-card" data-index="2">
+                    <div class="package-icon">⚡</div>
+                    <h3 class="package-title">Pro</h3>
+                    <p class="package-description">Standard + Email automation</p>
+                    <ul class="package-features">
+                        <li>✓ All Standard Features</li>
+                        <li>✓ Email Automation</li>
+                        <li>✓ Advanced Analytics</li>
+                    </ul>
+                </div>
+
+                <!-- Package Card 4: Add-ons -->
+                <div class="package-card" data-index="3">
+                    <div class="package-icon">🔧</div>
+                    <h3 class="package-title">Add-ons</h3>
+                    <p class="package-description">Custom modules tailored to your needs</p>
+                    <ul class="package-features">
+                        <li>✓ Custom Integrations</li>
+                        <li>✓ Specialized Modules</li>
+                        <li>✓ Priority Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="partners-section" style="padding: 4rem 0; display: none;">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Trusted By Organizations</h2>
+                <p class="section-subtitle">Join businesses and communities already running smoother with our solutions</p>
+            </div>
+            <div class="partners-showcase" data-animate="fade-up">
+                <div class="partners-placeholder" style="background: linear-gradient(135deg, rgba(74, 144, 226, 0.05), rgba(107, 93, 209, 0.05)); border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1); padding: 60px 40px; text-align: center;">
+                    <p style="color: var(--color-text-muted); font-size: 1.1rem;">
+                        [ Screenshot: Client Logos / Success Stories / Testimonials ]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section" style="padding: 4rem 0; text-align: center;">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Get Started Today</h2>
+                <p class="section-subtitle">Ready to transform your operations? Let's talk.</p>
+            </div>
+
+            <!-- Contact CTA Buttons -->
+            <div class="hero-cta" data-animate="fade-up" style="margin-top: 2rem; justify-content: center;">
+                <a href="https://wa.me/254717205175" target="_blank" class="btn btn-secondary">Chat on WhatsApp</a>
+                <button id="openContactModal" class="btn btn-primary">Email Us</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Modal -->
+    <div id="contactModal" class="modal" style="display: none;">
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+        <div class="modal-container">
+            <div class="modal-content">
+                <button class="modal-close" id="closeModal" aria-label="Close modal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+
+                <div class="modal-header">
+                    <h2>Get in Touch</h2>
+                    <p>Fill out the form below and we'll get back to you soon.</p>
+                </div>
+
+                <form id="contactForm" class="contact-form">
+                    <!-- Name Field -->
+                    <div class="form-group">
+                        <label for="name">Name <span class="required">*</span></label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            class="form-input"
+                            required
+                            placeholder="Your name"
+                        >
+                        <span class="error-message"></span>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="form-group" id="emailGroup">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <div class="input-with-validation">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="form-input"
+                                required
+                                placeholder="your.email@example.com"
+                            >
+                            <span class="validation-indicator" id="emailValidationIndicator" style="display: none;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" opacity="0.25"/>
+                                    <path d="M12 2 A 10 10 0 0 1 22 12" stroke-linecap="round"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <span class="error-message"></span>
+                        <span class="validation-message" id="emailValidationMessage"></span>
+                    </div>
+
+                    <!-- Contact Field (Optional) -->
+                    <div class="form-group">
+                        <label for="contact">Contact Number</label>
+                        <input
+                            type="tel"
+                            id="contact"
+                            name="contact"
+                            class="form-input"
+                            placeholder="254712345678 (optional)"
+                        >
+                        <span class="error-message"></span>
+                    </div>
+
+                    <!-- Project Description Field -->
+                    <div class="form-group">
+                        <label for="project">Project Description <span class="required">*</span></label>
+                        <textarea
+                            id="project"
+                            name="project"
+                            class="form-input form-textarea"
+                            rows="5"
+                            required
+                            placeholder="Tell us about your project and what you need..."
+                        ></textarea>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary form-submit-btn" id="submitBtn">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loader" style="display: none;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" opacity="0.25"/>
+                                <path d="M12 2 A 10 10 0 0 1 22 12" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                    </button>
+
+                    <!-- Success Message -->
+                    <div class="form-success-message" id="successMessage" style="display: none;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <p>Message sent! We'll get back to you soon.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="content-container">
+            <!-- Footer Top -->
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3 class="footer-logo">Hamster Innovations</h3>
+                    <p class="footer-tagline">From Idea to Interface — We build what you Imagine</p>
+                </div>
+            </div>
+
+            <!-- Footer Grid -->
+            <div class="footer-grid">
+                <!-- Products Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="contribution-tracker.html">Contribution Tracker</a></li>
+                        <li><a href="gym-management.html">Gym Management</a></li>
+                        <li><a href="property-management.html">Property Management</a></li>
+                        <li><a href="retail-pos.html">Retail POS</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#solutions">Our Packages</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="https://wa.me/254717205175" target="_blank">WhatsApp Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Connect Column -->
+                <div class="footer-column">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://wa.me/254717205175" target="_blank">WhatsApp</a></li>
+                        <li><a href="mailto:hamaborj@gmail.com">Email Us</a></li>
+                        <li><span>Nairobi, Kenya</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="policies.html">Terms & Policies</a>
+                </div>
+                <p class="footer-copyright">&copy; 2025 Hamster Innovations. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- JavaScript Files -->
+    <script src="js/utils.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/page-transitions.js"></script>
+</body>
+</html>

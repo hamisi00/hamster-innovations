@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive gym management system with member tracking, billing, equipment management, and class scheduling">
+    <title>Gym Management System | Hamster Innovations</title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/transitions.css">
+</head>
+<body>
+    <!-- Animated Background Layer -->
+    <div class="background-layer">
+        <div class="background-image"></div>
+        <div class="bokeh-overlay">
+            <div class="bokeh-element bokeh-1"></div>
+            <div class="bokeh-element bokeh-2"></div>
+            <div class="bokeh-element bokeh-3"></div>
+            <div class="bokeh-element bokeh-4"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/icon.png" alt="Hamster Innovations" class="logo-icon">
+                    <span class="company-name">Hamster Innovations</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#analytics" class="nav-link">Analytics</a></li>
+                <li><a href="#cta" class="nav-link">Get Started</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section" style="min-height: 60vh;">
+        <div class="hero-content">
+            <h1 class="hero-title" data-animate="title">
+                <span class="word">Gym</span>
+                <span class="word">Management</span>
+                <span class="word">System</span>
+            </h1>
+            <p class="hero-tagline" data-animate="fade-up">
+                Complete Operations Management for Modern Fitness Centers
+            </p>
+            <p class="hero-subtitle" data-animate="fade-up">
+                Streamline member registration, billing, equipment tracking, class scheduling, and analytics — all in one powerful desktop application
+            </p>
+        </div>
+    </section>
+
+    <!-- Product Screenshot Hero -->
+    <section style="padding: 2rem 0;">
+        <div class="content-container">
+            <div class="product-screenshot" data-animate="fade-up" style="text-align: center;">
+                <img src="images/products/gym-management/hero-dashboard.png" alt="Gym Dashboard Overview with Member Statistics" style="max-width: 100%; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="features-tabs-section">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Core Features</h2>
+                <p class="section-subtitle">Everything you need to run a successful gym operation</p>
+            </div>
+
+            <!-- Feature Grid -->
+            <div class="bento-grid" data-animate="bento-reveal" style="margin-top: 3rem; grid-auto-rows: 150px;">
+                <!-- Feature 1: Member Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">👥</div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Member Management</h3>
+                        <p style="margin-bottom: 1rem;">Complete member profiles with membership tracking, status management (Active, Frozen, Expired), and search capabilities. Categorize by membership type (Basic, Premium, VIP) with automated expiry alerts.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Profile Management</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Status Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Auto Expiry Alerts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Payment Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">💳</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Payment Management</h3>
+                        <p style="margin-bottom: 1rem;">Process payments with multiple methods (Cash, M-Pesa, Bank Transfer, Card). Track payment status with automated email reminders for overdue accounts.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Multi-Payment</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Status Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Email Reminders</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 3: Class & Trainer Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🏋️</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Class & Trainer Management</h3>
+                        <p style="margin-bottom: 1rem;">Schedule classes with timeline view, track trainer certifications with expiry alerts, assign clients, and monitor performance metrics and specializations.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Class Scheduling</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Certification Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Performance Metrics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Equipment Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🔧</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Equipment Management</h3>
+                        <p style="margin-bottom: 1rem;">Track equipment inventory by category (Cardio, Strength, Free Weights). Schedule maintenance, monitor status, and receive automated alerts for servicing.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Inventory Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Maintenance Schedule</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Service Alerts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 5: Reports & Data Export -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📈</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Reports & Data Export</h3>
+                        <p style="margin-bottom: 1rem;">Generate financial reports, member analytics, and trainer performance reviews. Export data in PDF, CSV, or JSON. Google Sheets integration for cloud backup.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Financial Reports</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Data Export</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Cloud Backup</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 6: Email Automation -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📧</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Email Automation</h3>
+                        <p style="margin-bottom: 1rem;">Automated welcome messages, payment reminders, and expiry notifications. Birthday reminders and activity notifications keep you connected with members.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Welcome Emails</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Payment Reminders</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Birthday Alerts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard Showcase -->
+    <section id="analytics" style="padding: 4rem 0; background: rgba(74, 144, 226, 0.02);">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up" style="text-align: center; margin-bottom: 2rem;">
+                <h2 class="section-title">Powerful Analytics & Insights</h2>
+                <p class="section-subtitle">Make data-driven decisions with comprehensive reports and real-time metrics</p>
+            </div>
+            <div class="product-screenshot" data-animate="fade-up" style="text-align: center;">
+                <img src="images/products/gym-management/analytics-dashboard.png" alt="Analytics Dashboard with Charts & Performance Metrics" style="max-width: 100%; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            </div>
+            <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">📊 Financial Reports</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Revenue, expenses, profit analysis with visual charts</p>
+                </div>
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">👥 Member Analytics</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Registration trends, retention rates, demographics</p>
+                </div>
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">💪 Performance Tracking</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Trainer performance, class utilization, equipment usage</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="contact-section" style="padding: 4rem 0; text-align: center;">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Ready to Transform Your Gym?</h2>
+                <p class="section-subtitle">Let's discuss your needs</p>
+            </div>
+            <div class="hero-cta" data-animate="fade-up" style="margin-top: 2rem; justify-content: center;">
+                <a href="https://wa.me/254717205175?text=Hi!%20I'm%20interested%20in%20the%20Gym%20Management%20System" target="_blank" class="btn btn-primary">Get Started</a>
+                <a href="index.html#contact" class="btn btn-secondary">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="content-container">
+            <p>&copy; 2025 Hamster Innovations. From Idea to Interface - We build what you Imagine.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/utils.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/page-transitions.js"></script>
+</body>
+</html>

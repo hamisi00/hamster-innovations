@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fund management system for chamas, SACCOs, and community groups with contribution tracking and analytics">
+    <title>Contribution Tracker | Hamster Innovations</title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/transitions.css">
+</head>
+<body>
+    <!-- Animated Background Layer -->
+    <div class="background-layer">
+        <div class="background-image"></div>
+        <div class="bokeh-overlay">
+            <div class="bokeh-element bokeh-1"></div>
+            <div class="bokeh-element bokeh-2"></div>
+            <div class="bokeh-element bokeh-3"></div>
+            <div class="bokeh-element bokeh-4"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/icon.png" alt="Hamster Innovations" class="logo-icon">
+                    <span class="company-name">Hamster Innovations</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#analytics" class="nav-link">Analytics</a></li>
+                <li><a href="#cta" class="nav-link">Get Started</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section" style="min-height: 60vh;">
+        <div class="hero-content">
+            <h1 class="hero-title" data-animate="title">
+                <span class="word">Contribution</span>
+                <span class="word">Tracker</span>
+            </h1>
+            <p class="hero-tagline" data-animate="fade-up">
+                Fund Management for Chamas, SACCOs & Community Groups
+            </p>
+            <p class="hero-subtitle" data-animate="fade-up">
+                Track group contributions, manage multiple funds with goal setting, generate transparent financial reports, and synchronize data to the cloud — perfect for community savings and investment groups
+            </p>
+        </div>
+    </section>
+
+    <!-- Product Screenshot Hero -->
+    <section style="padding: 2rem 0;">
+        <div class="content-container">
+            <div class="product-screenshot" data-animate="fade-up" style="text-align: center;">
+                <img src="images/products/contribution-tracker/hero-dashboard.png" alt="Contribution Dashboard with Fund Progress" style="max-width: 100%; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="features-tabs-section">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Core Features</h2>
+                <p class="section-subtitle">Everything you need for transparent group financial management</p>
+            </div>
+
+            <!-- Feature Grid -->
+            <div class="bento-grid" data-animate="bento-reveal" style="margin-top: 3rem; grid-auto-rows: 150px;">
+                <!-- Feature 1: Fund Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Fund Tracking & Management</h3>
+                        <p style="margin-bottom: 1rem;">Create and manage multiple fund types with flexible categorization. Set target amounts and track progress with visual indicators. Easy fund creation with real-time goal achievement monitoring for all your group's financial objectives.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Multiple Funds</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Goal Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Progress Indicators</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Group Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">👥</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Group Management</h3>
+                        <p style="margin-bottom: 1rem;">Organize contributors into groups with flexible sorting options (alphabetical, contribution-based). Track group performance and identify top contributors with leaderboard-style rankings.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Flexible Sorting</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Performance Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Leaderboard Rankings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 3: Payment Tracking -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">💳</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Payment Tracking</h3>
+                        <p style="margin-bottom: 1rem;">Record and track individual payments with powerful search and filter capabilities. Export payment data in multiple formats for accounting and reporting purposes.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Payment Records</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Search & Filter</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Data Export</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Expense Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">💸</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Expense Management</h3>
+                        <p style="margin-bottom: 1rem;">Categorized expense tracking for supplies, maintenance, utilities, and management. Filter by date ranges with vendor tracking and search functionality.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Categorized Expenses</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Vendor Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Date Filtering</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 5: Cloud Sync -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">☁️</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Google Sheets Integration</h3>
+                        <p style="margin-bottom: 1rem;">Seamless cloud backup and synchronization with Google Sheets. Test connections, setup sync, and perform bidirectional data synchronization for secure offsite backups.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Cloud Backup</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Auto Sync</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Bidirectional Sync</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 6: Smart Calculator -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🧮</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Smart Calculator & Tools</h3>
+                        <p style="margin-bottom: 1rem;">Built-in calculator with calculation history. Data export in multiple formats. Import/restore functionality for data migration and backup management.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Built-in Calculator</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Multi-Format Export</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Data Import/Restore</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard Showcase -->
+    <section id="analytics" style="padding: 4rem 0; background: rgba(74, 144, 226, 0.02);">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up" style="text-align: center; margin-bottom: 2rem;">
+                <h2 class="section-title">Transparent Financial Analytics</h2>
+                <p class="section-subtitle">Build trust with detailed insights and comprehensive contribution tracking</p>
+            </div>
+            <div class="product-screenshot" data-animate="fade-up" style="text-align: center;">
+                <img src="images/products/contribution-tracker/analytics-dashboard.png" alt="Analytics Dashboard with Fund Progress & Contribution Charts" style="max-width: 100%; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            </div>
+            <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">📊 Fund Performance</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Collection progress, goal achievement, fund trends</p>
+                </div>
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">👥 Contribution Analytics</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Group performance, top contributors, rankings</p>
+                </div>
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">💰 Collections vs Expenses</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Comparative analysis, expense breakdown, balance trends</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="contact-section" style="padding: 4rem 0; text-align: center;">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Ready to Bring Transparency to Your Group?</h2>
+                <p class="section-subtitle">Let's discuss your needs</p>
+            </div>
+            <div class="hero-cta" data-animate="fade-up" style="margin-top: 2rem; justify-content: center;">
+                <a href="https://wa.me/254717205175?text=Hi!%20I'm%20interested%20in%20the%20Contribution%20Tracker" target="_blank" class="btn btn-primary">Get Started</a>
+                <a href="index.html#contact" class="btn btn-secondary">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="content-container">
+            <p>&copy; 2025 Hamster Innovations. From Idea to Interface - We build what you Imagine.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/utils.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/page-transitions.js"></script>
+</body>
+</html>
