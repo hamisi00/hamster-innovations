@@ -105,16 +105,16 @@ body {
 /* Mobile: Rotate background 90 degrees for portrait display */
 @media screen and (max-width: 768px) {
     .background-image {
-        /* Rotate 90 degrees and ensure full coverage */
-        width: 100vh;
-        height: 100vw;
+        /* Use vmax for guaranteed coverage after rotation */
+        position: fixed;
+        width: 150vmax;
+        height: 150vmax;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%) rotate(90deg) scale(1.5);
+        transform: translate(-50%, -50%) rotate(90deg);
         transform-origin: center center;
-        /* Use background properties to ensure coverage */
         background-size: cover;
-        background-position: center center;
+        background-position: center;
         background-repeat: no-repeat;
     }
 }
