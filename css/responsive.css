@@ -111,7 +111,7 @@
         padding-bottom: 50vh;
     }
 
-    /* Proper stacking on tablet - full header visibility */
+    /* Proper stacking on tablet - full header visibility (5 cards) */
     .cascading-card:nth-child(1) {
         top: 80px;
     }
@@ -130,10 +130,6 @@
 
     .cascading-card:nth-child(5) {
         top: 440px;
-    }
-
-    .cascading-card:nth-child(6) {
-        top: 530px;
     }
 
     .cascade-card-header {
@@ -206,10 +202,16 @@
         height: 100%;
     }
 
-    .nav-logo {
+    /* Override desktop collapsed state - Higher specificity */
+    .main-nav:not(.expanded) .nav-logo,
+    .main-nav.expanded .nav-logo,
+    .main-nav .nav-logo {
         display: flex !important;
         opacity: 1 !important;
         width: auto !important;
+        pointer-events: auto !important;
+        overflow: visible !important;
+        transition: none !important;
     }
 
     .logo-icon {
@@ -275,11 +277,15 @@
         width: 40px;
         height: 40px;
         padding: 8px;
+        z-index: 100 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
     }
 
     .nav-toggle .line {
         width: 24px;
         height: 2.5px;
+        pointer-events: none; /* Prevent lines from blocking clicks */
     }
 
     .nav-toggle.active .line1 {
@@ -526,7 +532,7 @@
         margin-bottom: var(--spacing-md);
     }
 
-    /* Proper stacking on mobile - full header visibility */
+    /* Proper stacking on mobile - full header visibility (5 cards) */
     .cascading-card:nth-child(1) {
         top: 70px;
         z-index: 1;
@@ -550,11 +556,6 @@
     .cascading-card:nth-child(5) {
         top: 370px;
         z-index: 5;
-    }
-
-    .cascading-card:nth-child(6) {
-        top: 445px;
-        z-index: 6;
     }
 
     .cascade-card-header {

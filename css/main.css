@@ -110,13 +110,12 @@ body {
         height: 100vw;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%) rotate(90deg);
+        transform: translate(-50%, -50%) rotate(90deg) scale(1.5);
         transform-origin: center center;
-        /* Ensure the image covers the entire viewport */
-        min-width: 100vw;
-        min-height: 100vh;
+        /* Use background properties to ensure coverage */
         background-size: cover;
         background-position: center center;
+        background-repeat: no-repeat;
     }
 }
 
