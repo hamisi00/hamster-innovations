@@ -102,15 +102,28 @@ body {
     transform-origin: center center;
 }
 
-/* Mobile: Rotate background 90 degrees for landscape display */
+/* Mobile: Rotate background 90 degrees for portrait display */
 @media screen and (max-width: 768px) {
     .background-image {
-        transform: rotate(90deg);
+        /* Rotate 90 degrees and ensure full coverage */
         width: 100vh;
         height: 100vw;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(90deg);
+        transform-origin: center center;
+        /* Ensure the image covers the entire viewport */
+        min-width: 100vw;
+        min-height: 100vh;
+        background-size: cover;
+        background-position: center center;
+    }
+}
+
+/* Ensure no overflow from rotated background */
+@media screen and (max-width: 768px) {
+    .background-layer {
+        overflow: hidden;
     }
 }
 
