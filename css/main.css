@@ -329,6 +329,11 @@ body {
     .main-nav:not(.expanded) .nav-menu li:nth-child(4) { transition-delay: 0.9s; }
     .main-nav:not(.expanded) .nav-menu li:nth-child(5) { transition-delay: 0.6s; }
     .main-nav:not(.expanded) .nav-menu li:nth-child(6) { transition-delay: 0.3s; }
+
+    /* Hide hamburger toggle on desktop - only show on mobile */
+    .nav-toggle {
+        display: none !important;
+    }
 }
 
 .nav-link {
@@ -360,7 +365,7 @@ body {
 }
 
 .nav-toggle {
-    display: flex;
+    display: none; /* Hidden by default on desktop, shown on mobile via responsive.css */
     flex-direction: column;
     justify-content: center;
     align-items: center;
