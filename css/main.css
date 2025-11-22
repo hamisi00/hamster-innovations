@@ -280,8 +280,7 @@ body {
     list-style: none;
     width: 0;
     opacity: 0;
-    transition: width 3s ease, opacity 3s ease;
-    position: absolute; 
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
     justify-content: center;
@@ -289,6 +288,10 @@ body {
 
 /* Desktop only: 3D flip-in animation (progressive enhancement) */
 @media (min-width: 641px) {
+    .nav-menu {
+        transition: width 3s ease, opacity 3s ease; /* Slow animation only on desktop */
+    }
+
     .main-nav.expanded .nav-menu {
         width: auto;
         opacity: 1;
@@ -333,6 +336,11 @@ body {
     /* Hide hamburger toggle on desktop - only show on mobile */
     .nav-toggle {
         display: none !important;
+    }
+
+    /* Slow theatrical spinning animation for desktop hamburger (if visible) */
+    .nav-toggle .line {
+        transition: transform 3s ease;
     }
 }
 
@@ -392,7 +400,7 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    transition: transform 3s ease;
+    transition: transform 0.3s ease; /* Fast transition for mobile */
 }
 
 .nav-toggle .line1 {
