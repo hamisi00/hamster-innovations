@@ -415,7 +415,7 @@
         });
     }
 
-    /* -------------------- Scroll-Based Feature Tabs with Scroll Locking -------------------- */
+    /* -------------------- Scroll-Based Feature Tabs with State Machine -------------------- */
     function initFeatureTabs() {
         const section = document.querySelector('.features-tabs-section');
         const stickyWrapper = document.querySelector('.features-sticky-wrapper');
@@ -426,56 +426,143 @@
 
         if (!section || !stickyWrapper || tabs.length === 0 || panels.length === 0) return;
 
+        const SCROLL_PER_TAB = 300;
         const totalTabs = tabs.length;
+
+        // State machine
+        const STATE = {
+            IDLE: 'idle',
+            APPROACHING: 'approaching',
+            LOCKED: 'locked',
+            UNLOCKED: 'unlocked'
+        };
+
+        let currentState = STATE.IDLE;
+        let scrollBuffer = 0;
         let currentTabIndex = 0;
-        let isScrollBased = true;
-        let isLocked = false;
-        let scrollBuffer = 0; // Accumulated scroll during lock
-        const SCROLL_PER_TAB = 300; // Pixels of scroll needed per tab
+        let lockedScrollY = 0;
+        let rafId = null;
+        let isManualClick = false;
+        let hasCompletedOnce = false;
 
-        // Check if section is locked (sticky wrapper at top)
-        function checkLockState() {
-            const wrapperRect = stickyWrapper.getBoundingClientRect();
-            const stickyTop = 100; // Match CSS sticky top value
-
-            // Locked when wrapper is stuck at top
-            const shouldBeLocked = wrapperRect.top <= stickyTop + 10;
-
-            if (shouldBeLocked !== isLocked) {
-                isLocked = shouldBeLocked;
-                if (isLocked) {
-                    scrollBuffer = 0; // Reset buffer when entering lock
+        // Maintain scroll position during lock
+        function maintainScrollPosition() {
+            if (currentState === STATE.LOCKED && !isManualClick) {
+                const currentY = window.scrollY;
+                if (Math.abs(currentY - lockedScrollY) > 5) {
+                    window.scrollTo({
+                        top: lockedScrollY,
+                        behavior: 'instant'
+                    });
                 }
+                rafId = requestAnimationFrame(maintainScrollPosition);
             }
         }
 
-        // Handle scroll wheel events during lock
+        // Lock the section
+        function lockSection() {
+            if (hasCompletedOnce) return; // Don't re-lock if already completed
+
+            currentState = STATE.LOCKED;
+            lockedScrollY = window.scrollY;
+            scrollBuffer = 0;
+            currentTabIndex = 0;
+            activateTab(0);
+            maintainScrollPosition();
+        }
+
+        // Unlock downward (to Products section)
+        function unlockDownward() {
+            currentState = STATE.UNLOCKED;
+            hasCompletedOnce = true;
+            if (rafId) cancelAnimationFrame(rafId);
+
+            // Scroll past section to Products
+            const sectionBottom = section.offsetTop + section.offsetHeight;
+            window.scrollTo({
+                top: sectionBottom - window.innerHeight + 200,
+                behavior: 'smooth'
+            });
+        }
+
+        // Unlock upward (to About section)
+        function unlockUpward() {
+            currentState = STATE.APPROACHING;
+            scrollBuffer = 0;
+            currentTabIndex = 0;
+            if (rafId) cancelAnimationFrame(rafId);
+
+            // Allow natural scroll up
+        }
+
+        // Check section bounds and state
+        function checkBounds() {
+            const rect = section.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const inViewport = rect.top < viewportHeight && rect.bottom > 0;
+
+            const wrapperRect = stickyWrapper.getBoundingClientRect();
+            const atLockPosition = wrapperRect.top <= 110;
+
+            // State machine transitions
+            switch (currentState) {
+                case STATE.IDLE:
+                    if (inViewport && !atLockPosition) {
+                        currentState = STATE.APPROACHING;
+                    }
+                    break;
+
+                case STATE.APPROACHING:
+                    if (!inViewport) {
+                        currentState = STATE.IDLE;
+                    } else if (atLockPosition && !hasCompletedOnce) {
+                        lockSection();
+                    }
+                    break;
+
+                case STATE.LOCKED:
+                    // Stay locked until unlock conditions met
+                    break;
+
+                case STATE.UNLOCKED:
+                    // Once unlocked, never re-lock
+                    break;
+            }
+        }
+
+        // Handle wheel events
         function handleWheel(e) {
-            checkLockState();
+            if (currentState !== STATE.LOCKED || isManualClick) return;
 
-            if (!isLocked || !isScrollBased) return;
+            e.preventDefault();
 
-            // Calculate if we're done with all tabs
-            const allTabsComplete = currentTabIndex >= totalTabs - 1 &&
-                                    scrollBuffer >= SCROLL_PER_TAB;
+            // Bidirectional scroll buffer
+            scrollBuffer += e.deltaY; // Positive = down, negative = up
 
-            if (allTabsComplete) {
-                // Unlock - allow normal scroll to continue
-                isLocked = false;
+            // Check unlock conditions FIRST
+            if (scrollBuffer < -50) {
+                // Scrolling up past first tab
+                unlockUpward();
                 return;
             }
 
-            // Prevent default scroll - lock the page
-            e.preventDefault();
+            if (scrollBuffer >= SCROLL_PER_TAB * (totalTabs + 0.5)) {
+                // Scrolling down past last tab (with 0.5 tab buffer)
+                unlockDownward();
+                return;
+            }
 
-            // Accumulate scroll delta
-            scrollBuffer += Math.abs(e.deltaY);
+            // Clamp buffer to valid range
+            scrollBuffer = Math.max(0, Math.min(
+                scrollBuffer,
+                SCROLL_PER_TAB * totalTabs
+            ));
 
-            // Calculate tab index from scroll buffer
-            const newTabIndex = Math.min(
+            // Calculate tab index
+            const newTabIndex = Math.max(0, Math.min(
                 Math.floor(scrollBuffer / SCROLL_PER_TAB),
                 totalTabs - 1
-            );
+            ));
 
             // Update tab if changed
             if (newTabIndex !== currentTabIndex) {
@@ -484,19 +571,17 @@
 
             // Update progress bar
             const progress = scrollBuffer / (SCROLL_PER_TAB * totalTabs);
-            updateProgressBar(Math.min(progress, 1));
+            updateProgressBar(progress);
         }
 
-        // Activate specific tab
+        // Activate tab
         function activateTab(index) {
             currentTabIndex = index;
 
-            // Update tabs
             tabs.forEach((tab, i) => {
                 tab.classList.toggle('active', i === index);
             });
 
-            // Update panels with stagger
             panels.forEach((panel, i) => {
                 if (i === index) {
                     setTimeout(() => panel.classList.add('active'), 50);
@@ -505,14 +590,12 @@
                 }
             });
 
-            // Update progress label
-            const activeTab = tabs[index];
-            if (progressLabel && activeTab) {
-                progressLabel.textContent = activeTab.getAttribute('data-tab-label');
+            if (progressLabel && tabs[index]) {
+                progressLabel.textContent = tabs[index].getAttribute('data-tab-label');
             }
         }
 
-        // Update progress bar fill
+        // Update progress bar
         function updateProgressBar(progress) {
             if (progressFill) {
                 const fillPercent = Math.max(25, Math.min(100,
@@ -522,30 +605,30 @@
             }
         }
 
-        // Allow manual tab clicking (overrides scroll)
+        // Manual tab clicks
         tabs.forEach((tab, index) => {
             tab.addEventListener('click', () => {
-                isScrollBased = false; // Disable scroll-based for 2 seconds
+                isManualClick = true;
                 activateTab(index);
-                scrollBuffer = index * SCROLL_PER_TAB; // Update buffer to match
+                scrollBuffer = index * SCROLL_PER_TAB;
+                updateProgressBar(scrollBuffer / (SCROLL_PER_TAB * totalTabs));
 
-                // Re-enable after delay
                 setTimeout(() => {
-                    isScrollBased = true;
+                    isManualClick = false;
                 }, 2000);
             });
         });
 
-        // Attach wheel listener with passive: false to allow preventDefault
-        section.addEventListener('wheel', handleWheel, { passive: false });
+        // Global wheel listener (not just on section)
+        document.addEventListener('wheel', handleWheel, { passive: false });
 
-        // Monitor lock state on scroll
+        // Monitor bounds on scroll
         window.addEventListener('scroll', () => {
-            requestAnimationFrame(checkLockState);
-        });
+            requestAnimationFrame(checkBounds);
+        }, { passive: true });
 
         // Initial check
-        checkLockState();
+        checkBounds();
     }
 
     /* -------------------- Hero Title Animation -------------------- */
