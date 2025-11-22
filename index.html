@@ -117,21 +117,31 @@
                 <p class="section-subtitle">Powerful capabilities built into every package</p>
             </div>
 
-            <!-- Feature Tabs -->
-            <div class="feature-tabs" data-animate="fade-up">
-                <button class="feature-tab active" data-tab="offline">
+            <!-- Progress Indicator -->
+            <div class="tab-progress-bar-container">
+                <div class="tab-progress-bar">
+                    <div class="tab-progress-fill"></div>
+                </div>
+                <span class="tab-progress-label">Offline-First</span>
+            </div>
+
+            <!-- Sticky Wrapper for Scroll-Based Tab Progression -->
+            <div class="features-sticky-wrapper">
+                <!-- Feature Tabs -->
+                <div class="feature-tabs" data-animate="fade-up">
+                <button class="feature-tab active" data-tab="offline" data-tab-index="0" data-tab-label="Offline-First">
                     <span class="tab-icon">📴</span>
                     <span class="tab-label">Offline-First</span>
                 </button>
-                <button class="feature-tab" data-tab="security">
+                <button class="feature-tab" data-tab="security" data-tab-index="1" data-tab-label="Security & Roles">
                     <span class="tab-icon">🔐</span>
                     <span class="tab-label">Security & Roles</span>
                 </button>
-                <button class="feature-tab" data-tab="payments">
+                <button class="feature-tab" data-tab="payments" data-tab-index="2" data-tab-label="Payments">
                     <span class="tab-icon">💳</span>
                     <span class="tab-label">Payments</span>
                 </button>
-                <button class="feature-tab" data-tab="analytics">
+                <button class="feature-tab" data-tab="analytics" data-tab-index="3" data-tab-label="Analytics">
                     <span class="tab-icon">📊</span>
                     <span class="tab-label">Analytics</span>
                 </button>
@@ -210,6 +220,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </section>

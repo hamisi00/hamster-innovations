@@ -483,6 +483,14 @@
     }
 
     /* Feature Tabs - Mobile Optimization */
+    .features-tabs-section {
+        min-height: 250vh; /* Slightly less aggressive on mobile */
+    }
+
+    .features-sticky-wrapper {
+        top: 70px; /* Account for mobile nav */
+    }
+
     .feature-tabs {
         gap: var(--spacing-xs);
         padding-bottom: var(--spacing-sm);
@@ -491,6 +499,16 @@
     .feature-tab {
         padding: var(--spacing-sm) var(--spacing-md);
         font-size: var(--font-size-sm);
+    }
+
+    .tab-progress-label {
+        font-size: var(--font-size-xs);
+        min-width: 100px;
+    }
+
+    .tab-inner {
+        grid-template-columns: 1fr; /* Stack on mobile */
+        gap: var(--spacing-lg);
     }
 
     .tab-icon {
@@ -1029,6 +1047,30 @@
 
     .nav-link::after {
         height: 3px;
+    }
+}
+
+/* -------------------- Reduced Motion Support -------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .features-tabs-section {
+        min-height: auto !important; /* No scroll hijacking */
+    }
+
+    .tab-panel {
+        transition: opacity 0.2s ease !important;
+        transform: none !important;
+    }
+
+    .tab-progress-fill {
+        transition: width 0.2s ease !important;
+    }
+
+    .feature-tab {
+        transition: all 0.2s ease !important;
+    }
+
+    @keyframes tabActivePulse {
+        0%, 100% { opacity: 1; }
     }
 }
 

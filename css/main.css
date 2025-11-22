@@ -756,9 +756,50 @@ body {
 
 /* -------------------- Feature Tabs Section -------------------- */
 .features-tabs-section {
-    padding: var(--spacing-3xl) 0;
+    min-height: 300vh; /* 3× viewport for scroll-based progression */
+    padding: var(--spacing-3xl) 0 0 0; /* Remove bottom padding */
     position: relative;
     z-index: var(--z-content);
+}
+
+.features-sticky-wrapper {
+    position: sticky;
+    top: 100px; /* Below fixed nav */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Progress Bar */
+.tab-progress-bar-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.tab-progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.tab-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    width: 25%; /* Start at 25% (tab 1 of 4) */
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-progress-label {
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    min-width: 120px;
+    text-align: right;
+    transition: opacity 0.3s ease;
 }
 
 .feature-tabs {
@@ -782,8 +823,9 @@ body {
     font-size: var(--font-size-base);
     font-weight: 500;
     border-bottom: 3px solid transparent;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     white-space: nowrap;
+    position: relative;
 }
 
 .feature-tab:hover {
@@ -796,6 +838,22 @@ body {
     border-bottom-color: var(--color-primary);
 }
 
+.feature-tab.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--color-primary);
+    animation: tabActivePulse 0.6s ease;
+}
+
+@keyframes tabActivePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
 .tab-icon {
     font-size: var(--font-size-xl);
 }
@@ -806,16 +864,28 @@ body {
 
 .tab-content-container {
     position: relative;
+    flex: 1;
+    overflow: hidden; /* Prevent slide overflow */
     min-height: 400px;
 }
 
 .tab-panel {
-    display: none;
-    animation: fadeIn 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
 }
 
 .tab-panel.active {
-    display: block;
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+    position: relative; /* Take up space when active */
 }
 
 .tab-inner {

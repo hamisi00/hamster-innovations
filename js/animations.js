@@ -415,29 +415,114 @@
         });
     }
 
-    /* -------------------- Feature Tabs Switching -------------------- */
+    /* -------------------- Scroll-Based Feature Tabs -------------------- */
     function initFeatureTabs() {
+        const section = document.querySelector('.features-tabs-section');
         const tabs = document.querySelectorAll('.feature-tab');
         const panels = document.querySelectorAll('.tab-panel');
+        const progressFill = document.querySelector('.tab-progress-fill');
+        const progressLabel = document.querySelector('.tab-progress-label');
 
-        if (tabs.length === 0 || panels.length === 0) return;
+        if (!section || tabs.length === 0 || panels.length === 0) return;
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetId = tab.getAttribute('data-tab');
+        const totalTabs = tabs.length;
+        let currentTabIndex = 0;
+        let isScrollBased = true;
 
-                // Remove active class from all tabs and panels
-                tabs.forEach(t => t.classList.remove('active'));
-                panels.forEach(p => p.classList.remove('active'));
+        // Calculate scroll progress and update active tab
+        function updateTabBasedOnScroll() {
+            const rect = section.getBoundingClientRect();
+            const sectionHeight = section.offsetHeight;
+            const viewportHeight = window.innerHeight;
 
-                // Add active class to clicked tab and corresponding panel
-                tab.classList.add('active');
-                const targetPanel = document.getElementById(targetId);
-                if (targetPanel) {
-                    targetPanel.classList.add('active');
+            // Only process if section is in viewport
+            if (rect.top > viewportHeight || rect.bottom < 0) return;
+
+            // Calculate scroll progress through section (0 to 1)
+            const scrollProgress = Math.max(0, Math.min(1,
+                (viewportHeight - rect.top) / (sectionHeight - viewportHeight)
+            ));
+
+            // Determine active tab (0-3)
+            const tabIndex = Math.min(
+                Math.floor(scrollProgress * totalTabs),
+                totalTabs - 1
+            );
+
+            // Update if tab changed
+            if (tabIndex !== currentTabIndex && isScrollBased) {
+                activateTab(tabIndex);
+            }
+
+            // Update progress bar
+            updateProgressBar(scrollProgress);
+        }
+
+        // Activate specific tab
+        function activateTab(index) {
+            currentTabIndex = index;
+
+            // Update tabs
+            tabs.forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+            });
+
+            // Update panels with stagger
+            panels.forEach((panel, i) => {
+                if (i === index) {
+                    setTimeout(() => panel.classList.add('active'), 50);
+                } else {
+                    panel.classList.remove('active');
                 }
             });
+
+            // Update progress label
+            const activeTab = tabs[index];
+            if (progressLabel && activeTab) {
+                progressLabel.textContent = activeTab.getAttribute('data-tab-label');
+            }
+        }
+
+        // Update progress bar fill
+        function updateProgressBar(progress) {
+            if (progressFill) {
+                const fillPercent = Math.max(25, Math.min(100,
+                    25 + (progress * 75)
+                ));
+                progressFill.style.width = `${fillPercent}%`;
+            }
+        }
+
+        // Allow manual tab clicking (overrides scroll)
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                isScrollBased = false; // Disable scroll-based for 2 seconds
+                activateTab(index);
+
+                // Re-enable after delay
+                setTimeout(() => {
+                    isScrollBased = true;
+                }, 2000);
+            });
         });
+
+        // Throttled scroll listener using requestAnimationFrame
+        let ticking = false;
+        function handleScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateTabBasedOnScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        // Attach scroll listener
+        window.addEventListener('scroll', handleScroll);
+
+        // Initial check
+        updateTabBasedOnScroll();
     }
 
     /* -------------------- Hero Title Animation -------------------- */
