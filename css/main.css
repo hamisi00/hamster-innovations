@@ -1023,7 +1023,7 @@ body {
     padding: var(--spacing-3xl) 0;
     position: relative;
     z-index: var(--z-content);
-    min-height: 300vh;
+    min-height: 250vh;
 }
 
 .cascading-cards-container {
@@ -1215,6 +1215,31 @@ body {
         transparent 50%,
         rgba(74, 144, 226, 0.1) 50%);
     pointer-events: none;
+}
+
+/* Stacked State - When cards are compressed together */
+.cascading-card.stacked {
+    transform: scale(0.98) translateY(0);
+    opacity: 0.85;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cascading-card.stacked .cascade-card-body {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+/* Keep last card fully visible when others are stacked */
+.cascading-card:last-child {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.cascading-card:last-child .cascade-card-body {
+    opacity: 1;
+    max-height: none;
 }
 
 /* Product Feature Badges - Improved Hierarchy */

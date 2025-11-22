@@ -111,7 +111,7 @@
         padding-bottom: 50vh;
     }
 
-    /* Proper stacking on tablet - full header visibility (5 cards) */
+    /* Proper stacking on tablet - full header visibility (6 cards) */
     .cascading-card:nth-child(1) {
         top: 80px;
     }
@@ -130,6 +130,10 @@
 
     .cascading-card:nth-child(5) {
         top: 440px;
+    }
+
+    .cascading-card:nth-child(6) {
+        top: 530px;
     }
 
     .cascade-card-header {
@@ -532,7 +536,7 @@
         margin-bottom: var(--spacing-md);
     }
 
-    /* Proper stacking on mobile - full header visibility (5 cards) */
+    /* Proper stacking on mobile - full header visibility (6 cards) */
     .cascading-card:nth-child(1) {
         top: 70px;
         z-index: 1;
@@ -556,6 +560,11 @@
     .cascading-card:nth-child(5) {
         top: 370px;
         z-index: 5;
+    }
+
+    .cascading-card:nth-child(6) {
+        top: 445px;
+        z-index: 6;
     }
 
     .cascade-card-header {
