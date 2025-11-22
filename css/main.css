@@ -756,7 +756,7 @@ body {
 
 /* -------------------- Feature Tabs Section -------------------- */
 .features-tabs-section {
-    min-height: 300vh; /* 3× viewport for scroll-based progression */
+    min-height: 500vh; /* 5× viewport for deliberate scroll progression */
     padding: var(--spacing-3xl) 0 0 0; /* Remove bottom padding */
     position: relative;
     z-index: var(--z-content);
