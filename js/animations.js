@@ -477,12 +477,16 @@
             hasCompletedOnce = true;
             if (rafId) cancelAnimationFrame(rafId);
 
-            // Scroll past section to Products
-            const sectionBottom = section.offsetTop + section.offsetHeight;
+            // Gentle nudge: small scroll past locked position to "break free"
+            // Then user can naturally continue scrolling to Products
+            const targetScroll = lockedScrollY + 150;
+
             window.scrollTo({
-                top: sectionBottom - window.innerHeight + 200,
+                top: targetScroll,
                 behavior: 'smooth'
             });
+
+            // Normal scroll resumes immediately after this small adjustment
         }
 
         // Unlock upward (to About section)
