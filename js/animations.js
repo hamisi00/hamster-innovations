@@ -193,9 +193,13 @@
                     // Close mobile menu if open
                     const navMenu = document.querySelector('.nav-menu');
                     const navToggle = document.querySelector('.nav-toggle');
+                    const navBackdrop = document.querySelector('.nav-backdrop');
                     if (navMenu && navMenu.classList.contains('open')) {
                         navMenu.classList.remove('open');
                         navToggle.classList.remove('active');
+                        if (navBackdrop) {
+                            navBackdrop.classList.remove('active');
+                        }
                     }
                 }
             });
@@ -366,6 +370,7 @@
         const navToggle = document.querySelector('.nav-toggle');
         const navMenu = document.querySelector('.nav-menu');
         const mainNav = document.querySelector('.main-nav');
+        const navBackdrop = document.querySelector('.nav-backdrop');
 
         if (!navToggle || !navMenu || !mainNav) return;
 
@@ -376,11 +381,23 @@
                 // Mobile: Toggle menu open/close with active class
                 navToggle.classList.toggle('active');
                 navMenu.classList.toggle('open');
+                if (navBackdrop) {
+                    navBackdrop.classList.toggle('active');
+                }
             } else {
                 // Desktop: Toggle nav expanded/collapsed
                 mainNav.classList.toggle('expanded');
             }
         });
+
+        // Close menu when clicking backdrop
+        if (navBackdrop) {
+            navBackdrop.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('open');
+                navBackdrop.classList.remove('active');
+            });
+        }
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
@@ -390,6 +407,9 @@
                 if (isMobile) {
                     navToggle.classList.remove('active');
                     navMenu.classList.remove('open');
+                    if (navBackdrop) {
+                        navBackdrop.classList.remove('active');
+                    }
                 }
             }
         });

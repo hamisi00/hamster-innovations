@@ -418,6 +418,18 @@ body {
     /* -405deg = 1 full rotation (-360deg) + -45deg final position */
 }
 
+/* -------------------- Navigation Backdrop -------------------- */
+.nav-backdrop {
+    display: none;
+}
+
+/* Show on mobile only - styled in responsive.css */
+@media screen and (max-width: 640px) {
+    .nav-backdrop {
+        display: block;
+    }
+}
+
 /* -------------------- Content Container -------------------- */
 .content-container {
     max-width: var(--max-width);
@@ -1663,26 +1675,4 @@ body {
     margin: 0;
 }
 
-/* Footer Responsive */
-@media screen and (max-width: 1024px) {
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media screen and (max-width: 640px) {
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-lg);
-    }
-
-    .footer-column {
-        text-align: center;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        gap: var(--spacing-md);
-        text-align: center;
-    }
-}
+/* Footer Responsive - Moved to responsive.css for better organization */

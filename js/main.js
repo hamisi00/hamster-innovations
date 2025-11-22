@@ -521,10 +521,14 @@
             if (e.key === 'Escape') {
                 const navMenu = document.querySelector('.nav-menu');
                 const navToggle = document.querySelector('.nav-toggle');
+                const navBackdrop = document.querySelector('.nav-backdrop');
 
                 if (navMenu && navMenu.classList.contains('open')) {
                     navMenu.classList.remove('open');
                     navToggle.classList.remove('active');
+                    if (navBackdrop) {
+                        navBackdrop.classList.remove('active');
+                    }
                 }
             }
 

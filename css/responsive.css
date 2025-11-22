@@ -230,52 +230,75 @@
 
     .nav-menu {
         position: fixed;
-        top: 56px;
+        top: 0;
         left: 0;
-        width: 100%;
+        height: 100vh;
+        width: 280px;
+        max-width: 75vw;
         flex-direction: column;
-        background: rgba(10, 22, 40, 0.95);
-        backdrop-filter: blur(12px);
-        padding: var(--spacing-lg);
+        background: rgba(10, 22, 40, 0.98);
+        backdrop-filter: blur(16px);
+        padding: var(--spacing-2xl) var(--spacing-lg);
         gap: var(--spacing-md);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        transform: translateY(-100%);
-        opacity: 0;
-        transition: all 0.3s var(--ease-smooth);
-        pointer-events: none;
+        border-right: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: all;
+        z-index: 1001;
+        overflow-y: auto;
     }
 
     .nav-menu.open {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: all;
+        transform: translateX(0);
     }
 
-    /* Mobile menu items: Reset desktop flip and apply mobile version */
+    /* Mobile menu items: Simple fade-in for drawer */
     .nav-menu li {
-        transform: rotateY(90deg);
         opacity: 0;
-        transition: transform 0.4s ease, opacity 0.4s ease;
+        transform: translateX(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .nav-menu.open li {
-        transform: rotateY(0deg);
         opacity: 1;
+        transform: translateX(0);
     }
 
-    /* Mobile staggered delays - faster than desktop */
-    .nav-menu.open li:nth-child(1) { transition-delay: 0.05s; }
-    .nav-menu.open li:nth-child(2) { transition-delay: 0.1s; }
-    .nav-menu.open li:nth-child(3) { transition-delay: 0.15s; }
-    .nav-menu.open li:nth-child(4) { transition-delay: 0.2s; }
-    .nav-menu.open li:nth-child(5) { transition-delay: 0.25s; }
-    .nav-menu.open li:nth-child(6) { transition-delay: 0.3s; }
+    /* Staggered animation for drawer items */
+    .nav-menu.open li:nth-child(1) { transition-delay: 0.1s; }
+    .nav-menu.open li:nth-child(2) { transition-delay: 0.15s; }
+    .nav-menu.open li:nth-child(3) { transition-delay: 0.2s; }
+    .nav-menu.open li:nth-child(4) { transition-delay: 0.25s; }
+    .nav-menu.open li:nth-child(5) { transition-delay: 0.3s; }
+    .nav-menu.open li:nth-child(6) { transition-delay: 0.35s; }
 
     /* Mobile nav links - enhanced touch targets */
     .nav-menu .nav-link {
         display: block;
         padding: var(--spacing-sm) var(--spacing-md);
         width: 100%;
+        text-align: left;
+    }
+
+    /* Navigation Backdrop - Mobile Drawer Overlay */
+    .nav-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(2px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+    }
+
+    .nav-backdrop.active {
+        opacity: 1;
+        pointer-events: all;
     }
 
     /* Nav Toggle - Perfect Centering on Mobile */
