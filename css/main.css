@@ -287,16 +287,16 @@ body {
     justify-content: center;
 }
 
-.main-nav.expanded .nav-menu {
-    width: auto;
-    opacity: 1;
-    position: absolute; 
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 /* Desktop only: 3D flip-in animation (progressive enhancement) */
 @media (min-width: 641px) {
+    .main-nav.expanded .nav-menu {
+        width: auto;
+        opacity: 1;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
     .nav-menu li {
         transform: rotateY(90deg);
         opacity: 0;

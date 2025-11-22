@@ -246,6 +246,7 @@
         border-right: 1px solid rgba(255, 255, 255, 0.15);
         box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
         transform: translateX(-100%) !important;
+        opacity: 1 !important;
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         pointer-events: all !important;
         z-index: 1001 !important;
