@@ -102,27 +102,13 @@ body {
     transform-origin: center center;
 }
 
-/* Mobile: Rotate background 90 degrees for portrait display */
-@media screen and (max-width: 768px) {
+/* Mobile: Use dedicated mobile background image */
+@media screen and (max-width: 640px) {
     .background-image {
-        /* Use vmax for guaranteed coverage after rotation */
-        position: fixed;
-        width: 150vmax;
-        height: 150vmax;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(90deg);
-        transform-origin: center center;
+        background-image: url('../assets/mobile_background.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-    }
-}
-
-/* Ensure no overflow from rotated background */
-@media screen and (max-width: 768px) {
-    .background-layer {
-        overflow: hidden;
     }
 }
 
