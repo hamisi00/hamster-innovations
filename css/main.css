@@ -333,14 +333,20 @@ body {
     .main-nav:not(.expanded) .nav-menu li:nth-child(5) { transition-delay: 0.6s; }
     .main-nav:not(.expanded) .nav-menu li:nth-child(6) { transition-delay: 0.3s; }
 
-    /* Hide hamburger toggle on desktop - only show on mobile */
-    .nav-toggle {
-        display: none !important;
-    }
-
-    /* Slow theatrical spinning animation for desktop hamburger (if visible) */
+    /* Slow theatrical spinning animation for desktop hamburger */
     .nav-toggle .line {
         transition: transform 3s ease;
+    }
+
+    /* Desktop: Transform hamburger lines into X when expanded */
+    .main-nav.expanded .nav-toggle .line1 {
+        transform: translateX(-50%) translateY(3.5px) rotate(405deg);
+        /* 405deg = 1 full rotation (360deg) + 45deg final position */
+    }
+
+    .main-nav.expanded .nav-toggle .line2 {
+        transform: translateX(-50%) translateY(-3.5px) rotate(-405deg);
+        /* -405deg = 1 full rotation (-360deg) + -45deg final position */
     }
 }
 
@@ -418,17 +424,6 @@ body {
 
 .main-nav:not(.expanded) .nav-toggle .line2 {
     transform: translateX(-50%) translateY(0) rotate(0deg);
-}
-
-/* Transform lines into X when expanded with spinning animation */
-.main-nav.expanded .nav-toggle .line1 {
-    transform: translateX(-50%) translateY(3.5px) rotate(405deg);
-    /* 405deg = 1 full rotation (360deg) + 45deg final position */
-}
-
-.main-nav.expanded .nav-toggle .line2 {
-    transform: translateX(-50%) translateY(-3.5px) rotate(-405deg);
-    /* -405deg = 1 full rotation (-360deg) + -45deg final position */
 }
 
 /* -------------------- Navigation Backdrop -------------------- */
