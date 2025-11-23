@@ -439,14 +439,22 @@
         let scrollBuffer = 0;
         let currentTabIndex = 0;
         let lockedScrollY = 0;
+        let cachedScrollDistance = 0;
         let hasCompletedOnce = false;
 
-        // Calculate virtual scroll distance dynamically
-        function getVirtualScrollDistance() {
-            const rect = section.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-            // Section can scroll 200vh (300vh - 100vh) while wrapper is sticky
-            return rect.height - viewportHeight;
+        // Touch handling for mobile
+        let touchStartY = 0;
+        let lastTouchY = 0;
+
+        // Update virtual scroll position (shared by wheel and touch)
+        function updateVirtualScrollPosition() {
+            const progress = scrollBuffer / (SCROLL_PER_TAB * totalTabs);
+            const targetScrollY = lockedScrollY + (progress * cachedScrollDistance);
+
+            window.scrollTo({
+                top: targetScrollY,
+                behavior: 'instant'
+            });
         }
 
         // Lock the section
@@ -457,6 +465,11 @@
             lockedScrollY = window.scrollY;
             scrollBuffer = 0;
             currentTabIndex = 0;
+
+            // Cache virtual scroll distance once on lock
+            const rect = section.getBoundingClientRect();
+            cachedScrollDistance = rect.height - window.innerHeight;
+
             activateTab(0);
         }
 
@@ -464,7 +477,6 @@
         function unlockDownward() {
             currentState = STATE.UNLOCKED;
             hasCompletedOnce = true;
-            // Natural scroll resumes - wrapper will unstick automatically
         }
 
         // Unlock upward (to About section)
@@ -509,13 +521,12 @@
             }
         }
 
-        // Handle wheel events - control scroll and advance position
+        // Handle wheel events (desktop)
         function handleWheel(e) {
             if (currentState !== STATE.LOCKED) return;
 
-            e.preventDefault(); // Block default scroll - we control it
+            e.preventDefault();
 
-            // Accumulate scroll in buffer
             scrollBuffer += e.deltaY;
 
             // Check unlock conditions
@@ -529,29 +540,58 @@
                 return;
             }
 
-            // Clamp buffer to valid range
-            scrollBuffer = Math.max(0, Math.min(
-                scrollBuffer,
-                SCROLL_PER_TAB * totalTabs
-            ));
+            // Clamp buffer
+            scrollBuffer = Math.max(0, Math.min(scrollBuffer, SCROLL_PER_TAB * totalTabs));
 
-            // Calculate virtual scroll position
-            const progress = scrollBuffer / (SCROLL_PER_TAB * totalTabs); // 0 to 1
-            const virtualScrollDistance = getVirtualScrollDistance();
-            const targetScrollY = lockedScrollY + (progress * virtualScrollDistance);
-
-            // Programmatically scroll with smooth behavior
-            window.scrollTo({
-                top: targetScrollY,
-                behavior: 'smooth'
-            });
+            // Update virtual scroll
+            updateVirtualScrollPosition();
 
             // Update tab if changed
-            const newTabIndex = Math.max(0, Math.min(
-                Math.floor(scrollBuffer / SCROLL_PER_TAB),
-                totalTabs - 1
-            ));
+            const newTabIndex = Math.floor(scrollBuffer / SCROLL_PER_TAB);
+            if (newTabIndex !== currentTabIndex) {
+                activateTab(newTabIndex);
+            }
+        }
 
+        // Handle touch start (mobile)
+        function handleTouchStart(e) {
+            if (currentState !== STATE.LOCKED) return;
+            touchStartY = e.touches[0].clientY;
+            lastTouchY = touchStartY;
+        }
+
+        // Handle touch move (mobile)
+        function handleTouchMove(e) {
+            if (currentState !== STATE.LOCKED) return;
+
+            e.preventDefault();
+
+            const currentY = e.touches[0].clientY;
+            const delta = lastTouchY - currentY;
+            lastTouchY = currentY;
+
+            // Apply touch sensitivity multiplier
+            scrollBuffer += delta * 2;
+
+            // Check unlock conditions
+            if (scrollBuffer < -50) {
+                unlockUpward();
+                return;
+            }
+
+            if (scrollBuffer >= SCROLL_PER_TAB * totalTabs) {
+                unlockDownward();
+                return;
+            }
+
+            // Clamp buffer
+            scrollBuffer = Math.max(0, Math.min(scrollBuffer, SCROLL_PER_TAB * totalTabs));
+
+            // Update virtual scroll
+            updateVirtualScrollPosition();
+
+            // Update tab if changed
+            const newTabIndex = Math.floor(scrollBuffer / SCROLL_PER_TAB);
             if (newTabIndex !== currentTabIndex) {
                 activateTab(newTabIndex);
             }
@@ -580,24 +620,17 @@
                 activateTab(index);
                 scrollBuffer = index * SCROLL_PER_TAB;
 
-                // Update virtual scroll position on manual click
                 if (currentState === STATE.LOCKED) {
-                    const progress = scrollBuffer / (SCROLL_PER_TAB * totalTabs);
-                    const virtualScrollDistance = getVirtualScrollDistance();
-                    const targetScrollY = lockedScrollY + (progress * virtualScrollDistance);
-
-                    window.scrollTo({
-                        top: targetScrollY,
-                        behavior: 'smooth'
-                    });
+                    updateVirtualScrollPosition();
                 }
             });
         });
 
-        // Global wheel listener
+        // Event listeners
         document.addEventListener('wheel', handleWheel, { passive: false });
+        document.addEventListener('touchstart', handleTouchStart, { passive: false });
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
-        // Monitor bounds on scroll
         window.addEventListener('scroll', () => {
             requestAnimationFrame(checkBounds);
         }, { passive: true });
