@@ -415,7 +415,7 @@
         });
     }
 
-    /* -------------------- Scroll-Based Feature Tabs with Natural Scroll -------------------- */
+    /* -------------------- Scroll-Based Feature Tabs with Virtual Scroll -------------------- */
     function initFeatureTabs() {
         const section = document.querySelector('.features-tabs-section');
         const stickyWrapper = document.querySelector('.features-sticky-wrapper');
@@ -424,69 +424,137 @@
 
         if (!section || !stickyWrapper || tabs.length === 0 || panels.length === 0) return;
 
-        const SCROLL_PER_TAB = 300; // pixels of scroll needed per tab
+        const SCROLL_PER_TAB = 300;
         const totalTabs = tabs.length;
 
-        let scrollAccumulator = 0;
-        let lastScrollY = window.scrollY;
+        // State machine
+        const STATE = {
+            IDLE: 'idle',
+            APPROACHING: 'approaching',
+            LOCKED: 'locked',
+            UNLOCKED: 'unlocked'
+        };
+
+        let currentState = STATE.IDLE;
+        let scrollBuffer = 0;
         let currentTabIndex = 0;
-        let wasSticky = false;
+        let lockedScrollY = 0;
+        let hasCompletedOnce = false;
 
-        // Update tabs based on scroll position
-        function updateTabsOnScroll() {
+        // Calculate virtual scroll distance dynamically
+        function getVirtualScrollDistance() {
             const rect = section.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            // Section can scroll 200vh (300vh - 100vh) while wrapper is sticky
+            return rect.height - viewportHeight;
+        }
+
+        // Lock the section
+        function lockSection() {
+            if (hasCompletedOnce) return;
+
+            currentState = STATE.LOCKED;
+            lockedScrollY = window.scrollY;
+            scrollBuffer = 0;
+            currentTabIndex = 0;
+            activateTab(0);
+        }
+
+        // Unlock downward (to Products section)
+        function unlockDownward() {
+            currentState = STATE.UNLOCKED;
+            hasCompletedOnce = true;
+            // Natural scroll resumes - wrapper will unstick automatically
+        }
+
+        // Unlock upward (to About section)
+        function unlockUpward() {
+            currentState = STATE.APPROACHING;
+            scrollBuffer = 0;
+            currentTabIndex = 0;
+        }
+
+        // Check section bounds and state
+        function checkBounds() {
+            const rect = section.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const inViewport = rect.top < viewportHeight && rect.bottom > 0;
+
             const wrapperRect = stickyWrapper.getBoundingClientRect();
-            const currentScrollY = window.scrollY;
+            const atLockPosition = wrapperRect.top <= 110;
 
-            // Check if wrapper is in sticky position
-            // Sticky when: wrapper at top position AND section has room to scroll
-            const isSticky = wrapperRect.top <= 105 && wrapperRect.top >= 95 &&
-                           rect.top <= 100 && rect.bottom > window.innerHeight;
-
-            if (isSticky) {
-                // Wrapper is sticky - accumulate scroll delta
-                if (wasSticky) {
-                    // Only accumulate if we were already sticky (avoid jump on first frame)
-                    const delta = currentScrollY - lastScrollY;
-                    scrollAccumulator += delta;
-
-                    // Clamp accumulator to valid range [0, SCROLL_PER_TAB * totalTabs]
-                    scrollAccumulator = Math.max(0, Math.min(
-                        scrollAccumulator,
-                        SCROLL_PER_TAB * totalTabs
-                    ));
-
-                    // Calculate tab index from accumulator
-                    const newTabIndex = Math.min(
-                        totalTabs - 1,
-                        Math.floor(scrollAccumulator / SCROLL_PER_TAB)
-                    );
-
-                    // Update tab if changed (show all intermediate tabs during fast scroll)
-                    if (newTabIndex !== currentTabIndex) {
-                        activateTab(newTabIndex);
+            // State machine transitions
+            switch (currentState) {
+                case STATE.IDLE:
+                    if (inViewport && !atLockPosition) {
+                        currentState = STATE.APPROACHING;
                     }
-                }
-                wasSticky = true;
-            } else {
-                // Not sticky - check if we need to reset
-                if (rect.top > 100) {
-                    // Section is above sticky position - reset to first tab
-                    scrollAccumulator = 0;
-                    if (currentTabIndex !== 0) {
-                        activateTab(0);
+                    break;
+
+                case STATE.APPROACHING:
+                    if (!inViewport) {
+                        currentState = STATE.IDLE;
+                    } else if (atLockPosition && !hasCompletedOnce) {
+                        lockSection();
                     }
-                } else if (rect.bottom <= window.innerHeight) {
-                    // Section scrolled completely past - ensure last tab is active
-                    if (currentTabIndex !== totalTabs - 1) {
-                        activateTab(totalTabs - 1);
-                        scrollAccumulator = SCROLL_PER_TAB * totalTabs;
-                    }
-                }
-                wasSticky = false;
+                    break;
+
+                case STATE.LOCKED:
+                    // Stay locked until unlock conditions met
+                    break;
+
+                case STATE.UNLOCKED:
+                    // Once unlocked, never re-lock
+                    break;
+            }
+        }
+
+        // Handle wheel events - control scroll and advance position
+        function handleWheel(e) {
+            if (currentState !== STATE.LOCKED) return;
+
+            e.preventDefault(); // Block default scroll - we control it
+
+            // Accumulate scroll in buffer
+            scrollBuffer += e.deltaY;
+
+            // Check unlock conditions
+            if (scrollBuffer < -50) {
+                unlockUpward();
+                return;
             }
 
-            lastScrollY = currentScrollY;
+            if (scrollBuffer >= SCROLL_PER_TAB * totalTabs) {
+                unlockDownward();
+                return;
+            }
+
+            // Clamp buffer to valid range
+            scrollBuffer = Math.max(0, Math.min(
+                scrollBuffer,
+                SCROLL_PER_TAB * totalTabs
+            ));
+
+            // Calculate virtual scroll position
+            const progress = scrollBuffer / (SCROLL_PER_TAB * totalTabs); // 0 to 1
+            const virtualScrollDistance = getVirtualScrollDistance();
+            const targetScrollY = lockedScrollY + (progress * virtualScrollDistance);
+
+            // Programmatically scroll with smooth behavior
+            window.scrollTo({
+                top: targetScrollY,
+                behavior: 'smooth'
+            });
+
+            // Update tab if changed
+            const newTabIndex = Math.max(0, Math.min(
+                Math.floor(scrollBuffer / SCROLL_PER_TAB),
+                totalTabs - 1
+            ));
+
+            if (newTabIndex !== currentTabIndex) {
+                activateTab(newTabIndex);
+            }
         }
 
         // Activate tab
@@ -510,15 +578,32 @@
         tabs.forEach((tab, index) => {
             tab.addEventListener('click', () => {
                 activateTab(index);
-                scrollAccumulator = index * SCROLL_PER_TAB;
+                scrollBuffer = index * SCROLL_PER_TAB;
+
+                // Update virtual scroll position on manual click
+                if (currentState === STATE.LOCKED) {
+                    const progress = scrollBuffer / (SCROLL_PER_TAB * totalTabs);
+                    const virtualScrollDistance = getVirtualScrollDistance();
+                    const targetScrollY = lockedScrollY + (progress * virtualScrollDistance);
+
+                    window.scrollTo({
+                        top: targetScrollY,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
-        // Listen to scroll events (passive - allows natural scrolling)
-        window.addEventListener('scroll', updateTabsOnScroll, { passive: true });
+        // Global wheel listener
+        document.addEventListener('wheel', handleWheel, { passive: false });
+
+        // Monitor bounds on scroll
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(checkBounds);
+        }, { passive: true });
 
         // Initial check
-        updateTabsOnScroll();
+        checkBounds();
     }
 
     /* -------------------- Hero Title Animation -------------------- */
