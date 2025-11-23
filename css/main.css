@@ -379,7 +379,7 @@ body {
 }
 
 .nav-toggle {
-    display: none; /* Hidden by default on desktop, shown on mobile via responsive.css */
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -756,7 +756,7 @@ body {
 
 /* -------------------- Feature Tabs Section -------------------- */
 .features-tabs-section {
-    min-height: 200vh; /* 2× viewport for smooth scroll progression */
+    min-height: 400vh; /* 4× viewport for deliberate scroll progression */
     padding: var(--spacing-3xl) 0 0 0; /* Remove bottom padding */
     position: relative;
     z-index: var(--z-content);

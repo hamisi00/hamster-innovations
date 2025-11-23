@@ -484,7 +484,7 @@
 
     /* Feature Tabs - Mobile Optimization */
     .features-tabs-section {
-        min-height: 180vh; /* Smooth scroll progression on mobile */
+        min-height: 320vh; /* Deliberate scroll progression on mobile */
     }
 
     .features-sticky-wrapper {
