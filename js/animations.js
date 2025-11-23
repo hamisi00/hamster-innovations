@@ -499,6 +499,9 @@
             const rect = section.getBoundingClientRect();
             cachedScrollDistance = rect.height - window.innerHeight;
 
+            // Change to fixed position - freezes content on screen
+            stickyWrapper.classList.add('position-locked');
+
             activateTab(0);
         }
 
@@ -506,6 +509,9 @@
         function unlockDownward() {
             currentState = STATE.UNLOCKED;
             hasCompletedOnce = true;
+
+            // Change back to sticky - allows natural unsticking
+            stickyWrapper.classList.remove('position-locked');
         }
 
         // Unlock upward (to About section)
@@ -513,6 +519,9 @@
             currentState = STATE.APPROACHING;
             scrollBuffer = 0;
             currentTabIndex = 0;
+
+            // Change back to sticky
+            stickyWrapper.classList.remove('position-locked');
         }
 
         // Check section bounds and state

@@ -770,6 +770,16 @@ body {
     flex-direction: column;
 }
 
+/* Override sticky with fixed when locked - keeps content frozen on screen */
+.features-sticky-wrapper.position-locked {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+}
+
 .feature-tabs {
     display: flex;
     gap: var(--spacing-sm);
