@@ -441,6 +441,7 @@
         let lockedScrollY = 0;
         let cachedScrollDistance = 0;
         let hasCompletedOnce = false;
+        let isOurScroll = false; // Track our programmatic scrolls
 
         // Touch handling for mobile
         let touchStartY = 0;
@@ -451,10 +452,38 @@
             const progress = scrollBuffer / (SCROLL_PER_TAB * totalTabs);
             const targetScrollY = lockedScrollY + (progress * cachedScrollDistance);
 
+            isOurScroll = true; // Mark that WE are scrolling
             window.scrollTo({
                 top: targetScrollY,
                 behavior: 'instant'
             });
+            setTimeout(() => { isOurScroll = false; }, 0);
+        }
+
+        // Detect and block unwanted scroll
+        function handleScrollEvent() {
+            if (currentState !== STATE.LOCKED || isOurScroll) return;
+
+            const expectedScrollY = lockedScrollY + (scrollBuffer / (SCROLL_PER_TAB * totalTabs)) * cachedScrollDistance;
+            const currentScrollY = window.scrollY;
+
+            // If position drifted, force it back
+            if (Math.abs(currentScrollY - expectedScrollY) > 2) {
+                isOurScroll = true;
+                window.scrollTo({ top: expectedScrollY, behavior: 'instant' });
+                setTimeout(() => { isOurScroll = false; }, 0);
+            }
+        }
+
+        // Block keyboard scrolling
+        function handleKeyDown(e) {
+            if (currentState !== STATE.LOCKED) return;
+
+            // Block scroll-triggering keys: Space, PgUp, PgDn, End, Home, Arrows
+            const scrollKeys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
+            if (scrollKeys.includes(e.keyCode)) {
+                e.preventDefault();
+            }
         }
 
         // Lock the section
@@ -630,9 +659,11 @@
         document.addEventListener('wheel', handleWheel, { passive: false });
         document.addEventListener('touchstart', handleTouchStart, { passive: false });
         document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        document.addEventListener('keydown', handleKeyDown, { passive: false });
 
         window.addEventListener('scroll', () => {
             requestAnimationFrame(checkBounds);
+            handleScrollEvent(); // Detect and block unwanted scroll
         }, { passive: true });
 
         // Initial check
