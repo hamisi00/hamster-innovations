@@ -421,8 +421,6 @@
         const stickyWrapper = document.querySelector('.features-sticky-wrapper');
         const tabs = document.querySelectorAll('.feature-tab');
         const panels = document.querySelectorAll('.tab-panel');
-        const progressFill = document.querySelector('.tab-progress-fill');
-        const progressLabel = document.querySelector('.tab-progress-label');
 
         if (!section || !stickyWrapper || tabs.length === 0 || panels.length === 0) return;
 
@@ -477,16 +475,7 @@
             hasCompletedOnce = true;
             if (rafId) cancelAnimationFrame(rafId);
 
-            // Gentle nudge: small scroll past locked position to "break free"
-            // Then user can naturally continue scrolling to Products
-            const targetScroll = lockedScrollY + 150;
-
-            window.scrollTo({
-                top: targetScroll,
-                behavior: 'smooth'
-            });
-
-            // Normal scroll resumes immediately after this small adjustment
+            // Release lock - user can now naturally scroll to Products section
         }
 
         // Unlock upward (to About section)
@@ -550,8 +539,8 @@
                 return;
             }
 
-            if (scrollBuffer >= SCROLL_PER_TAB * (totalTabs + 0.5)) {
-                // Scrolling down past last tab (with 0.5 tab buffer)
+            if (scrollBuffer >= SCROLL_PER_TAB * totalTabs) {
+                // Scrolling down past last tab - unlock immediately
                 unlockDownward();
                 return;
             }
@@ -572,10 +561,6 @@
             if (newTabIndex !== currentTabIndex) {
                 activateTab(newTabIndex);
             }
-
-            // Update progress bar
-            const progress = scrollBuffer / (SCROLL_PER_TAB * totalTabs);
-            updateProgressBar(progress);
         }
 
         // Activate tab
@@ -593,20 +578,6 @@
                     panel.classList.remove('active');
                 }
             });
-
-            if (progressLabel && tabs[index]) {
-                progressLabel.textContent = tabs[index].getAttribute('data-tab-label');
-            }
-        }
-
-        // Update progress bar
-        function updateProgressBar(progress) {
-            if (progressFill) {
-                const fillPercent = Math.max(25, Math.min(100,
-                    25 + (progress * 75)
-                ));
-                progressFill.style.width = `${fillPercent}%`;
-            }
         }
 
         // Manual tab clicks
@@ -615,7 +586,6 @@
                 isManualClick = true;
                 activateTab(index);
                 scrollBuffer = index * SCROLL_PER_TAB;
-                updateProgressBar(scrollBuffer / (SCROLL_PER_TAB * totalTabs));
 
                 setTimeout(() => {
                     isManualClick = false;
