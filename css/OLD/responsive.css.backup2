@@ -1074,31 +1074,3 @@
     /* Override for light mode if needed - currently designed for dark */
     /* This portfolio is designed for dark mode by default */
 }
-
-/* ============================================
-   MOBILE-SPECIFIC OVERRIDES
-   Additional mobile-first improvements
-   ============================================ */
-
-/* Mobile: Ensure cards don't overflow */
-@media screen and (max-width: 640px) {
-    /* Prevent horizontal scroll */
-    body {
-        overflow-x: hidden;
-    }
-
-    /* Cascading cards - already handled in main.css */
-    /* Stack cards properly on mobile */
-    .cascading-cards-container {
-        padding: 0;
-    }
-
-    /* Ensure selling points are readable */
-    .product-features {
-        flex-direction: column;
-    }
-
-    .product-features li {
-        width: 100%;
-    }
-}
