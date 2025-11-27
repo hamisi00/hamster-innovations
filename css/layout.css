@@ -209,11 +209,7 @@
         width: 100%;
     }
 
-    /* Hide mobile-specific nav elements */
-    .nav-toggle {
-        display: none;
-    }
-
+    /* Keep nav-backdrop hidden on desktop (not needed for expanding nav) */
     .nav-backdrop {
         display: none;
     }
