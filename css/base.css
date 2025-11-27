@@ -211,7 +211,7 @@ section {
 
 /* -------------------- Feature Tabs (Mobile: Simple Accordion) -------------------- */
 .features-tabs-section {
-    padding: var(--spacing-3xl) var(--spacing-md) var(--spacing-2xl);
+    padding: var(--spacing-2xl) 0;
 }
 
 .feature-tabs {

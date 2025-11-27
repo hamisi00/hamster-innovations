@@ -60,15 +60,18 @@
     <link rel="stylesheet" href="css/components.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="css/transitions.css" media="print" onload="this.media='all'">
 
+    <!-- Progressive animation loading - All devices -->
+    <link rel="stylesheet" href="css/animations.css" media="print" onload="this.media='all'">
+
     <!-- Desktop-only enhancements - Load conditionally -->
     <link rel="stylesheet" href="css/desktop-enhanced.css" media="(min-width: 1024px)">
-    <link rel="stylesheet" href="css/animations.css" media="(min-width: 1024px)">
 
     <!-- Fallback for browsers that don't support onload -->
     <noscript>
         <link rel="stylesheet" href="css/layout.css">
         <link rel="stylesheet" href="css/components.css">
         <link rel="stylesheet" href="css/transitions.css">
+        <link rel="stylesheet" href="css/animations.css">
         <!-- Ensure content visible without JavaScript -->
         <style>
             [data-animate] {
@@ -139,7 +142,7 @@
                 <a href="#contact" class="btn btn-secondary">Contact Us</a>
             </div>
         </div>
-        <div class="scroll-indicator" data-animate="fade-up">
+        <div class="scroll-indicator">
             <span>Scroll to explore</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
