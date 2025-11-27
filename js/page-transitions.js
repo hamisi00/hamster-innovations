@@ -325,57 +325,63 @@ class PageTransition {
     }
 
     /**
-     * Animate vertices for mobile - Simplified 2-vertex diagonal sweep
-     * Creates true diagonal motion from top-left to bottom-right
+     * Animate vertices for mobile - 4-vertex diagonal parallelogram (like desktop)
+     * Creates true diagonal sweep effect, optimized for mobile with faster timing
      */
     animateVerticesMobile(direction, callback) {
-        const duration = 400; // Fast mobile transition
+        const duration = 400; // Fast mobile transition (vs desktop's 1200ms)
         const startTime = performance.now();
 
-        // 2-vertex diagonal sweep: top-left and bottom-right move together
-        // Creating a diagonal wipe effect across the screen
+        // Define vertex animation configs for DIAGONAL parallelogram effect
+        // Same diagonal pairing as desktop, but faster timing
+        // Diagonal pair 1: Top-left + Bottom-right (move together)
+        // Diagonal pair 2: Top-right + Bottom-left (move together, offset from pair 1)
         const vertices = [
-            { name: 'point1', easing: this.cubicBezier(0.4, 0, 0.2, 1) },  // Top-left
-            { name: 'point2', easing: this.cubicBezier(0.4, 0, 0.2, 1) },  // Top-right
-            { name: 'point3', easing: this.cubicBezier(0.4, 0, 0.2, 1) },  // Bottom-right
-            { name: 'point4', easing: this.cubicBezier(0.4, 0, 0.2, 1) }   // Bottom-left
+            { name: 'point1', delay: 0, easing: this.cubicBezier(0.4, 0, 0.2, 1) },      // Top-left (Diagonal 1)
+            { name: 'point2', delay: 100, easing: this.cubicBezier(0.45, 0, 0.25, 1) }, // Top-right (Diagonal 2)
+            { name: 'point3', delay: 0, easing: this.cubicBezier(0.4, 0, 0.2, 1) },      // Bottom-right (Diagonal 1)
+            { name: 'point4', delay: 100, easing: this.cubicBezier(0.45, 0, 0.25, 1) }  // Bottom-left (Diagonal 2)
         ];
 
-        // Position definitions for diagonal sweep
+        // Position definitions
         const positions = {
-            corners: [   // Mask fully visible (screen covered)
-                { x: 0, y: 0 },       // point1: top-left
-                { x: 100, y: 0 },     // point2: top-right
-                { x: 100, y: 100 },   // point3: bottom-right
-                { x: 0, y: 100 }      // point4: bottom-left
+            corners: [   // Mask fully visible (screen covered/black)
+                { x: 0, y: 0 },       // point1: top-left corner
+                { x: 100, y: 0 },     // point2: top-right corner
+                { x: 100, y: 100 },   // point3: bottom-right corner
+                { x: 0, y: 100 }      // point4: bottom-left corner
             ],
-            topLeft: [   // Mask collapsed to top-left (content visible)
-                { x: 0, y: 0 },       // point1: top-left
-                { x: 0, y: 0 },       // point2: collapsed to top-left
-                { x: 0, y: 0 },       // point3: collapsed to top-left
-                { x: 0, y: 0 }        // point4: top-left
+            center: [    // Mask barely visible (content shows)
+                { x: 50, y: 50 },     // point1: center
+                { x: 50, y: 50 },     // point2: center
+                { x: 50, y: 50 },     // point3: center
+                { x: 50, y: 50 }      // point4: center
             ]
         };
 
-        // Determine start and end positions
-        const startPos = direction === 'cover' ? positions.topLeft : positions.corners;
-        const endPos = direction === 'cover' ? positions.corners : positions.topLeft;
+        // Determine start and end positions based on direction
+        const startPos = direction === 'cover' ? positions.center : positions.corners;
+        const endPos = direction === 'cover' ? positions.corners : positions.center;
 
         const animate = (currentTime) => {
             const elapsed = currentTime - startTime;
-            const progress = Math.min(1, elapsed / duration);
-            const easedProgress = vertices[0].easing(progress);
+            let completed = 0;
 
-            // Animate all vertices together (no stagger on mobile for speed)
             vertices.forEach((vertex, index) => {
+                const adjustedElapsed = Math.max(0, elapsed - vertex.delay);
+                const progress = Math.min(1, adjustedElapsed / duration);
+                const easedProgress = vertex.easing(progress);
+
                 const x = this.lerp(startPos[index].x, endPos[index].x, easedProgress);
                 const y = this.lerp(startPos[index].y, endPos[index].y, easedProgress);
 
                 this.mask.style.setProperty(`--${vertex.name}X`, `${x}%`);
                 this.mask.style.setProperty(`--${vertex.name}Y`, `${y}%`);
+
+                if (progress >= 1) completed++;
             });
 
-            if (progress < 1) {
+            if (completed < vertices.length) {
                 requestAnimationFrame(animate);
             } else {
                 if (callback) callback();
