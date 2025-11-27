@@ -10,6 +10,14 @@ class PageTransition {
         this.currentContentUrl = window.location.href;
         this.supportsViewTransition = 'startViewTransition' in document;
 
+        // Mobile detection - use CSS transition on mobile, JS animation on desktop
+        this.isMobile = window.matchMedia('(max-width: 1023px)').matches;
+
+        // Listen for viewport changes (orientation/resize)
+        window.matchMedia('(max-width: 1023px)').addEventListener('change', (e) => {
+            this.isMobile = e.matches;
+        });
+
         this.init();
     }
 
@@ -203,13 +211,22 @@ class PageTransition {
     async playExitAnimation() {
         return new Promise((resolve) => {
             this.mask.classList.add('active');
-            this.mask.classList.remove('covered');
+            this.mask.classList.remove('revealed', 'covered');
 
-            // Animate vertices: center → corners (cover screen)
-            this.animateVertices('cover', () => {
-                this.mask.classList.add('covered');
-                resolve();
-            });
+            // Animate vertices with platform-specific timing
+            if (this.isMobile) {
+                // Mobile: Simplified 2-vertex diagonal sweep (400ms)
+                this.animateVerticesMobile('cover', () => {
+                    this.mask.classList.add('covered');
+                    resolve();
+                });
+            } else {
+                // Desktop: Complex 4-vertex parallelogram (1200ms)
+                this.animateVertices('cover', () => {
+                    this.mask.classList.add('covered');
+                    resolve();
+                });
+            }
         });
     }
 
@@ -223,12 +240,21 @@ class PageTransition {
 
             // Small delay for effect
             setTimeout(() => {
-                // Animate vertices: corners → center (reveal content)
-                this.animateVertices('reveal', () => {
-                    this.mask.classList.add('revealed');
-                    this.mask.classList.remove('covered', 'active');
-                    resolve();
-                });
+                if (this.isMobile) {
+                    // Mobile: Simplified 2-vertex diagonal sweep (400ms)
+                    this.animateVerticesMobile('reveal', () => {
+                        this.mask.classList.add('revealed');
+                        this.mask.classList.remove('covered', 'active');
+                        resolve();
+                    });
+                } else {
+                    // Desktop: Complex 4-vertex parallelogram (1200ms)
+                    this.animateVertices('reveal', () => {
+                        this.mask.classList.add('revealed');
+                        this.mask.classList.remove('covered', 'active');
+                        resolve();
+                    });
+                }
             }, 100);
         });
     }
@@ -289,6 +315,67 @@ class PageTransition {
             });
 
             if (completed < vertices.length) {
+                requestAnimationFrame(animate);
+            } else {
+                if (callback) callback();
+            }
+        };
+
+        requestAnimationFrame(animate);
+    }
+
+    /**
+     * Animate vertices for mobile - Simplified 2-vertex diagonal sweep
+     * Creates true diagonal motion from top-left to bottom-right
+     */
+    animateVerticesMobile(direction, callback) {
+        const duration = 400; // Fast mobile transition
+        const startTime = performance.now();
+
+        // 2-vertex diagonal sweep: top-left and bottom-right move together
+        // Creating a diagonal wipe effect across the screen
+        const vertices = [
+            { name: 'point1', easing: this.cubicBezier(0.4, 0, 0.2, 1) },  // Top-left
+            { name: 'point2', easing: this.cubicBezier(0.4, 0, 0.2, 1) },  // Top-right
+            { name: 'point3', easing: this.cubicBezier(0.4, 0, 0.2, 1) },  // Bottom-right
+            { name: 'point4', easing: this.cubicBezier(0.4, 0, 0.2, 1) }   // Bottom-left
+        ];
+
+        // Position definitions for diagonal sweep
+        const positions = {
+            corners: [   // Mask fully visible (screen covered)
+                { x: 0, y: 0 },       // point1: top-left
+                { x: 100, y: 0 },     // point2: top-right
+                { x: 100, y: 100 },   // point3: bottom-right
+                { x: 0, y: 100 }      // point4: bottom-left
+            ],
+            topLeft: [   // Mask collapsed to top-left (content visible)
+                { x: 0, y: 0 },       // point1: top-left
+                { x: 0, y: 0 },       // point2: collapsed to top-left
+                { x: 0, y: 0 },       // point3: collapsed to top-left
+                { x: 0, y: 0 }        // point4: top-left
+            ]
+        };
+
+        // Determine start and end positions
+        const startPos = direction === 'cover' ? positions.topLeft : positions.corners;
+        const endPos = direction === 'cover' ? positions.corners : positions.topLeft;
+
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(1, elapsed / duration);
+            const easedProgress = vertices[0].easing(progress);
+
+            // Animate all vertices together (no stagger on mobile for speed)
+            vertices.forEach((vertex, index) => {
+                const x = this.lerp(startPos[index].x, endPos[index].x, easedProgress);
+                const y = this.lerp(startPos[index].y, endPos[index].y, easedProgress);
+
+                this.mask.style.setProperty(`--${vertex.name}X`, `${x}%`);
+                this.mask.style.setProperty(`--${vertex.name}Y`, `${y}%`);
+            });
+
+            if (progress < 1) {
                 requestAnimationFrame(animate);
             } else {
                 if (callback) callback();

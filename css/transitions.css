@@ -135,6 +135,13 @@
     }
 }
 
+/* ============================================
+   RESPONSIVE: DIAGONAL SWEEP ANIMATION
+   Mobile: Simplified 2-vertex (400ms)
+   Desktop: Complex 4-vertex parallelogram (1200ms)
+   Both use JavaScript animation for smooth diagonal motion
+   ============================================ */
+
 /* -------------------- Mobile Optimizations -------------------- */
 @media screen and (max-width: 640px) {
     .transition-loading {
