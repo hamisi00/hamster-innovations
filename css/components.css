@@ -6,33 +6,8 @@
 
 /* -------------------- Scroll Animations (Applied via JS) -------------------- */
 
-/* MOBILE-FIRST: Content visible by default (progressive enhancement) */
-[data-animate] {
-    opacity: 1; /* ← CHANGED: Show content immediately on mobile */
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-/* When JavaScript adds .revealed class, reset any transforms */
-[data-animate].revealed {
-    opacity: 1;
-    transform: translateY(0) translateX(0) scale(1); /* Reset all transforms */
-}
-
-/* Transform states (only hidden on desktop, see below) */
-[data-animate="fade-up"] {
-    transform: translateY(30px);
-}
-
-[data-animate="fade-up"].revealed {
-    transform: translateY(0);
-}
-
-/* Desktop only: Hide elements before animation (JS will reveal) */
-@media (min-width: 1024px) {
-    [data-animate]:not(.revealed):not(.animation-complete) {
-        opacity: 0; /* Hide only on desktop where we control animations */
-    }
-}
+/* NOTE: Animation states handled by animations.css (loaded on all devices)
+   This file only provides emergency fallback for accessibility */
 
 /* Emergency fallback: Show content after 2s even if JS hasn't loaded */
 [data-animate]:not(.revealed):not(.animation-complete) {
@@ -44,22 +19,6 @@
         opacity: 1 !important;
         transform: translateY(0) translateX(0) scale(1) !important;
     }
-}
-
-[data-animate="fade-in"] {
-    transform: scale(0.95);
-}
-
-[data-animate="fade-in"].revealed {
-    transform: scale(1);
-}
-
-[data-animate="slide-left"] {
-    transform: translateX(30px);
-}
-
-[data-animate="slide-left"].revealed {
-    transform: translateX(0);
 }
 
 /* -------------------- Loading States -------------------- */
