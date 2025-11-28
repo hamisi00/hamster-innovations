@@ -163,148 +163,151 @@ body {
 }
 
 /* -------------------- Navigation -------------------- */
-.main-nav {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: var(--z-nav);
-    padding: var(--spacing-md);
-    background: rgba(10, 22, 40, 0.6);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    transition: width 3s ease, padding 3s ease;
-    width: 80px;
-    overflow: hidden;
-}
+/* Mobile base styles (no media query) will be added by responsive.css */
+/* Desktop expandable navigation */
+/* Breakpoint aligns with JavaScript: window.innerWidth <= 640 (mobile) vs > 640 (desktop) */
 
-.main-nav.expanded {
-    width: calc(100vw - 40px);
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--spacing-lg);
-    position: relative;
-    padding-right: 54px;
-    transition: gap 3s ease;
-}
-
-/* Remove gap when collapsed - toggle is absolutely positioned */
-.main-nav:not(.expanded) .nav-container {
-    gap: 0;
-}
-
-.nav-logo {
-    flex-shrink: 0;
-    transition: opacity 2.5s ease, width 3s ease;
-}
-
-/* Hide logo in collapsed state - remove from layout*/
-.main-nav:not(.expanded) .nav-logo {
-    opacity: 0;
-    width: 0;
-    overflow: hidden;
-    pointer-events: none;
-    transition-delay: 1.5s, 1.5s;
-}
-
-/* Show logo when expanded - delay fade-in */
-.main-nav.expanded .nav-logo {
-    opacity: 1;
-    width: auto;
-    transition-delay: 0.3s, 0s;
-}
-
-.nav-logo a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.logo-link {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    transition: transform 0.3s ease;
-}
-
-.logo-link:hover {
-    transform: scale(1.02);
-}
-
-.logo-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(74, 144, 226, 0.3);
-    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
-    transition: all 0.3s ease;
-}
-
-.logo-icon:hover {
-    border-color: rgba(74, 144, 226, 0.6);
-    box-shadow: 0 6px 16px rgba(74, 144, 226, 0.3);
-}
-
-.company-name {
-    font-family: 'Poppins', var(--font-primary);
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--color-text-primary);
-    letter-spacing: -0.5px;
-    opacity: 0;
-    white-space: nowrap;
-    transition: opacity 3s ease;
-    transition-delay: 0.3s,
-}
-
-.main-nav.expanded .company-name {
-    opacity: 1;
-}
-
-/* for proper collapse timing */
-.main-nav:not(.expanded) .company-name {
-    opacity: 0;
-    transition-delay: 1.5s; /* Wait for drawer to collapse */
-}
-
-.nav-menu {
-    display: flex;
-    gap: var(--spacing-xl);
-    list-style: none;
-    width: 0;
-    opacity: 0;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    justify-content: center;
-}
-
-/* Desktop only: 3D flip-in animation (progressive enhancement) */
 @media (min-width: 641px) {
+    .main-nav {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        right: auto;
+        width: 80px;
+        height: auto; /* Override inline critical CSS - let content determine size */
+        padding: var(--spacing-md);
+        background: rgba(10, 22, 40, 0.6);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        transition: width 3s ease, padding 3s ease;
+        overflow: hidden;
+        z-index: var(--z-nav);
+    }
+
+    .main-nav.expanded {
+        width: calc(100vw - 40px);
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--spacing-lg);
+        position: relative;
+        padding-right: 54px;
+        transition: gap 3s ease;
+        /* NO height or max-width - let flexbox size naturally */
+    }
+
+    .main-nav:not(.expanded) .nav-container {
+        gap: 0;
+    }
+
+    /* Logo specifications */
+    .nav-logo {
+        flex-shrink: 0;
+        transition: opacity 2.5s ease, width 3s ease;
+    }
+
+    .main-nav:not(.expanded) .nav-logo {
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
+        pointer-events: none;
+        transition-delay: 1.5s, 1.5s;
+    }
+
+    .main-nav.expanded .nav-logo {
+        opacity: 1;
+        width: auto;
+        transition-delay: 0.3s, 0s;
+    }
+
+    .logo-link {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start; /* Explicit left align */
+        gap: var(--spacing-sm);
+        transition: transform 0.3s ease;
+    }
+
+    .logo-link:hover {
+        transform: scale(1.02);
+    }
+
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(74, 144, 226, 0.3);
+        box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .logo-icon:hover {
+        border-color: rgba(74, 144, 226, 0.6);
+        box-shadow: 0 6px 16px rgba(74, 144, 226, 0.3);
+    }
+
+    .company-name {
+        display: inline-block;
+        font-family: 'Poppins', var(--font-primary);
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--color-text-primary);
+        letter-spacing: -0.5px;
+        opacity: 0;
+        white-space: nowrap;
+        transition: opacity 3s ease;
+        transition-delay: 0.3s;
+    }
+
+    .main-nav.expanded .company-name {
+        opacity: 1;
+    }
+
+    .main-nav:not(.expanded) .company-name {
+        opacity: 0;
+        transition-delay: 1.5s;
+    }
+
+    /* Nav menu - 3D flip animation */
     .nav-menu {
-        transition: width 3s ease, opacity 3s ease; /* Slow animation only on desktop */
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        height: auto;
+        width: 0;
+        max-width: none;
+        opacity: 0;
+        background: transparent;
+        backdrop-filter: none;
+        padding: 0;
+        border: none;
+        border-right: none;
+        display: flex;
+        flex-direction: row;
+        gap: var(--spacing-xl);
+        list-style: none;
+        justify-content: center;
+        transition: width 3s ease, opacity 3s ease;
+        z-index: auto;
+        box-shadow: none;
     }
 
     .main-nav.expanded .nav-menu {
         width: auto;
         opacity: 1;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
     }
 
     .nav-menu li {
         transform: rotateY(90deg);
         opacity: 0;
         transition: transform 3s ease, opacity 3s ease;
-        transition-delay: 0s;
     }
 
     .main-nav.expanded .nav-menu li {
@@ -312,18 +315,44 @@ body {
         opacity: 1;
     }
 
-    /* Staggered animation delays for sequential flip-in when expanding */
+    .nav-menu .nav-link {
+        padding: var(--spacing-sm);
+        min-height: auto;
+        border-radius: 0;
+        position: relative;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        font-size: var(--font-size-base);
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .nav-menu .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--color-primary);
+        transition: width 0.3s ease;
+    }
+
+    .nav-menu .nav-link:hover {
+        color: var(--color-text-primary);
+    }
+
+    .nav-menu .nav-link:hover::after {
+        width: 100%;
+    }
+
+    /* Staggered delays for sequential flip-in when expanding */
     .main-nav.expanded .nav-menu li:nth-child(1) { transition-delay: 0.3s; }
     .main-nav.expanded .nav-menu li:nth-child(2) { transition-delay: 0.6s; }
     .main-nav.expanded .nav-menu li:nth-child(3) { transition-delay: 0.9s; }
     .main-nav.expanded .nav-menu li:nth-child(4) { transition-delay: 1.2s; }
     .main-nav.expanded .nav-menu li:nth-child(5) { transition-delay: 1.5s; }
     .main-nav.expanded .nav-menu li:nth-child(6) { transition-delay: 1.8s; }
-    
-    /* PROPER reversed stagger delays for sequential fade out when collapsing*/
-    .main-nav:not(.expanded) .nav-menu li {
-    transition-delay: 0s;
-}
 
     /* Reversed stagger delays for sequential fade-out when collapsing */
     .main-nav:not(.expanded) .nav-menu li:nth-child(1) { transition-delay: 1.8s; }
@@ -333,108 +362,77 @@ body {
     .main-nav:not(.expanded) .nav-menu li:nth-child(5) { transition-delay: 0.6s; }
     .main-nav:not(.expanded) .nav-menu li:nth-child(6) { transition-delay: 0.3s; }
 
-    /* Slow theatrical spinning animation for desktop hamburger */
-    .nav-toggle .line {
-        transition: transform 3s ease;
+    /* Hamburger toggle - Perfect centering */
+    .nav-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0; /* Remove padding for perfect centering */
+        position: absolute;
+        right: 25px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 30px;
+        width: 30px;
+        flex-shrink: 0;
+        z-index: var(--z-toggle);
     }
 
-    /* Desktop: Transform hamburger lines into X when expanded */
+    /* Remove blue focus outline */
+    .nav-toggle:focus {
+        outline: none;
+    }
+
+    /* For accessibility - only show outline for keyboard users */
+    .nav-toggle:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
+
+    .nav-toggle .line {
+        width: 26px;
+        height: 3px;
+        background: #ffffff;
+        opacity: 1;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: transform 3s ease; /* Slow theatrical animation */
+    }
+
+    .nav-toggle .line1 {
+        top: 10px;
+    }
+
+    .nav-toggle .line2 {
+        bottom: 10px;
+    }
+
+    /* Theatrical hamburger rotation (360° + 45°) */
     .main-nav.expanded .nav-toggle .line1 {
         transform: translateX(-50%) translateY(3.5px) rotate(405deg);
-        /* 405deg = 1 full rotation (360deg) + 45deg final position */
     }
 
     .main-nav.expanded .nav-toggle .line2 {
         transform: translateX(-50%) translateY(-3.5px) rotate(-405deg);
-        /* -405deg = 1 full rotation (-360deg) + -45deg final position */
     }
-}
 
-.nav-link {
-    color: var(--color-text-secondary);
-    text-decoration: none;
-    font-size: var(--font-size-base);
-    font-weight: 500;
-    position: relative;
-    transition: color 0.3s ease;
-}
+    .main-nav:not(.expanded) .nav-toggle .line1 {
+        transform: translateX(-50%) translateY(0) rotate(0deg);
+    }
 
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transition: width 0.3s ease;
-}
+    .main-nav:not(.expanded) .nav-toggle .line2 {
+        transform: translateX(-50%) translateY(0) rotate(0deg);
+    }
 
-.nav-link:hover {
-    color: var(--color-text-primary);
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-.nav-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    position: absolute;
-    right: 25px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 30px;
-    width: 30px;
-    flex-shrink: 0;
-    z-index: var(--z-toggle);
-}
-
-.nav-toggle .line {
-    width: 26px;
-    height: 3px;
-    background: #ffffff;
-    opacity: 1;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: transform 0.3s ease; /* Fast transition for mobile */
-}
-
-.nav-toggle .line1 {
-    top: 10px;
-}
-
-.nav-toggle .line2 {
-    bottom: 10px;
-}
-
-/* Explicit collapsed state - ensure horizontal lines are visible */
-.main-nav:not(.expanded) .nav-toggle .line1 {
-    transform: translateX(-50%) translateY(0) rotate(0deg);
-}
-
-.main-nav:not(.expanded) .nav-toggle .line2 {
-    transform: translateX(-50%) translateY(0) rotate(0deg);
-}
-
-/* -------------------- Navigation Backdrop -------------------- */
-.nav-backdrop {
-    display: none;
-}
-
-/* Show on mobile only - styled in responsive.css */
-@media screen and (max-width: 640px) {
+    /* Hide nav-backdrop on desktop */
     .nav-backdrop {
-        display: block;
+        display: none;
     }
 }
 
@@ -649,9 +647,8 @@ body {
 }
 
 .bento-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 22, 40, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-lg);
     transition: all 0.18s ease;

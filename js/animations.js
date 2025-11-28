@@ -374,7 +374,9 @@
 
         if (!navToggle || !navMenu || !mainNav) return;
 
-        navToggle.addEventListener('click', () => {
+        // Toggle menu open/close - ONLY via X icon
+        navToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent document click listener from firing
             const isMobile = window.innerWidth <= 640;
 
             if (isMobile) {
@@ -390,6 +392,8 @@
             }
         });
 
+        /* REMOVED - Drawer should only close via X icon, not backdrop/outside/link clicks */
+        /*
         // Close menu when clicking backdrop
         if (navBackdrop) {
             navBackdrop.addEventListener('click', () => {
@@ -399,12 +403,31 @@
             });
         }
 
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        // Close menu when clicking a navigation link (after navigation)
+        const navLinks = navMenu.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
                 const isMobile = window.innerWidth <= 640;
-
                 if (isMobile) {
+                    // Small delay to allow navigation to complete
+                    setTimeout(() => {
+                        navToggle.classList.remove('active');
+                        navMenu.classList.remove('open');
+                        if (navBackdrop) {
+                            navBackdrop.classList.remove('active');
+                        }
+                    }, 150);
+                }
+            });
+        });
+
+        // Close menu when clicking outside (but NOT inside menu)
+        document.addEventListener('click', (e) => {
+            const isMobile = window.innerWidth <= 640;
+
+            if (isMobile && navMenu.classList.contains('open')) {
+                // Only close if clicking outside both toggle and menu
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
                     navToggle.classList.remove('active');
                     navMenu.classList.remove('open');
                     if (navBackdrop) {
@@ -413,6 +436,7 @@
                 }
             }
         });
+        */
     }
 
     /* -------------------- Scroll-Based Feature Tabs with Virtual Scroll -------------------- */

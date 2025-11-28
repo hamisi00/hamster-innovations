@@ -327,9 +327,12 @@ body.animations-paused .animated {
     }
 }
 
+/* DISABLED - conflicts with mobile drawer translateX transition causing bounce */
+/*
 .nav-menu.open {
     animation: menu-reveal var(--duration-normal) var(--ease-smooth);
 }
+*/
 
 /* -------------------- Page Transitions -------------------- */
 @keyframes page-fade-in {
@@ -455,6 +458,8 @@ body.animations-paused .animated {
 }
 
 /* -------------------- Backdrop Blur Animation -------------------- */
+/* DISABLED - was causing menu items to be blurred when drawer fully open */
+/*
 @supports (backdrop-filter: blur(6px)) {
     .nav-menu.open::before {
         content: '';
@@ -467,6 +472,7 @@ body.animations-paused .animated {
         z-index: -1;
     }
 }
+*/
 
 /* -------------------- Utility Classes -------------------- */
 .fade-in {

@@ -314,15 +314,15 @@
         pointer-events: all;
     }
 
-    /* Nav Toggle - Perfect Centering on Mobile */
+    /* Nav Toggle - Perfect Centering on Mobile (larger for touch) */
     .nav-toggle {
         display: flex !important;
         position: absolute;
         right: var(--spacing-md);
         top: 50%;
         transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
+        width: 40px !important;
+        height: 40px !important;
         padding: 8px;
         z-index: 100 !important;
         pointer-events: auto !important;
@@ -333,6 +333,14 @@
         width: 24px;
         height: 2.5px;
         pointer-events: none; /* Prevent lines from blocking clicks */
+    }
+
+    .nav-toggle .line1 {
+        top: 14px; /* Adjusted for 40px container */
+    }
+
+    .nav-toggle .line2 {
+        bottom: 14px; /* Adjusted for 40px container */
     }
 
     .nav-toggle.active .line1 {
@@ -546,23 +554,40 @@
         padding: var(--spacing-2xl) 0;
     }
 
+    /* Product pages: Flex layout for mobile bento */
     .bento-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-sm);
-        grid-auto-rows: auto;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: var(--spacing-md);
+        grid-template-columns: unset;
+        grid-auto-rows: unset;
     }
 
     .bento-card {
         padding: var(--spacing-md);
-        min-height: 200px;
+        min-height: auto;
     }
 
     .bento-card.large,
     .bento-card.medium,
     .bento-card.small,
     .bento-card.wide {
-        grid-column: span 1;
-        grid-row: auto;
+        grid-column: unset;
+        grid-row: unset;
+    }
+
+    /* Fix large spacing in product pages (sections with bento-grid, no tabs) */
+    .features-tabs-section:has(.bento-grid) {
+        min-height: auto !important;
+        padding: var(--spacing-2xl) 0 var(--spacing-xl) 0;
+    }
+
+    /* Fallback for browsers without :has() support - target bento-grid parent */
+    @supports not (selector(:has(*))) {
+        .features-tabs-section .bento-grid {
+            /* Signal parent should be auto height via this marker class approach */
+        }
+        /* This fallback isn't perfect but won't break main page */
     }
 
     .bento-card h3 {
@@ -1073,4 +1098,32 @@
 @media (prefers-color-scheme: light) {
     /* Override for light mode if needed - currently designed for dark */
     /* This portfolio is designed for dark mode by default */
+}
+
+/* ============================================
+   MOBILE-SPECIFIC OVERRIDES
+   Additional mobile-first improvements
+   ============================================ */
+
+/* Mobile: Ensure cards don't overflow */
+@media screen and (max-width: 640px) {
+    /* Prevent horizontal scroll */
+    body {
+        overflow-x: hidden;
+    }
+
+    /* Cascading cards - already handled in main.css */
+    /* Stack cards properly on mobile */
+    .cascading-cards-container {
+        padding: 0;
+    }
+
+    /* Ensure selling points are readable */
+    .product-features {
+        flex-direction: column;
+    }
+
+    .product-features li {
+        width: 100%;
+    }
 }

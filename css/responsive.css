@@ -191,14 +191,26 @@
     }
 
     /* Navigation - Mobile Optimization */
+    /* Overrides desktop nav from main.css @media (min-width: 768px) */
+    /* Mobile uses drawer navigation instead of expandable desktop nav */
     .main-nav {
         height: 56px !important;
         padding: var(--spacing-sm) var(--spacing-md) !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        width: 100% !important;
-        border-radius: 0 !important;
+        /* Floating nav bar - separated from page edges */
+        top: 16px !important;
+        left: 16px !important;
+        right: 16px !important;
+        width: calc(100% - 32px) !important;
+        border-radius: 12px !important;
+        /* Fix z-index: must be ABOVE backdrop (1000) to prevent dark overlay */
+        z-index: 1100 !important;
+        /* Glassmorphism - matches desktop nav styling */
+        background: rgba(10, 22, 40, 0.6) !important; /* 60% opacity for see-through effect */
+        backdrop-filter: blur(8px) !important; /* Blur content behind nav */
+        /* Enhanced floating effect */
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3),
+                    0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
     }
 
     .nav-container {
@@ -239,13 +251,13 @@
         flex-direction: column !important;
         justify-content: flex-start !important;
         align-items: stretch !important;
-        background: rgba(10, 22, 40, 0.98);
-        backdrop-filter: blur(16px);
+        background: rgba(10, 22, 40, 1); /* Fully opaque for clarity */
+        /* backdrop-filter: blur(16px); */ /* REMOVED - was blurring content behind drawer */
         padding: var(--spacing-2xl) var(--spacing-lg);
         gap: var(--spacing-md);
-        border-right: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
-        transform: translateX(-100%) !important;
+        /* border-right and box-shadow moved to .open state - prevents visibility when drawer is closed */
+        /* Push drawer 16px further left to account for floating nav margin */
+        transform: translateX(calc(-100% - 16px)) !important;
         opacity: 1 !important;
         transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
         pointer-events: all !important;
@@ -255,15 +267,17 @@
 
     .nav-menu.open {
         transform: translateX(0) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.15) !important; /* Border only when open */
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5) !important; /* Shadow only when open */
     }
 
-    /* Mobile menu items: Simple fade-in for drawer */
+    /* Mobile menu items: Staggered fade-in animation */
     .nav-menu li {
         display: block !important;
         width: 100% !important;
         opacity: 0 !important;
         transform: translateX(-20px) !important;
-        transition: opacity 0.8s ease, transform 0.8s ease !important;
+        transition: opacity 0.3s ease, transform 0.3s ease !important;
     }
 
     .nav-menu.open li {
@@ -271,13 +285,13 @@
         transform: translateX(0) !important;
     }
 
-    /* Staggered animation for drawer items - cascading slide-in effect */
-    .nav-menu.open li:nth-child(1) { transition-delay: 0.2s !important; }
-    .nav-menu.open li:nth-child(2) { transition-delay: 0.3s !important; }
-    .nav-menu.open li:nth-child(3) { transition-delay: 0.4s !important; }
-    .nav-menu.open li:nth-child(4) { transition-delay: 0.5s !important; }
-    .nav-menu.open li:nth-child(5) { transition-delay: 0.6s !important; }
-    .nav-menu.open li:nth-child(6) { transition-delay: 0.7s !important; }
+    /* Staggered animation for drawer items - fast cascading effect */
+    .nav-menu.open li:nth-child(1) { transition-delay: 0.1s !important; }
+    .nav-menu.open li:nth-child(2) { transition-delay: 0.15s !important; }
+    .nav-menu.open li:nth-child(3) { transition-delay: 0.2s !important; }
+    .nav-menu.open li:nth-child(4) { transition-delay: 0.25s !important; }
+    .nav-menu.open li:nth-child(5) { transition-delay: 0.3s !important; }
+    .nav-menu.open li:nth-child(6) { transition-delay: 0.35s !important; }
 
     /* Reset delays when closing for instant fade-out */
     .nav-menu:not(.open) li {
@@ -292,6 +306,16 @@
         text-align: left !important;
         color: var(--color-text-primary) !important; /* Bright white for visibility */
         opacity: 1 !important;
+        font-weight: 500 !important; /* Medium weight for readability without excessive boldness */
+        font-size: 1.1rem !important; /* Slightly larger on mobile */
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
+                     0 0 8px rgba(255, 255, 255, 0.1) !important; /* Subtle glow */
+    }
+
+    /* Active/hover state for mobile menu items */
+    .nav-menu.open .nav-link:active {
+        background: rgba(74, 144, 226, 0.25) !important;
+        box-shadow: 0 0 16px rgba(74, 144, 226, 0.4) !important;
     }
 
     /* Navigation Backdrop - Mobile Drawer Overlay */
@@ -301,8 +325,8 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(2px);
+        background: rgba(0, 0, 0, 0.7); /* Solid dark overlay - no blur */
+        /* backdrop-filter: blur(2px); */ /* REMOVED - was blurring entire screen */
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.8s ease;
@@ -311,22 +335,35 @@
 
     .nav-backdrop.active {
         opacity: 1;
-        pointer-events: all;
+        pointer-events: none; /* Changed from 'all' - backdrop is purely visual, clicks pass through to menu/toggle */
     }
 
-    /* Nav Toggle - Perfect Centering on Mobile */
+    /* Nav Toggle - Perfect Centering on Mobile (larger for touch) */
     .nav-toggle {
         display: flex !important;
         position: absolute;
         right: var(--spacing-md);
         top: 50%;
         transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
+        width: 40px !important;
+        height: 40px !important;
         padding: 8px;
-        z-index: 100 !important;
+        z-index: 1100 !important; /* Above nav-menu (1001) so it stays clickable */
         pointer-events: auto !important;
         cursor: pointer !important;
+        transition: transform 0.2s ease !important;
+    }
+
+    /* Highlight X icon when drawer is open */
+    .nav-toggle.active {
+        background: rgba(74, 144, 226, 0.15) !important;
+        border-radius: 8px !important;
+        box-shadow: 0 0 16px rgba(74, 144, 226, 0.4),
+                    0 0 32px rgba(74, 144, 226, 0.2) !important;
+    }
+
+    .nav-toggle:hover {
+        transform: translateY(-50%) scale(1.05) !important;
     }
 
     .nav-toggle .line {
@@ -335,19 +372,36 @@
         pointer-events: none; /* Prevent lines from blocking clicks */
     }
 
+    /* Brighten X icon lines when active */
+    .nav-toggle.active .line {
+        background: #ffffff !important;
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.8),
+                    0 0 20px rgba(74, 144, 226, 0.6) !important;
+    }
+
+    .nav-toggle .line1 {
+        top: 14px; /* Adjusted for 40px container */
+    }
+
+    .nav-toggle .line2 {
+        bottom: 14px; /* Adjusted for 40px container */
+    }
+
+    /* Mobile X icon - 5px offset for visual balance (40px container) */
     .nav-toggle.active .line1 {
-        transform: rotate(45deg) translateY(6px);
+        transform: translateX(-50%) translateY(5px) rotate(45deg);
     }
 
     .nav-toggle.active .line2 {
-        transform: rotate(-45deg) translateY(-6px);
+        transform: translateX(-50%) translateY(-5px) rotate(-45deg);
     }
 
     /* Hero Section */
     .hero-section {
         padding: var(--spacing-2xl) var(--spacing-md);
         min-height: calc(100vh - 56px);
-        padding-top: calc(56px + var(--spacing-xl));
+        /* Account for floating nav: 16px top + 56px height + spacing */
+        padding-top: calc(72px + var(--spacing-xl));
     }
 
     .hero-title {
@@ -546,23 +600,40 @@
         padding: var(--spacing-2xl) 0;
     }
 
+    /* Product pages: Flex layout for mobile bento */
     .bento-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-sm);
-        grid-auto-rows: auto;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: var(--spacing-md);
+        grid-template-columns: unset;
+        grid-auto-rows: unset;
     }
 
     .bento-card {
         padding: var(--spacing-md);
-        min-height: 200px;
+        min-height: auto;
     }
 
     .bento-card.large,
     .bento-card.medium,
     .bento-card.small,
     .bento-card.wide {
-        grid-column: span 1;
-        grid-row: auto;
+        grid-column: unset;
+        grid-row: unset;
+    }
+
+    /* Fix large spacing in product pages (sections with bento-grid, no tabs) */
+    .features-tabs-section:has(.bento-grid) {
+        min-height: auto !important;
+        padding: var(--spacing-2xl) 0 var(--spacing-xl) 0;
+    }
+
+    /* Fallback for browsers without :has() support - target bento-grid parent */
+    @supports not (selector(:has(*))) {
+        .features-tabs-section .bento-grid {
+            /* Signal parent should be auto height via this marker class approach */
+        }
+        /* This fallback isn't perfect but won't break main page */
     }
 
     .bento-card h3 {

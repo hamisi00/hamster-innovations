@@ -649,9 +649,8 @@ body {
 }
 
 .bento-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 22, 40, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-lg);
     transition: all 0.18s ease;
@@ -1732,3 +1731,42 @@ body {
 }
 
 /* Footer Responsive - Moved to responsive.css for better organization */
+
+/* ============================================
+   MOBILE-FIRST OVERRIDES
+   Disable complex desktop effects on mobile
+   ============================================ */
+
+/* Mobile: Disable cascading card stacking - simple vertical layout */
+@media screen and (max-width: 1023px) {
+    /* Disable stacking behavior - all cards fully visible */
+    .cascading-card.stacked {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    .cascading-card.stacked .cascade-card-body {
+        opacity: 1 !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    /* Simple vertical stack with spacing */
+    .cascading-cards-container {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+
+    .cascading-card {
+        position: relative !important;
+        top: auto !important;
+        transform: none !important;
+        margin-bottom: 0;
+    }
+
+    /* Ensure proper positioning for mobile */
+    .stacked-cards-section {
+        min-height: auto !important;
+    }
+}
