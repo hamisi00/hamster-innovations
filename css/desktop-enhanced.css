@@ -218,112 +218,6 @@
     }
 }
 
-/* ==================== PRODUCT SHOWCASE - STICKY CASCADE ==================== */
-
-@media (min-width: 1024px) {
-
-    .products-showcase-section {
-        min-height: 250vh; /* Allow scroll room for cascade */
-    }
-
-    .cascading-cards-container {
-        padding-bottom: 60vh;
-        display: block; /* Override grid for sticky effect */
-    }
-
-    .cascading-card {
-        position: sticky;
-        margin-bottom: var(--spacing-lg);
-        will-change: transform;
-    }
-
-    /* Cascading positions with reversed z-index */
-    .cascading-card:nth-child(1) {
-        top: 100px;
-        z-index: 1;
-    }
-
-    .cascading-card:nth-child(2) {
-        top: 200px;
-        z-index: 2;
-    }
-
-    .cascading-card:nth-child(3) {
-        top: 300px;
-        z-index: 3;
-    }
-
-    .cascading-card:nth-child(4) {
-        top: 400px;
-        z-index: 4;
-    }
-
-    .cascading-card:nth-child(5) {
-        top: 500px;
-        z-index: 5;
-    }
-
-    .cascading-card:nth-child(6) {
-        top: 600px;
-        z-index: 6;
-    }
-
-    /* Gradient border glow on hover */
-    .cascading-card::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: var(--border-radius-lg);
-        padding: 2px;
-        background: linear-gradient(135deg,
-            rgba(74, 144, 226, 0.3),
-            rgba(107, 93, 209, 0.2),
-            rgba(217, 70, 217, 0.2));
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-                      linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        pointer-events: none;
-    }
-
-    .cascading-card:hover::before {
-        opacity: 1;
-    }
-
-    /* Enhanced hover lift */
-    .cascading-card:hover {
-        transform: translateY(-4px) scale(1.01);
-        box-shadow: 0 16px 48px rgba(74, 144, 226, 0.25),
-                    0 8px 24px rgba(0, 0, 0, 0.5),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    }
-
-    /* Arrow slide animation on hover */
-    .cascading-card:hover .card-arrow {
-        transform: translateX(8px);
-        opacity: 1;
-    }
-
-    .card-arrow {
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-    }
-
-    /* Header highlight on hover */
-    .cascade-card-header::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(90deg,
-            transparent,
-            rgba(74, 144, 226, 0.4),
-            transparent);
-    }
-}
 
 /* ==================== SCROLL ANIMATIONS ==================== */
 
@@ -438,7 +332,6 @@
     /* GPU acceleration for animated elements */
     .nav-menu li,
     .bokeh-element,
-    .cascading-card,
     .package-card,
     .background-image,
     [data-animate="parallax"] {
@@ -483,7 +376,6 @@
 
     /* Custom cursor for interactive elements */
     .btn,
-    .cascading-card,
     .nav-link,
     .feature-tab {
         cursor: pointer;

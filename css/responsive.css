@@ -100,58 +100,6 @@
         font-size: var(--font-size-xl);
     }
 
-    /* Product Cards - Tablet (keep stacked scroll) */
-    .products-showcase-section {
-        min-height: 250vh;
-        padding: var(--spacing-2xl) 0;
-    }
-
-    .cascading-cards-container {
-        max-width: 900px;
-        padding-bottom: 50vh;
-    }
-
-    /* Proper stacking on tablet - full header visibility (6 cards) */
-    .cascading-card:nth-child(1) {
-        top: 80px;
-    }
-
-    .cascading-card:nth-child(2) {
-        top: 170px;
-    }
-
-    .cascading-card:nth-child(3) {
-        top: 260px;
-    }
-
-    .cascading-card:nth-child(4) {
-        top: 350px;
-    }
-
-    .cascading-card:nth-child(5) {
-        top: 440px;
-    }
-
-    .cascading-card:nth-child(6) {
-        top: 530px;
-    }
-
-    .cascade-card-header {
-        padding: var(--spacing-lg) var(--spacing-xl);
-        min-height: 70px;
-    }
-
-    .cascade-card-header h3 {
-        font-size: var(--font-size-xl);
-    }
-
-    .cascade-card-body {
-        padding: var(--spacing-xl);
-    }
-
-    .cascade-card-body p {
-        font-size: var(--font-size-base);
-    }
 
     /* Stacked Cards */
     .stack-card {
@@ -171,8 +119,10 @@
     }
 }
 
-/* -------------------- Mobile (640px and below) -------------------- */
-@media screen and (max-width: 640px) {
+/* -------------------- Mobile & Tablet Portrait -------------------- */
+/* Applies to: phones (any orientation) + tablets in portrait mode */
+@media screen and (max-width: 640px),
+       screen and (max-width: 1024px) and (orientation: portrait) {
     :root {
         --font-size-5xl: 2rem;
         --font-size-4xl: 1.75rem;
@@ -191,26 +141,13 @@
     }
 
     /* Navigation - Mobile Optimization */
-    /* Overrides desktop nav from main.css @media (min-width: 768px) */
     /* Mobile uses drawer navigation instead of expandable desktop nav */
+    /* Most mobile styles are in inline critical CSS for fast first paint */
     .main-nav {
-        height: 56px !important;
-        padding: var(--spacing-sm) var(--spacing-md) !important;
-        /* Floating nav bar - separated from page edges */
-        top: 16px !important;
-        left: 16px !important;
-        right: 16px !important;
-        width: calc(100% - 32px) !important;
-        border-radius: 12px !important;
-        /* Fix z-index: must be ABOVE backdrop (1000) to prevent dark overlay */
-        z-index: 1100 !important;
-        /* Glassmorphism - matches desktop nav styling */
-        background: rgba(10, 22, 40, 0.6) !important; /* 60% opacity for see-through effect */
-        backdrop-filter: blur(8px) !important; /* Blur content behind nav */
-        /* Enhanced floating effect */
+        height: 56px;
+        /* Enhanced floating effect - additional shadow layer */
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3),
-                    0 0 0 1px rgba(255, 255, 255, 0.1) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                    0 0 0 1px rgba(255, 255, 255, 0.1);
     }
 
     .nav-container {
@@ -218,104 +155,103 @@
         height: 100%;
     }
 
-    /* Override desktop collapsed state - Higher specificity */
-    .main-nav:not(.expanded) .nav-logo,
-    .main-nav.expanded .nav-logo,
+    /* Override desktop collapsed state - mobile logo always visible */
     .main-nav .nav-logo {
-        display: flex !important;
-        opacity: 1 !important;
-        width: auto !important;
-        pointer-events: auto !important;
-        overflow: visible !important;
-        transition: none !important;
+        display: flex;
+        opacity: 1;
+        width: auto;
+        position: static;
+        transform: none;
+        pointer-events: auto;
+        overflow: visible;
+        transition: none;
     }
 
     .logo-icon {
-        width: 36px !important;
-        height: 36px !important;
+        width: 36px;
+        height: 36px;
     }
 
     /* Hide company name on mobile */
     .company-name {
-        display: none !important;
+        display: none;
     }
 
     .nav-menu {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        height: 100vh !important;
-        width: 280px !important;
-        max-width: 75vw !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        align-items: stretch !important;
-        background: rgba(10, 22, 40, 1); /* Fully opaque for clarity */
-        /* backdrop-filter: blur(16px); */ /* REMOVED - was blurring content behind drawer */
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 280px;
+        max-width: 75vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        background: rgba(10, 22, 40, 1);
         padding: var(--spacing-2xl) var(--spacing-lg);
         gap: var(--spacing-md);
-        /* border-right and box-shadow moved to .open state - prevents visibility when drawer is closed */
         /* Push drawer 16px further left to account for floating nav margin */
-        transform: translateX(calc(-100% - 16px)) !important;
-        opacity: 1 !important;
-        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        pointer-events: all !important;
-        z-index: 1001 !important;
+        transform: translateX(calc(-100% - 16px));
+        opacity: 1;
+        visibility: visible;
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: all;
+        z-index: 1001;
         overflow-y: auto;
     }
 
     .nav-menu.open {
-        transform: translateX(0) !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.15) !important; /* Border only when open */
-        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5) !important; /* Shadow only when open */
+        transform: translateX(0);
+        border-right: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
     }
 
     /* Mobile menu items: Staggered fade-in animation */
     .nav-menu li {
-        display: block !important;
-        width: 100% !important;
-        opacity: 0 !important;
-        transform: translateX(-20px) !important;
-        transition: opacity 0.3s ease, transform 0.3s ease !important;
+        display: block;
+        width: 100%;
+        opacity: 0;
+        transform: translateX(-20px) rotateY(0deg);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .nav-menu.open li {
-        opacity: 1 !important;
-        transform: translateX(0) !important;
+        opacity: 1;
+        transform: translateX(0);
     }
 
-    /* Staggered animation for drawer items - fast cascading effect */
-    .nav-menu.open li:nth-child(1) { transition-delay: 0.1s !important; }
-    .nav-menu.open li:nth-child(2) { transition-delay: 0.15s !important; }
-    .nav-menu.open li:nth-child(3) { transition-delay: 0.2s !important; }
-    .nav-menu.open li:nth-child(4) { transition-delay: 0.25s !important; }
-    .nav-menu.open li:nth-child(5) { transition-delay: 0.3s !important; }
-    .nav-menu.open li:nth-child(6) { transition-delay: 0.35s !important; }
+    /* Staggered animation for drawer items - slower cascading effect */
+    .nav-menu.open li:nth-child(1) { transition-delay: 0.2s; }
+    .nav-menu.open li:nth-child(2) { transition-delay: 0.4s; }
+    .nav-menu.open li:nth-child(3) { transition-delay: 0.6s; }
+    .nav-menu.open li:nth-child(4) { transition-delay: 0.8s; }
+    .nav-menu.open li:nth-child(5) { transition-delay: 1.0s; }
+    .nav-menu.open li:nth-child(6) { transition-delay: 1.2s; }
 
     /* Reset delays when closing for instant fade-out */
     .nav-menu:not(.open) li {
-        transition-delay: 0s !important;
+        transition-delay: 0s;
     }
 
     /* Mobile nav links - enhanced touch targets and visibility */
     .nav-menu .nav-link {
-        display: block !important;
-        padding: var(--spacing-sm) var(--spacing-md) !important;
-        width: 100% !important;
-        text-align: left !important;
-        color: var(--color-text-primary) !important; /* Bright white for visibility */
-        opacity: 1 !important;
-        font-weight: 500 !important; /* Medium weight for readability without excessive boldness */
-        font-size: 1.1rem !important; /* Slightly larger on mobile */
+        display: block;
+        padding: var(--spacing-sm) var(--spacing-md);
+        width: 100%;
+        text-align: left;
+        color: var(--color-text-primary);
+        opacity: 1;
+        font-weight: 500;
+        font-size: 1.1rem;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
-                     0 0 8px rgba(255, 255, 255, 0.1) !important; /* Subtle glow */
+                     0 0 8px rgba(255, 255, 255, 0.1);
     }
 
     /* Active/hover state for mobile menu items */
     .nav-menu.open .nav-link:active {
-        background: rgba(74, 144, 226, 0.25) !important;
-        box-shadow: 0 0 16px rgba(74, 144, 226, 0.4) !important;
+        background: rgba(74, 144, 226, 0.25);
+        box-shadow: 0 0 16px rgba(74, 144, 226, 0.4);
     }
 
     /* Navigation Backdrop - Mobile Drawer Overlay */
@@ -340,43 +276,43 @@
 
     /* Nav Toggle - Perfect Centering on Mobile (larger for touch) */
     .nav-toggle {
-        display: flex !important;
+        display: flex;
         position: absolute;
         right: var(--spacing-md);
         top: 50%;
         transform: translateY(-50%);
-        width: 40px !important;
-        height: 40px !important;
+        width: 40px;
+        height: 40px;
         padding: 8px;
-        z-index: 1100 !important; /* Above nav-menu (1001) so it stays clickable */
-        pointer-events: auto !important;
-        cursor: pointer !important;
-        transition: transform 0.2s ease !important;
+        z-index: 1100;
+        pointer-events: auto;
+        cursor: pointer;
+        transition: transform 0.2s ease;
     }
 
     /* Highlight X icon when drawer is open */
     .nav-toggle.active {
-        background: rgba(74, 144, 226, 0.15) !important;
-        border-radius: 8px !important;
+        background: rgba(74, 144, 226, 0.15);
+        border-radius: 8px;
         box-shadow: 0 0 16px rgba(74, 144, 226, 0.4),
-                    0 0 32px rgba(74, 144, 226, 0.2) !important;
+                    0 0 32px rgba(74, 144, 226, 0.2);
     }
 
     .nav-toggle:hover {
-        transform: translateY(-50%) scale(1.05) !important;
+        transform: translateY(-50%) scale(1.05);
     }
 
     .nav-toggle .line {
         width: 24px;
         height: 2.5px;
-        pointer-events: none; /* Prevent lines from blocking clicks */
+        pointer-events: none;
     }
 
     /* Brighten X icon lines when active */
     .nav-toggle.active .line {
-        background: #ffffff !important;
+        background: #ffffff;
         box-shadow: 0 0 12px rgba(255, 255, 255, 0.8),
-                    0 0 20px rgba(74, 144, 226, 0.6) !important;
+                    0 0 20px rgba(74, 144, 226, 0.6);
     }
 
     .nav-toggle .line1 {
@@ -653,79 +589,6 @@
         height: 36px;
     }
 
-    /* Product Cards - Mobile (Stacked Scroll with ABOVE positioning) */
-    .products-showcase-section {
-        min-height: 250vh;
-        padding: var(--spacing-2xl) 0;
-    }
-
-    .cascading-cards-container {
-        max-width: 100%;
-        padding-bottom: 40vh;
-        margin-left: var(--spacing-md);
-        margin-right: var(--spacing-md);
-    }
-
-    .cascading-card {
-        margin-bottom: var(--spacing-md);
-    }
-
-    /* Proper stacking on mobile - full header visibility (6 cards) */
-    .cascading-card:nth-child(1) {
-        top: 70px;
-        z-index: 1;
-    }
-
-    .cascading-card:nth-child(2) {
-        top: 145px;
-        z-index: 2;
-    }
-
-    .cascading-card:nth-child(3) {
-        top: 220px;
-        z-index: 3;
-    }
-
-    .cascading-card:nth-child(4) {
-        top: 295px;
-        z-index: 4;
-    }
-
-    .cascading-card:nth-child(5) {
-        top: 370px;
-        z-index: 5;
-    }
-
-    .cascading-card:nth-child(6) {
-        top: 445px;
-        z-index: 6;
-    }
-
-    .cascade-card-header {
-        padding: var(--spacing-md) var(--spacing-lg);
-        min-height: 60px;
-    }
-
-    .cascade-card-header h3 {
-        font-size: var(--font-size-lg);
-    }
-
-    .card-arrow {
-        font-size: var(--font-size-2xl);
-    }
-
-    .cascade-card-body {
-        padding: var(--spacing-lg);
-    }
-
-    .cascade-card-body p {
-        font-size: var(--font-size-base);
-    }
-
-    .product-features li {
-        font-size: 0.75rem;
-        padding: 0.4rem 0.8rem;
-    }
 
     /* Stacked Cards */
     .stacked-cards-section {
@@ -1002,14 +865,6 @@
         transform: none;
     }
 
-    /* Cascading Cards - Touch Devices (subtle tap effects) */
-    .cascading-card:hover {
-        transform: translateY(-2px) scale(1);
-    }
-
-    .cascading-card:active {
-        transform: scale(0.98);
-    }
 
     /* Increase touch targets */
     .btn,
@@ -1158,11 +1013,6 @@
         overflow-x: hidden;
     }
 
-    /* Cascading cards - already handled in main.css */
-    /* Stack cards properly on mobile */
-    .cascading-cards-container {
-        padding: 0;
-    }
 
     /* Ensure selling points are readable */
     .product-features {

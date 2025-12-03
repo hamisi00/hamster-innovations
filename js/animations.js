@@ -229,6 +229,8 @@
     }
 
     /* -------------------- Cascading Cards Click/Tap Handlers -------------------- */
+    /* DISABLED - Cards are now display-only without expand/collapse interaction */
+    /*
     function initCascadingCards() {
         const cards = document.querySelectorAll('.cascading-card');
         if (cards.length === 0) return;
@@ -299,6 +301,7 @@
             observer.observe(card, { attributes: true, attributeFilter: ['class'] });
         });
     }
+    */
 
     /* -------------------- Packages Pop-Out Animation -------------------- */
     function initPackagesPopOut() {
@@ -327,43 +330,8 @@
     }
 
     /* -------------------- Stacked Product Cards Scroll Effect -------------------- */
-    function initStackedCards() {
-        const cards = document.querySelectorAll('.cascading-card');
-        if (cards.length === 0) return;
-
-        function updateStackedCards() {
-            cards.forEach((card, index) => {
-                const cardRect = card.getBoundingClientRect();
-                const cardTop = cardRect.top;
-
-                // Get the sticky top position for this card
-                const stickyTop = parseInt(window.getComputedStyle(card).top);
-
-                // Card is considered "stacked" when it reaches its sticky position
-                // and the next card is approaching or has passed
-                if (index < cards.length - 1) {
-                    const nextCard = cards[index + 1];
-                    const nextCardRect = nextCard.getBoundingClientRect();
-
-                    // If card is at sticky position and next card is close
-                    if (cardTop <= stickyTop + 10 && nextCardRect.top <= stickyTop + 200) {
-                        card.classList.add('stacked');
-                    } else {
-                        card.classList.remove('stacked');
-                    }
-                } else {
-                    // Last card never gets stacked
-                    card.classList.remove('stacked');
-                }
-            });
-        }
-
-        // Update on scroll
-        window.addEventListener('scroll', throttle(updateStackedCards, 16));
-
-        // Initial check
-        updateStackedCards();
-    }
+    /* REMOVED - Using simple CSS-only sticky positioning instead */
+    /* Cards stack naturally with position: sticky + z-index layering */
 
     /* -------------------- Navigation Toggle (Desktop & Mobile) -------------------- */
     function initMobileMenu() {
@@ -377,7 +345,7 @@
         // Toggle menu open/close - ONLY via X icon
         navToggle.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent document click listener from firing
-            const isMobile = window.innerWidth <= 640;
+            const isMobile = window.innerWidth <= 1024;
 
             if (isMobile) {
                 // Mobile: Toggle menu open/close with active class
@@ -407,7 +375,7 @@
         const navLinks = navMenu.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                const isMobile = window.innerWidth <= 640;
+                const isMobile = window.innerWidth <= 1024;
                 if (isMobile) {
                     // Small delay to allow navigation to complete
                     setTimeout(() => {
@@ -423,7 +391,7 @@
 
         // Close menu when clicking outside (but NOT inside menu)
         document.addEventListener('click', (e) => {
-            const isMobile = window.innerWidth <= 640;
+            const isMobile = window.innerWidth <= 1024;
 
             if (isMobile && navMenu.classList.contains('open')) {
                 // Only close if clicking outside both toggle and menu
@@ -736,8 +704,8 @@
         initNavigationScroll();
         initSmoothScroll();
         initButtonAnimations();
-        initCascadingCards();
-        initStackedCards();
+        // initCascadingCards(); // DISABLED - Cards are now display-only
+        // initStackedCards(); // REMOVED - Using simple CSS-only sticky positioning
         initPackagesPopOut();
         initMobileMenu();
         initFeatureTabs();
