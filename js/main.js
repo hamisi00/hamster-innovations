@@ -642,10 +642,13 @@
         init();
     });
 
-    // Export for debugging
+    // Export for debugging and page transitions
     window.PortfolioApp = {
         showNotification,
         performance
     };
+
+    // Export initialization function for page transitions
+    window.initializeWebsite = init;
 
 })();

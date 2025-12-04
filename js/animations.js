@@ -695,6 +695,9 @@
             console.log('⚠️ Reduced motion detected - animations simplified');
             document.body.classList.add('animations-paused');
             state.animationsEnabled = false;
+        } else {
+            document.body.classList.remove('animations-paused');
+            state.animationsEnabled = true;
         }
 
         // Initialize all animation systems
@@ -735,5 +738,8 @@
         cleanup,
         reinit: init
     };
+
+    // Export initialization function for page transitions
+    window.initializeAnimations = init;
 
 })();

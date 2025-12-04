@@ -191,14 +191,27 @@ class PageTransition {
     }
 
     reinitializeScripts() {
+        // Clean up animations before reinitializing
+        if (window.AnimationController && window.AnimationController.cleanup) {
+            window.AnimationController.cleanup();
+        }
+
         // Re-run main.js initialization if it exists
-        if (window.initializeWebsite) {
-            window.initializeWebsite();
+        if (typeof window.initializeWebsite === 'function') {
+            try {
+                window.initializeWebsite();
+            } catch (error) {
+                console.error('Error reinitializing website:', error);
+            }
         }
 
         // Reinitialize animations.js if it exists
-        if (window.initializeAnimations) {
-            window.initializeAnimations();
+        if (typeof window.initializeAnimations === 'function') {
+            try {
+                window.initializeAnimations();
+            } catch (error) {
+                console.error('Error reinitializing animations:', error);
+            }
         }
 
         // Trigger custom event for other scripts
