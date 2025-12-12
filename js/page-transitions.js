@@ -22,6 +22,11 @@ class PageTransition {
     }
 
     init() {
+        // Disable browser's automatic scroll restoration - we'll handle it manually
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
         // Create mask element
         this.createMask();
 
@@ -56,6 +61,9 @@ class PageTransition {
             // Initial page load - start with content visible
             this.mask.classList.add('revealed');
             this.mask.classList.remove('active', 'covered');
+
+            // Always start at top on page load/refresh
+            window.scrollTo(0, 0);
         }
     }
 

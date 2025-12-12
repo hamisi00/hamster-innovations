@@ -418,38 +418,40 @@
         padding: var(--spacing-2xl) 0;
     }
 
+    /* Mobile package cards - Independent layout like products */
     .packages-stack {
-        min-height: 650px;
+        display: flex;
         flex-direction: column;
+        gap: var(--spacing-lg);
+        position: relative;
+        min-height: auto;
     }
 
     .package-card {
-        max-width: 90%;
-        padding: var(--spacing-md);
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        padding: var(--spacing-lg);
+        transform: none !important;
+        opacity: 1;
+        margin-bottom: 0;
     }
 
-    /* Vertical stacking on mobile due to limited horizontal space */
+    /* Remove all stacking transforms on mobile */
     .package-card[data-index="0"],
     .package-card[data-index="1"],
     .package-card[data-index="2"],
     .package-card[data-index="3"] {
-        transform: translateX(0) translateY(10px) scale(0.95);
+        position: relative;
+        transform: none !important;
     }
 
-    .packages-stack.revealing .package-card[data-index="0"] {
-        transform: translateX(0) translateY(0) scale(1);
-    }
-
-    .packages-stack.revealing .package-card[data-index="1"] {
-        transform: translateX(0) translateY(160px) scale(1);
-    }
-
-    .packages-stack.revealing .package-card[data-index="2"] {
-        transform: translateX(0) translateY(320px) scale(1);
-    }
-
+    /* Remove revealing animation on mobile */
+    .packages-stack.revealing .package-card[data-index="0"],
+    .packages-stack.revealing .package-card[data-index="1"],
+    .packages-stack.revealing .package-card[data-index="2"],
     .packages-stack.revealing .package-card[data-index="3"] {
-        transform: translateX(0) translateY(480px) scale(1);
+        transform: none !important;
     }
 
     .package-icon {
