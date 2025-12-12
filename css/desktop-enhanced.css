@@ -1,0 +1,388 @@
+/* ============================================
+   DESKTOP-ENHANCED CSS
+   Complex animations and effects for desktop only (≥1024px)
+   Loaded conditionally to avoid performance impact on mobile
+   Requires: base.css, layout.css
+   ============================================ */
+
+/* This file should ONLY be loaded on desktop via:
+   <link rel="stylesheet" href="css/desktop-enhanced.css" media="(min-width: 1024px)">
+*/
+
+/* ==================== NAVIGATION ENHANCEMENTS ==================== */
+/* All navigation styles consolidated in main.css @media (min-width: 768px) */
+/* This file (desktop-enhanced.css) is for 1024px+ enhancements only */
+
+/* ==================== BACKGROUND ANIMATIONS ==================== */
+
+/* Animated bokeh elements - desktop only */
+@media (min-width: 1024px) {
+
+    .bokeh-element {
+        will-change: transform, opacity;
+        animation: float 20s ease-in-out infinite;
+    }
+
+    .bokeh-1 {
+        animation-duration: 25s;
+        animation-delay: 0s;
+    }
+
+    .bokeh-2 {
+        animation-duration: 30s;
+        animation-delay: -5s;
+    }
+
+    .bokeh-3 {
+        animation-duration: 28s;
+        animation-delay: -10s;
+    }
+
+    .bokeh-4 {
+        animation-duration: 32s;
+        animation-delay: -15s;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.15;
+        }
+        25% {
+            transform: translate(30px, -30px) scale(1.1);
+            opacity: 0.2;
+        }
+        50% {
+            transform: translate(-20px, 20px) scale(0.9);
+            opacity: 0.12;
+        }
+        75% {
+            transform: translate(20px, 30px) scale(1.05);
+            opacity: 0.18;
+        }
+    }
+
+    /* Parallax background on scroll (applied via JS) */
+    .background-image {
+        will-change: transform;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+/* ==================== PARALLAX SCROLL EFFECTS ==================== */
+
+@media (min-width: 1024px) {
+
+    /* Parallax layers (applied via JS) */
+    [data-animate="parallax"] {
+        will-change: transform;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .parallax-foreground {
+        will-change: transform;
+    }
+
+    .parallax-mid {
+        will-change: transform;
+    }
+
+    .parallax-background {
+        will-change: transform;
+    }
+}
+
+/* ==================== FEATURE TABS - VIRTUAL SCROLL ==================== */
+
+@media (min-width: 1024px) {
+
+    /* Virtual scroll progression */
+    .features-tabs-section {
+        min-height: 300vh; /* 3× viewport for scroll progression */
+        padding: var(--spacing-3xl) 0 0 0;
+    }
+
+    .features-sticky-wrapper {
+        position: sticky;
+        top: 100px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Position lock when needed (applied via JS) */
+    .features-sticky-wrapper.position-locked {
+        position: fixed;
+        top: 100px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 100;
+    }
+
+    /* Smooth tab transitions */
+    .tab-panel {
+        transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateX(-20px);
+    }
+
+    .tab-panel.active {
+        transform: translateX(0);
+    }
+
+    /* Tab active pulse animation */
+    .feature-tab.active::before {
+        animation: tabActivePulse 0.6s ease;
+    }
+
+    @keyframes tabActivePulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+}
+
+/* ==================== PACKAGE CARDS - POP-OUT ANIMATION ==================== */
+
+@media (min-width: 1024px) {
+
+    .packages-stack {
+        position: relative;
+        min-height: 450px;
+    }
+
+    .package-card {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        will-change: transform, opacity;
+    }
+
+    /* Initial compressed state */
+    .package-card[data-index="0"] {
+        transform: translate(-50%, -50%) translateX(0) scale(0.95);
+        z-index: 4;
+        opacity: 1;
+    }
+
+    .package-card[data-index="1"] {
+        transform: translate(-50%, -50%) translateX(15px) scale(0.95);
+        z-index: 3;
+        opacity: 0.7;
+    }
+
+    .package-card[data-index="2"] {
+        transform: translate(-50%, -50%) translateX(30px) scale(0.95);
+        z-index: 2;
+        opacity: 0.5;
+    }
+
+    .package-card[data-index="3"] {
+        transform: translate(-50%, -50%) translateX(45px) scale(0.95);
+        z-index: 1;
+        opacity: 0.3;
+    }
+
+    /* Revealed state - horizontal spread (applied via JS) */
+    .packages-stack.revealing .package-card[data-index="0"] {
+        transform: translate(-50%, -50%) translateX(-480px) scale(1);
+        opacity: 1;
+        transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        transition-delay: 0ms;
+    }
+
+    .packages-stack.revealing .package-card[data-index="1"] {
+        transform: translate(-50%, -50%) translateX(-160px) scale(1);
+        opacity: 1;
+        transition-delay: 150ms;
+    }
+
+    .packages-stack.revealing .package-card[data-index="2"] {
+        transform: translate(-50%, -50%) translateX(160px) scale(1);
+        opacity: 1;
+        transition-delay: 300ms;
+    }
+
+    .packages-stack.revealing .package-card[data-index="3"] {
+        transform: translate(-50%, -50%) translateX(480px) scale(1);
+        opacity: 1;
+        transition-delay: 450ms;
+    }
+
+    /* Enhanced hover effect when spread */
+    .packages-stack.revealing .package-card:hover {
+        border-color: rgba(74, 144, 226, 0.4);
+        box-shadow: 0 12px 40px rgba(74, 144, 226, 0.2);
+        z-index: 10;
+    }
+}
+
+
+/* ==================== SCROLL ANIMATIONS ==================== */
+
+@media (min-width: 1024px) {
+
+    /* Stagger animations for elements entering viewport */
+    [data-animate="fade-up"] {
+        transition-delay: 0.1s;
+    }
+
+    [data-animate="fade-up"]:nth-child(2) {
+        transition-delay: 0.2s;
+    }
+
+    [data-animate="fade-up"]:nth-child(3) {
+        transition-delay: 0.3s;
+    }
+
+    /* Title animation - word by word (applied via JS) */
+    .hero-title .word {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: wordSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .hero-title .word:nth-child(1) { animation-delay: 0.1s; }
+    .hero-title .word:nth-child(2) { animation-delay: 0.3s; }
+
+    @keyframes wordSlideIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* ==================== ENHANCED HOVER EFFECTS ==================== */
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+
+    /* Button hover enhancements */
+    .btn-primary:hover {
+        box-shadow: 0 0 30px rgba(74, 144, 226, 0.3),
+                    0 8px 24px rgba(0, 0, 0, 0.2);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            box-shadow: 0 0 30px rgba(74, 144, 226, 0.25),
+                        0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        50% {
+            box-shadow: 0 0 40px rgba(74, 144, 226, 0.35),
+                        0 12px 32px rgba(0, 0, 0, 0.25);
+        }
+    }
+
+    /* Nav link underline animation */
+    .nav-menu .nav-link::after {
+        background: linear-gradient(90deg,
+            var(--color-primary),
+            var(--color-secondary));
+    }
+
+    /* Card hover lift */
+    .card:hover,
+    .package-card:hover {
+        transform: translateY(-6px) scale(1.02);
+    }
+
+    /* Image zoom on hover */
+    .about-image img,
+    .tab-image img,
+    .product-screenshot img {
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .about-image:hover img,
+    .tab-image:hover img,
+    .product-screenshot:hover img {
+        transform: scale(1.05);
+    }
+
+    .about-image,
+    .tab-image,
+    .product-screenshot {
+        overflow: hidden;
+        border-radius: var(--border-radius-md);
+    }
+}
+
+/* ==================== SMOOTH SCROLL BEHAVIOR ==================== */
+
+@media (min-width: 1024px) {
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Enhanced scroll padding for fixed nav */
+    html {
+        scroll-padding-top: 120px;
+    }
+}
+
+/* ==================== PERFORMANCE OPTIMIZATIONS ==================== */
+
+@media (min-width: 1024px) {
+
+    /* GPU acceleration for animated elements */
+    .nav-menu li,
+    .bokeh-element,
+    .package-card,
+    .background-image,
+    [data-animate="parallax"] {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+
+    /* Reduce motion if user prefers */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+
+        .main-nav,
+        .nav-menu,
+        .nav-menu li,
+        .nav-toggle .line {
+            transition-duration: 0.3s !important;
+        }
+
+        .features-tabs-section {
+            min-height: auto !important;
+        }
+
+        .bokeh-element {
+            animation: none !important;
+        }
+
+        [data-animate="parallax"] {
+            transform: none !important;
+        }
+    }
+}
+
+/* ==================== CUSTOM CURSOR (OPTIONAL ENHANCEMENT) ==================== */
+
+@media (min-width: 1024px) and (hover: hover) {
+
+    /* Custom cursor for interactive elements */
+    .btn,
+    .nav-link,
+    .feature-tab {
+        cursor: pointer;
+    }
+
+    /* Magnetic effect on buttons (requires JS) */
+    .btn {
+        will-change: transform;
+    }
+}

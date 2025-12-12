@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Terms of Service, Privacy Policy, and Acceptable Use Policy for Hamster Innovations software products and services">
+    <title>Terms & Policies | Hamster Innovations</title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CRITICAL CSS - Inlined for fast first paint -->
+    <style>
+        /* Critical above-the-fold styles inlined for performance */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+        body{min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#ffffff;background-color:#050d18;overflow-x:hidden}
+        :root{--color-bg-dark:#0a1628;--color-bg-darker:#050d18;--color-primary:#4a90e2;--color-secondary:#6b5dd1;--color-text-primary:#ffffff;--color-text-secondary:#b8c5d6;--color-text-muted:#7a8ba3;--font-size-base:1rem;--font-size-lg:clamp(1.125rem,2vw,1.25rem);--font-size-xl:clamp(1.25rem,2.5vw,1.5rem);--font-size-2xl:clamp(1.5rem,3vw,2rem);--font-size-3xl:clamp(1.75rem,4vw,2.5rem);--font-size-4xl:clamp(2rem,5vw,3rem);--font-size-5xl:clamp(2.25rem,6vw,3.5rem);--spacing-xs:0.5rem;--spacing-sm:1rem;--spacing-md:clamp(1.5rem,3vw,2rem);--spacing-lg:clamp(2rem,4vw,3rem);--spacing-xl:clamp(2.5rem,5vw,4rem);--spacing-2xl:clamp(3rem,6vw,5rem);--spacing-3xl:clamp(4rem,8vw,6rem);--max-width:1280px;--border-radius-sm:0.5rem;--border-radius-md:1rem;--font-primary:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--font-heading:"Segoe UI",system-ui,sans-serif;--z-background:-1;--z-content:1;--z-nav:100;--z-toggle:110}
+        .background-layer{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
+        .background-image{position:fixed;top:0;left:0;width:100vw;height:100vh;background-image:url('assets/mobile_background.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0.9}
+        .bokeh-overlay{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none}
+        .bokeh-element{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.08}
+        .bokeh-1{width:200px;height:200px;background:radial-gradient(circle,var(--color-primary) 0%,transparent 70%);top:10%;left:15%}
+        .bokeh-2{width:180px;height:180px;background:radial-gradient(circle,var(--color-secondary) 0%,transparent 70%);bottom:20%;right:10%}
+        @media (max-width: 1024px) {
+            .main-nav{position:fixed;top:16px;left:16px;right:16px;width:calc(100% - 32px);z-index:1100;padding:var(--spacing-sm) var(--spacing-md);background:rgba(10,22,40,0.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.2);border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.3);height:56px}
+            .nav-container{display:flex;justify-content:space-between;align-items:center;height:100%;padding:0}
+            .nav-logo{display:flex;align-items:center;gap:var(--spacing-sm)}
+            .logo-link{display:flex;align-items:center;text-decoration:none}
+            .logo-icon{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(74,144,226,0.3)}
+            .company-name{font-family:'Poppins',var(--font-primary);font-size:1.25rem;font-weight:800;color:var(--color-text-primary);display:none}
+            .nav-toggle{display:flex;flex-direction:column;justify-content:center;align-items:center;background:transparent;border:none;cursor:pointer;padding:8px;z-index:1100;position:absolute;right:var(--spacing-md);top:50%;transform:translateY(-50%);width:40px;height:40px}
+            .nav-toggle:focus{outline:none}
+            .nav-toggle:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px}
+            .nav-toggle .line{background:#ffffff;box-shadow:0 0 8px rgba(255,255,255,0.6);position:absolute;left:50%;transform:translateX(-50%);transition:transform 0.3s ease;width:24px;height:2.5px}
+            .nav-toggle .line1{top:14px}
+            .nav-toggle .line2{bottom:14px}
+            .nav-menu{position:fixed;top:0;left:0;height:100vh;width:280px;max-width:75vw;background:rgba(10,22,40,1);padding:var(--spacing-2xl) var(--spacing-lg);transform:translateX(calc(-100% - 16px));transition:transform 0.8s cubic-bezier(0.4,0,0.2,1);z-index:1001;list-style:none;display:flex;flex-direction:column;gap:var(--spacing-md)}
+        }
+        .hero-section{min-height:calc(100vh - 56px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--spacing-xl) var(--spacing-md);padding-top:calc(56px + var(--spacing-xl));position:relative}
+        .hero-content{max-width:900px;margin:0 auto;position:relative;z-index:1}
+        .hero-title{font-family:var(--font-heading);font-size:var(--font-size-4xl);font-weight:800;line-height:1.1;margin-bottom:var(--spacing-md);letter-spacing:-1px;color:var(--color-text-primary)}
+        .hero-title .word{display:inline-block;margin:0 0.2em}
+        .hero-tagline{font-size:var(--font-size-xl);font-weight:600;color:var(--color-primary);margin-bottom:var(--spacing-sm);font-style:italic}
+        .hero-subtitle{font-size:var(--font-size-base);color:var(--color-text-secondary);margin-bottom:var(--spacing-lg);line-height:1.65}
+        .hero-cta{display:flex;flex-direction:column;gap:var(--spacing-sm);width:100%}
+        .btn{display:inline-block;padding:var(--spacing-md) var(--spacing-lg);border-radius:var(--border-radius-md);font-size:var(--font-size-base);font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all 0.18s ease;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center}
+        .btn-primary{background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));color:var(--color-text-primary);box-shadow:0 0 20px rgba(74,144,226,0.15)}
+        .btn-secondary{background:rgba(255,255,255,0.1);color:var(--color-text-primary);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(10px)}
+        .content-container{max-width:var(--max-width);margin:0 auto;padding:0 var(--spacing-md)}
+    </style>
+
+    <!-- CSS Files - Optimized Load Order -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/transitions.css">
+
+    <!-- Page-Specific Styles -->
+    <style>
+        .policy-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--spacing-2xl) var(--spacing-lg);
+        }
+
+        .policy-section {
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .policy-section h2 {
+            font-size: var(--font-size-3xl);
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .policy-section h3 {
+            font-size: var(--font-size-xl);
+            color: var(--color-text-primary);
+            margin: var(--spacing-xl) 0 var(--spacing-md);
+        }
+
+        .policy-section p,
+        .policy-section li {
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .policy-section ul {
+            padding-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .policy-section li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .policy-nav {
+            background: rgba(74, 144, 226, 0.1);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .policy-nav h4 {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-primary);
+            margin: 0 0 var(--spacing-md);
+        }
+
+        .policy-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+
+        .policy-nav a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .policy-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .last-updated {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            font-style: italic;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        @media screen and (max-width: 640px) {
+            .policy-nav ul {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Layer -->
+    <div class="background-layer">
+        <div class="background-image"></div>
+        <div class="bokeh-overlay">
+            <div class="bokeh-element bokeh-1"></div>
+            <div class="bokeh-element bokeh-2"></div>
+            <div class="bokeh-element bokeh-3"></div>
+            <div class="bokeh-element bokeh-4"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/icon.png" alt="Hamster Innovations" class="logo-icon">
+                    <span class="company-name">Hamster Innovations</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#terms" class="nav-link">Terms of Service</a></li>
+                <li><a href="#privacy" class="nav-link">Privacy Policy</a></li>
+                <li><a href="#acceptable-use" class="nav-link">Acceptable Use</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Navigation Backdrop (Mobile) -->
+    <div class="nav-backdrop" id="navBackdrop"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" style="min-height: 40vh; padding-top: 120px;">
+        <div class="content-container" style="text-align: center;">
+            <h1 class="hero-title" data-animate="split-text">
+                <span class="word">Terms</span>
+                <span class="word">&</span>
+                <span class="word">Policies</span>
+            </h1>
+            <p class="hero-subtitle" data-animate="fade-up">
+                Our commitment to transparency and your rights
+            </p>
+        </div>
+    </section>
+
+    <!-- Policy Content -->
+    <section class="policy-content">
+        <p class="last-updated">Last updated: November 2025</p>
+        <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-bottom: var(--spacing-2xl);">These policies may be updated at any time without prior notice. Please review them periodically for any changes.</p>
+
+        <!-- Terms of Service -->
+        <div id="terms" class="policy-section">
+            <h2>Terms of Service</h2>
+
+            <h3>1. Agreement to Terms</h3>
+            <p>By purchasing or using any software product from Hamster Innovations ("we," "us," or "our"), you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access or use our products.</p>
+
+            <h3>2. Software License</h3>
+            <p>Upon purchase, we grant you a non-exclusive, non-transferable license to use our software products for your business operations. This license is:</p>
+            <ul>
+                <li>Valid for the number of installations specified in your purchase</li>
+                <li>Limited to your organization's internal use only</li>
+                <li>Not for resale, redistribution, or sublicensing</li>
+            </ul>
+
+            <h3>3. Payment Terms</h3>
+            <p>All payments are due as specified in your invoice. Prices are quoted in Kenyan Shillings (KES) unless otherwise stated. We accept payments via MPESA and bank transfer. Customization work requires a 50% deposit before development begins.</p>
+
+            <h3>4. Support & Updates</h3>
+            <p>Your purchase includes:</p>
+            <ul>
+                <li>Initial installation and setup assistance</li>
+                <li>Bug fixes for the purchased version</li>
+                <li>WhatsApp and email support during business hours</li>
+            </ul>
+            <p>Major version upgrades and new features may require additional payment.</p>
+
+            <h3>5. User Responsibilities</h3>
+            <p>You are responsible for:</p>
+            <ul>
+                <li>Maintaining accurate and complete data in the system</li>
+                <li>Keeping your login credentials secure</li>
+                <li>Ensuring your hardware meets minimum requirements</li>
+                <li>Creating regular backups of your data</li>
+                <li>Compliance with applicable local laws and regulations</li>
+            </ul>
+
+            <h3>6. Limitation of Liability</h3>
+            <p>Our software is provided "as is" without warranties of any kind. We are not liable for:</p>
+            <ul>
+                <li>Data loss due to hardware failure, user error, or lack of backups</li>
+                <li>Business losses or interruptions</li>
+                <li>Third-party service outages (Google Sheets, email providers, etc.)</li>
+                <li>Damages exceeding the amount you paid for the software</li>
+            </ul>
+
+            <h3>7. Intellectual Property</h3>
+            <p>All software, designs, and documentation remain the intellectual property of Hamster Innovations. You may not reverse engineer, decompile, or modify our software without written permission.</p>
+
+            <h3>8. Termination</h3>
+            <p>We may terminate your license if you violate these terms. Upon termination, you must cease all use of the software and destroy any copies in your possession.</p>
+        </div>
+
+        <!-- Privacy Policy -->
+        <div id="privacy" class="policy-section">
+            <h2>Privacy Policy</h2>
+
+            <h3>1. Information We Collect</h3>
+            <p>We collect information necessary to provide our services:</p>
+            <ul>
+                <li><strong>Contact Information:</strong> Name, email, phone number, business name</li>
+                <li><strong>Business Information:</strong> Industry type, number of users, specific requirements</li>
+                <li><strong>Communication Records:</strong> Messages exchanged during support and sales</li>
+            </ul>
+
+            <h3>2. How We Use Your Information</h3>
+            <p>We use your information to:</p>
+            <ul>
+                <li>Provide and improve our software products</li>
+                <li>Communicate about your purchases and support requests</li>
+                <li>Send important updates about your software</li>
+                <li>Process payments and maintain records</li>
+            </ul>
+
+            <h3>3. Data Storage</h3>
+            <p>Your business data is stored locally on your own devices. If you use cloud sync features (Google Sheets integration), your data is stored in your own Google account. We do not have access to your operational data.</p>
+
+            <h3>4. Data Sharing</h3>
+            <p>We do not sell or rent your personal information. We may share information only:</p>
+            <ul>
+                <li>With your consent</li>
+                <li>To comply with legal obligations</li>
+                <li>With service providers who assist our operations (under confidentiality agreements)</li>
+            </ul>
+
+            <h3>5. Your Rights</h3>
+            <p>You have the right to:</p>
+            <ul>
+                <li>Access the personal information we hold about you</li>
+                <li>Request correction of inaccurate information</li>
+                <li>Request deletion of your information (subject to legal retention requirements)</li>
+                <li>Opt out of marketing communications</li>
+            </ul>
+
+            <h3>6. Data Security</h3>
+            <p>We implement appropriate security measures to protect your information, including encrypted communications and secure storage. However, no method of transmission over the internet is 100% secure.</p>
+
+            <h3>7. Contact for Privacy Concerns</h3>
+            <p>For privacy-related questions or requests, <a href="index.html#contact" style="color: var(--color-primary);">contact us through our form</a> or via <a href="https://wa.me/254717205175" target="_blank" style="color: var(--color-primary);">WhatsApp</a>.</p>
+        </div>
+
+        <!-- Acceptable Use Policy -->
+        <div id="acceptable-use" class="policy-section">
+            <h2>Acceptable Use Policy</h2>
+
+            <h3>1. Intended Use</h3>
+            <p>Our software is designed for legitimate business operations. You agree to use our products only for their intended purpose as described in the product documentation.</p>
+
+            <h3>2. Prohibited Activities</h3>
+            <p>You may not use our software to:</p>
+            <ul>
+                <li>Conduct illegal activities or store illegal content</li>
+                <li>Infringe on intellectual property rights of others</li>
+                <li>Distribute malware or engage in hacking</li>
+                <li>Process payments without proper authorization</li>
+                <li>Misrepresent the software as your own product</li>
+                <li>Circumvent license restrictions or share with unauthorized users</li>
+            </ul>
+
+            <h3>3. Account Security</h3>
+            <p>You are responsible for:</p>
+            <ul>
+                <li>Creating strong passwords for all user accounts</li>
+                <li>Limiting access to authorized personnel only</li>
+                <li>Immediately reporting any security breaches</li>
+                <li>Logging out of shared devices</li>
+            </ul>
+
+            <h3>4. Data Integrity</h3>
+            <p>You agree to:</p>
+            <ul>
+                <li>Enter accurate and truthful information</li>
+                <li>Maintain regular data backups</li>
+                <li>Not attempt to corrupt or manipulate system databases</li>
+                <li>Report any data inconsistencies to our support team</li>
+            </ul>
+
+            <h3>5. Consequences of Violations</h3>
+            <p>Violations of this policy may result in:</p>
+            <ul>
+                <li>Suspension or termination of your license</li>
+                <li>Legal action for damages</li>
+                <li>Reporting to relevant authorities</li>
+            </ul>
+
+            <h3>6. Reporting Violations</h3>
+            <p>If you become aware of any misuse of our software, please <a href="index.html#contact" style="color: var(--color-primary);">contact us immediately</a>.</p>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="policy-section" style="background: rgba(74, 144, 226, 0.1); padding: var(--spacing-xl); border-radius: var(--border-radius-md); text-align: center;">
+            <h3 style="margin-top: 0;">Questions About These Policies?</h3>
+            <p>We're here to help clarify any concerns you may have.</p>
+            <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-lg);">
+                <a href="https://wa.me/254717205175" target="_blank" class="btn btn-primary">WhatsApp Us</a>
+                <a href="index.html#contact" class="btn btn-secondary">Contact Form</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="content-container">
+            <p>&copy; 2025 Hamster Innovations. From Idea to Interface - We build what you Imagine.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/utils.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/page-transitions.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+/* ============================================
+   PAGE TRANSITION - PARALLELOGRAM MASK REVEAL
+   Based on Ma Sài Gòn Space effect
+   ============================================ */
+
+/* -------------------- Mask Overlay -------------------- */
+.page-transition-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-bg-darker, #050d18);
+    z-index: 9999;
+    pointer-events: none;
+    will-change: clip-path;
+
+    /* CSS Custom Properties for 4 vertices */
+    --point1X: 50%;
+    --point1Y: 50%;
+    --point2X: 50%;
+    --point2Y: 50%;
+    --point3X: 50%;
+    --point3Y: 50%;
+    --point4X: 50%;
+    --point4Y: 50%;
+
+    /* Clip-path polygon using vertices */
+    clip-path: polygon(
+        var(--point1X) var(--point1Y),
+        var(--point2X) var(--point2Y),
+        var(--point3X) var(--point3Y),
+        var(--point4X) var(--point4Y)
+    );
+}
+
+/* Active state - mask is visible */
+.page-transition-mask.active {
+    pointer-events: all;
+}
+
+/* Covered state - mask fully visible (screen black/covered) */
+.page-transition-mask.covered {
+    --point1X: 0%;
+    --point1Y: 0%;
+    --point2X: 100%;
+    --point2Y: 0%;
+    --point3X: 100%;
+    --point3Y: 100%;
+    --point4X: 0%;
+    --point4Y: 100%;
+}
+
+/* Revealed state - mask invisible (content visible) */
+.page-transition-mask.revealed {
+    --point1X: 50%;
+    --point1Y: 50%;
+    --point2X: 50%;
+    --point2Y: 50%;
+    --point3X: 50%;
+    --point3Y: 50%;
+    --point4X: 50%;
+    --point4Y: 50%;
+}
+
+/* -------------------- View Transition API Styles -------------------- */
+@supports (view-transition-name: none) {
+    /* Root element during transition */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation-duration: 0s;
+    }
+
+    /* Custom transition group for mask effect */
+    .page-content {
+        view-transition-name: page-content;
+    }
+
+    ::view-transition-old(page-content) {
+        animation: none;
+    }
+
+    ::view-transition-new(page-content) {
+        animation: none;
+    }
+}
+
+/* -------------------- Loading Indicator -------------------- */
+.transition-loading {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.transition-loading.active {
+    opacity: 1;
+}
+
+.transition-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(74, 144, 226, 0.2);
+    border-top-color: var(--color-primary, #4a90e2);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* -------------------- Accessibility -------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .page-transition-mask {
+        transition: opacity 0.3s ease !important;
+        clip-path: none !important;
+    }
+
+    .page-transition-mask.covered {
+        opacity: 1;
+    }
+
+    .page-transition-mask.revealed {
+        opacity: 0;
+    }
+
+    .transition-spinner {
+        animation: none;
+    }
+}
+
+/* ============================================
+   RESPONSIVE: DIAGONAL SWEEP ANIMATION
+   Mobile: Simplified 2-vertex (400ms)
+   Desktop: Complex 4-vertex parallelogram (1200ms)
+   Both use JavaScript animation for smooth diagonal motion
+   ============================================ */
+
+/* -------------------- Mobile Optimizations -------------------- */
+@media screen and (max-width: 640px) {
+    .transition-loading {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .transition-spinner {
+        width: 32px;
+        height: 32px;
+        border-width: 2px;
+    }
+}

@@ -1,0 +1,451 @@
+/* ============================================
+   LAYOUT CSS - PROGRESSIVE ENHANCEMENT
+   Mobile-first responsive layouts using min-width queries
+   Enhances base.css for tablet and desktop viewports
+   ============================================ */
+
+/* ============================================
+   TABLET (≥ 640px)
+   ============================================ */
+@media (min-width: 640px) {
+
+    /* Typography adjustments */
+    .hero-subtitle {
+        font-size: var(--font-size-lg);
+    }
+
+    .section-subtitle {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Navigation - Show company name */
+    .company-name {
+        display: inline-block;
+    }
+
+    /* Hero - Horizontal button layout */
+    .hero-cta {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        width: auto;
+        min-width: 160px;
+    }
+
+    /* About - Start transitioning to two-column */
+    .about-content {
+        gap: var(--spacing-2xl);
+    }
+
+    /* Feature tabs - More spacing */
+    .tab-inner {
+        padding: var(--spacing-xl);
+    }
+
+    /* Package cards - 2 columns */
+    .packages-stack {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .package-card {
+        flex: 0 1 calc(50% - var(--spacing-md));
+        max-width: 320px;
+    }
+
+
+    /* Footer - 2 columns */
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+
+    /* Modal - Larger on tablet */
+    .modal-container {
+        width: calc(100% - 80px);
+        max-width: 600px;
+    }
+
+    .modal-content {
+        padding: var(--spacing-2xl);
+    }
+
+    .modal-close {
+        top: var(--spacing-lg);
+        right: var(--spacing-lg);
+        width: 40px;
+        height: 40px;
+    }
+
+    .modal-header h2 {
+        font-size: var(--font-size-3xl);
+    }
+}
+
+/* ============================================
+   DESKTOP (≥ 1024px)
+   ============================================ */
+@media (min-width: 1024px) {
+
+    /* Enhanced Background */
+    .background-image {
+        background-image: url('../assets/background.jpg'); /* Desktop background */
+    }
+
+    /* Fuller bokeh effects on desktop */
+    .bokeh-element {
+        filter: blur(80px);
+        opacity: 0.15;
+    }
+
+    .bokeh-1 {
+        width: 500px;
+        height: 500px;
+    }
+
+    .bokeh-2 {
+        width: 400px;
+        height: 400px;
+    }
+
+    .bokeh-3 {
+        width: 350px;
+        height: 350px;
+        bottom: 15%;
+        left: 25%;
+    }
+
+    .bokeh-4 {
+        width: 450px;
+        height: 450px;
+        top: 30%;
+        left: 45%;
+    }
+
+    /* Navigation styles moved to main.css for consolidation */
+    /* Desktop nav: @media (min-width: 768px) in main.css */
+    /* Mobile nav: responsive.css for mobile overrides */
+
+    /* Hero - Desktop layout */
+    .hero-section {
+        min-height: 100vh;
+        padding-top: var(--spacing-3xl);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-5xl);
+        letter-spacing: -2px;
+    }
+
+    .hero-title .word {
+        margin: 0 0.3em;
+    }
+
+    .hero-tagline {
+        font-size: var(--font-size-2xl);
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-lg);
+        max-width: 600px;
+    }
+
+    .hero-cta {
+        gap: var(--spacing-md);
+    }
+
+    .scroll-indicator {
+        bottom: var(--spacing-2xl);
+        font-size: var(--font-size-sm);
+    }
+
+    /* About - Two-column layout */
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-3xl);
+        align-items: center;
+    }
+
+    .about-text {
+        font-size: var(--font-size-lg);
+    }
+
+    .about-highlight {
+        font-size: var(--font-size-xl);
+    }
+
+    .about-image img {
+        max-height: none;
+        height: 100%;
+    }
+
+    /* Feature Tabs - Side-by-side layout */
+    .tab-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-2xl);
+        align-items: center;
+        padding: var(--spacing-2xl);
+    }
+
+    .tab-text {
+        order: 1;
+    }
+
+    .tab-image {
+        order: 2;
+        height: 300px;
+        max-height: none;
+    }
+
+    .tab-text h3 {
+        font-size: var(--font-size-2xl);
+    }
+
+    .tab-text p {
+        font-size: var(--font-size-lg);
+    }
+
+    /* Package Cards - 4 columns horizontal */
+    .packages-stack {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: var(--spacing-lg);
+    }
+
+    .package-card {
+        flex: 0 1 280px;
+        max-width: 280px;
+    }
+
+    .package-icon {
+        font-size: 2.5rem;
+    }
+
+    .package-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .package-description {
+        font-size: var(--font-size-base);
+    }
+
+    .package-features li {
+        font-size: var(--font-size-base);
+    }
+
+
+    /* Footer - 4 columns */
+    .footer-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-2xl);
+    }
+
+    .footer-top {
+        margin-bottom: var(--spacing-2xl);
+        padding-bottom: var(--spacing-xl);
+    }
+
+    .footer-logo {
+        font-size: var(--font-size-2xl);
+    }
+
+    .footer-links a,
+    .footer-links span {
+        min-height: auto;
+    }
+
+    /* Modal - Desktop size */
+    .modal-container {
+        max-width: 700px;
+    }
+
+    /* Remove touch-specific styles on desktop */
+    @media (hover: hover) and (pointer: fine) {
+        .btn:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(74, 144, 226, 0.25);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .package-card:hover {
+            transform: translateY(-4px);
+        }
+
+    }
+}
+
+/* ============================================
+   LARGE DESKTOP (≥ 1280px)
+   ============================================ */
+@media (min-width: 1280px) {
+
+    /* Content container - Max width expansion */
+    .content-container {
+        max-width: 1400px;
+    }
+
+    /* Hero - Larger typography */
+    .hero-title {
+        font-size: 4rem;
+    }
+
+    /* Sections - More generous spacing */
+    section {
+        padding: var(--spacing-3xl) 0;
+    }
+
+    .section-title {
+        font-size: 3rem;
+    }
+
+    /* Package cards - More spread */
+    .packages-stack {
+        gap: var(--spacing-2xl);
+    }
+
+    .package-card {
+        max-width: 320px;
+    }
+
+}
+
+/* ============================================
+   ULTRA-WIDE (≥ 1536px)
+   ============================================ */
+@media (min-width: 1536px) {
+
+    .content-container {
+        max-width: 1536px;
+    }
+
+    .hero-title {
+        font-size: 4.5rem;
+    }
+
+    .section-title {
+        font-size: 3.5rem;
+    }
+}
+
+/* ============================================
+   CONTAINER QUERIES (Modern Enhancement)
+   ============================================ */
+
+/* Container query support detection */
+@supports (container-type: inline-size) {
+
+    /* Define containers */
+    .about-content,
+    .tab-inner,
+    .cascading-card {
+        container-type: inline-size;
+    }
+
+    /* Responsive card based on container width */
+    @container (min-width: 600px) {
+        .cascade-card-header h3 {
+            font-size: var(--font-size-2xl);
+        }
+    }
+
+    /* Tab content responsive to its container */
+    @container (min-width: 800px) {
+        .tab-inner {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION ADJUSTMENTS
+   ============================================ */
+@media (max-height: 600px) and (orientation: landscape) {
+
+    .hero-section {
+        min-height: auto;
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-3xl);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .hero-subtitle {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+
+    /* Hide interactive elements */
+    .nav-toggle,
+    .scroll-indicator,
+    .bokeh-overlay,
+    .background-layer,
+    .modal {
+        display: none !important;
+    }
+
+    /* Adjust colors for print */
+    body {
+        background: white;
+        color: black;
+    }
+
+    .hero-title,
+    .section-title {
+        color: black;
+        -webkit-text-fill-color: black;
+    }
+
+    /* Remove animations and transitions */
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    /* Prevent page breaks inside elements */
+    section,
+    .package-card,
+    .cascading-card,
+    .about-content {
+        page-break-inside: avoid;
+    }
+
+    /* Adjust spacing for print */
+    section {
+        padding: 2rem 0;
+    }
+
+    .btn {
+        border: 1px solid black;
+    }
+}

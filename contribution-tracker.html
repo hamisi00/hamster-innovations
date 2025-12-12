@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fund management system for chamas, SACCOs, and community groups with contribution tracking and analytics">
+    <title>Contribution Tracker | Hamster Innovations</title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CRITICAL CSS - Inlined for fast first paint -->
+    <style>
+        /* Critical above-the-fold styles inlined for performance */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+        body{min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#ffffff;background-color:#050d18;overflow-x:hidden}
+        :root{--color-bg-dark:#0a1628;--color-bg-darker:#050d18;--color-primary:#4a90e2;--color-secondary:#6b5dd1;--color-text-primary:#ffffff;--color-text-secondary:#b8c5d6;--color-text-muted:#7a8ba3;--font-size-base:1rem;--font-size-lg:clamp(1.125rem,2vw,1.25rem);--font-size-xl:clamp(1.25rem,2.5vw,1.5rem);--font-size-2xl:clamp(1.5rem,3vw,2rem);--font-size-3xl:clamp(1.75rem,4vw,2.5rem);--font-size-4xl:clamp(2rem,5vw,3rem);--font-size-5xl:clamp(2.25rem,6vw,3.5rem);--spacing-xs:0.5rem;--spacing-sm:1rem;--spacing-md:clamp(1.5rem,3vw,2rem);--spacing-lg:clamp(2rem,4vw,3rem);--spacing-xl:clamp(2.5rem,5vw,4rem);--spacing-2xl:clamp(3rem,6vw,5rem);--spacing-3xl:clamp(4rem,8vw,6rem);--max-width:1280px;--border-radius-sm:0.5rem;--border-radius-md:1rem;--font-primary:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--font-heading:"Segoe UI",system-ui,sans-serif;--z-background:-1;--z-content:1;--z-nav:100;--z-toggle:110}
+        .background-layer{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
+        .background-image{position:fixed;top:0;left:0;width:100vw;height:100vh;background-image:url('assets/mobile_background.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0.9}
+        .bokeh-overlay{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none}
+        .bokeh-element{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.08}
+        .bokeh-1{width:200px;height:200px;background:radial-gradient(circle,var(--color-primary) 0%,transparent 70%);top:10%;left:15%}
+        .bokeh-2{width:180px;height:180px;background:radial-gradient(circle,var(--color-secondary) 0%,transparent 70%);bottom:20%;right:10%}
+        @media (max-width: 1024px) {
+            .main-nav{position:fixed;top:16px;left:16px;right:16px;width:calc(100% - 32px);z-index:1100;padding:var(--spacing-sm) var(--spacing-md);background:rgba(10,22,40,0.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.2);border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.3);height:56px}
+            .nav-container{display:flex;justify-content:space-between;align-items:center;height:100%;padding:0}
+            .nav-logo{display:flex;align-items:center;gap:var(--spacing-sm)}
+            .logo-link{display:flex;align-items:center;text-decoration:none}
+            .logo-icon{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(74,144,226,0.3)}
+            .company-name{font-family:'Poppins',var(--font-primary);font-size:1.25rem;font-weight:800;color:var(--color-text-primary);display:none}
+            .nav-toggle{display:flex;flex-direction:column;justify-content:center;align-items:center;background:transparent;border:none;cursor:pointer;padding:8px;z-index:1100;position:absolute;right:var(--spacing-md);top:50%;transform:translateY(-50%);width:40px;height:40px}
+            .nav-toggle:focus{outline:none}
+            .nav-toggle:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px}
+            .nav-toggle .line{background:#ffffff;box-shadow:0 0 8px rgba(255,255,255,0.6);position:absolute;left:50%;transform:translateX(-50%);transition:transform 0.3s ease;width:24px;height:2.5px}
+            .nav-toggle .line1{top:14px}
+            .nav-toggle .line2{bottom:14px}
+            .nav-menu{position:fixed;top:0;left:0;height:100vh;width:280px;max-width:75vw;background:rgba(10,22,40,1);padding:var(--spacing-2xl) var(--spacing-lg);transform:translateX(calc(-100% - 16px));transition:transform 0.8s cubic-bezier(0.4,0,0.2,1);z-index:1001;list-style:none;display:flex;flex-direction:column;gap:var(--spacing-md)}
+        }
+        .hero-section{min-height:calc(100vh - 56px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--spacing-xl) var(--spacing-md);padding-top:calc(56px + var(--spacing-xl));position:relative}
+        .hero-content{max-width:900px;margin:0 auto;position:relative;z-index:1}
+        .hero-title{font-family:var(--font-heading);font-size:var(--font-size-4xl);font-weight:800;line-height:1.1;margin-bottom:var(--spacing-md);letter-spacing:-1px;color:var(--color-text-primary)}
+        .hero-title .word{display:inline-block;margin:0 0.2em}
+        .hero-tagline{font-size:var(--font-size-xl);font-weight:600;color:var(--color-primary);margin-bottom:var(--spacing-sm);font-style:italic}
+        .hero-subtitle{font-size:var(--font-size-base);color:var(--color-text-secondary);margin-bottom:var(--spacing-lg);line-height:1.65}
+        .hero-cta{display:flex;flex-direction:column;gap:var(--spacing-sm);width:100%}
+        .btn{display:inline-block;padding:var(--spacing-md) var(--spacing-lg);border-radius:var(--border-radius-md);font-size:var(--font-size-base);font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all 0.18s ease;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center}
+        .btn-primary{background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));color:var(--color-text-primary);box-shadow:0 0 20px rgba(74,144,226,0.15)}
+        .btn-secondary{background:rgba(255,255,255,0.1);color:var(--color-text-primary);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(10px)}
+        .content-container{max-width:var(--max-width);margin:0 auto;padding:0 var(--spacing-md)}
+    </style>
+
+    <!-- CSS Files - Optimized Load Order -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/transitions.css">
+</head>
+<body>
+    <!-- Animated Background Layer -->
+    <div class="background-layer">
+        <div class="background-image"></div>
+        <div class="bokeh-overlay">
+            <div class="bokeh-element bokeh-1"></div>
+            <div class="bokeh-element bokeh-2"></div>
+            <div class="bokeh-element bokeh-3"></div>
+            <div class="bokeh-element bokeh-4"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/icon.png" alt="Hamster Innovations" class="logo-icon">
+                    <span class="company-name">Hamster Innovations</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#analytics" class="nav-link">Analytics</a></li>
+                <li><a href="#cta" class="nav-link">Get Started</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Navigation Backdrop (Mobile) -->
+    <div class="nav-backdrop" id="navBackdrop"></div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section" style="min-height: 60vh;">
+        <div class="hero-content">
+            <h1 class="hero-title" data-animate="title">
+                <span class="word">Contribution</span>
+                <span class="word">Tracker</span>
+            </h1>
+            <p class="hero-tagline" data-animate="fade-up">
+                Fund Management for Chamas, SACCOs & Community Groups
+            </p>
+            <p class="hero-subtitle" data-animate="fade-up">
+                Track group contributions, manage multiple funds with goal setting, generate transparent financial reports, and synchronize data to the cloud — perfect for community savings and investment groups
+            </p>
+        </div>
+    </section>
+
+    <!-- Product Screenshot Hero -->
+    <section style="padding: 2rem 0;">
+        <div class="content-container">
+            <div class="product-screenshot" data-animate="fade-up" style="text-align: center;">
+                <img src="images/products/contribution-tracker/hero-dashboard.png" alt="Contribution Dashboard with Fund Progress" style="max-width: 100%; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="features-tabs-section">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Core Features</h2>
+                <p class="section-subtitle">Everything you need for transparent group financial management</p>
+            </div>
+
+            <!-- Feature Grid -->
+            <div class="bento-grid" data-animate="bento-reveal" style="margin-top: 3rem; grid-auto-rows: 150px;">
+                <!-- Feature 1: Fund Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Fund Tracking & Management</h3>
+                        <p style="margin-bottom: 1rem;">Create and manage multiple fund types with flexible categorization. Set target amounts and track progress with visual indicators. Easy fund creation with real-time goal achievement monitoring for all your group's financial objectives.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Multiple Funds</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Goal Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Progress Indicators</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Group Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">👥</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Group Management</h3>
+                        <p style="margin-bottom: 1rem;">Organize contributors into groups with flexible sorting options (alphabetical, contribution-based). Track group performance and identify top contributors with leaderboard-style rankings.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Flexible Sorting</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Performance Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Leaderboard Rankings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 3: Payment Tracking -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">💳</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Payment Tracking</h3>
+                        <p style="margin-bottom: 1rem;">Record and track individual payments with powerful search and filter capabilities. Export payment data in multiple formats for accounting and reporting purposes.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Payment Records</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Search & Filter</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Data Export</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Expense Management -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">💸</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Expense Management</h3>
+                        <p style="margin-bottom: 1rem;">Categorized expense tracking for supplies, maintenance, utilities, and management. Filter by date ranges with vendor tracking and search functionality.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Categorized Expenses</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Vendor Tracking</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Date Filtering</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 5: Cloud Sync -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">☁️</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Google Sheets Integration</h3>
+                        <p style="margin-bottom: 1rem;">Seamless cloud backup and synchronization with Google Sheets. Test connections, setup sync, and perform bidirectional data synchronization for secure offsite backups.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Cloud Backup</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Auto Sync</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Bidirectional Sync</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 6: Smart Calculator -->
+                <div class="bento-card large" data-animate="fade-up">
+                    <div class="bento-content">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🧮</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Smart Calculator & Tools</h3>
+                        <p style="margin-bottom: 1rem;">Built-in calculator with calculation history. Data export in multiple formats. Import/restore functionality for data migration and backup management.</p>
+                        <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Built-in Calculator</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Multi-Format Export</li>
+                            <li style="background: rgba(74, 144, 226, 0.1); padding: 0.4rem 0.8rem; border-radius: 0.3rem; font-size: 0.85rem;">✓ Data Import/Restore</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard Showcase -->
+    <section id="analytics" style="padding: 4rem 0; background: rgba(74, 144, 226, 0.02);">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up" style="text-align: center; margin-bottom: 2rem;">
+                <h2 class="section-title">Transparent Financial Analytics</h2>
+                <p class="section-subtitle">Build trust with detailed insights and comprehensive contribution tracking</p>
+            </div>
+            <div class="product-screenshot" data-animate="fade-up" style="text-align: center;">
+                <img src="images/products/contribution-tracker/analytics-dashboard.png" alt="Analytics Dashboard with Fund Progress & Contribution Charts" style="max-width: 100%; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            </div>
+            <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">📊 Fund Performance</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Collection progress, goal achievement, fund trends</p>
+                </div>
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">👥 Contribution Analytics</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Group performance, top contributors, rankings</p>
+                </div>
+                <div style="text-align: center;" data-animate="fade-up">
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">💰 Collections vs Expenses</h4>
+                    <p style="font-size: 0.9rem; color: var(--color-text-muted);">Comparative analysis, expense breakdown, balance trends</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="contact-section" style="padding: 4rem 0; text-align: center;">
+        <div class="content-container">
+            <div class="section-header" data-animate="fade-up">
+                <h2 class="section-title">Ready to Bring Transparency to Your Group?</h2>
+                <p class="section-subtitle">Let's discuss your needs</p>
+            </div>
+            <div class="hero-cta" data-animate="fade-up" style="margin-top: 2rem; justify-content: center;">
+                <a href="https://wa.me/254717205175?text=Hi!%20I'm%20interested%20in%20the%20Contribution%20Tracker" target="_blank" class="btn btn-primary">Get Started</a>
+                <a href="index.html#contact" class="btn btn-secondary">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="content-container">
+            <p>&copy; 2025 Hamster Innovations. From Idea to Interface - We build what you Imagine.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/utils.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/page-transitions.js"></script>
+</body>
+</html>
