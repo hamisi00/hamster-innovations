@@ -1,0 +1,503 @@
+/* ============================================
+   PORTFOLIO WEBSITE - ANIMATIONS
+   Based on Web.md Specifications
+   ============================================ */
+
+/* -------------------- Animation Variables -------------------- */
+:root {
+    /* Timing Functions (Single Easing Family) */
+    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
+    --ease-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+    --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Duration Scale */
+    --duration-fast: 120ms;
+    --duration-quick: 180ms;
+    --duration-normal: 360ms;
+    --duration-slow: 500ms;
+    --duration-very-slow: 700ms;
+    --duration-drift: 30s;
+    --duration-hue: 40s;
+
+    /* Animation Amplitudes */
+    --scale-hover: 1.02;
+    --scale-press: 0.98;
+    --scale-reveal: 0.98;
+    --translate-reveal: 16px;
+    --translate-shake: 8px;
+    --glow-opacity: 0.15;
+
+    /* Parallax Multipliers */
+    --parallax-foreground: 0.9;
+    --parallax-mid: 0.6;
+    --parallax-background: 0.3;
+}
+
+/* -------------------- Reduced Motion Support -------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .bokeh-element,
+    .background-layer {
+        animation: none !important;
+        transform: none !important;
+    }
+
+    .hero-title .word,
+    [data-animate] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* Static fallback when animations paused */
+body.animations-paused .bokeh-element,
+body.animations-paused .background-layer,
+body.animations-paused .animated {
+    animation-play-state: paused !important;
+}
+
+/* Fallback: Reveal content after 2s if JavaScript fails */
+@keyframes fallback-reveal {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+[data-animate] {
+    animation: fallback-reveal 0.5s ease-out 2s forwards;
+}
+
+/* JavaScript will override this when it loads */
+[data-animate].revealed,
+[data-animate].animation-complete {
+    animation: none;
+}
+
+/* -------------------- Background Animations -------------------- */
+/* Bokeh drift animation */
+@keyframes bokeh-drift {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    25% {
+        transform: translate3d(12px, -8px, 0) scale(1.03);
+    }
+    50% {
+        transform: translate3d(-10px, 10px, 0) scale(0.98);
+    }
+    75% {
+        transform: translate3d(-8px, -12px, 0) scale(1.02);
+    }
+}
+
+/* Bokeh hue shift */
+@keyframes bokeh-hue {
+    0%, 100% {
+        filter: blur(80px) hue-rotate(0deg);
+    }
+    50% {
+        filter: blur(80px) hue-rotate(6deg);
+    }
+}
+
+/* Apply animations to bokeh elements */
+.bokeh-1 {
+    animation: bokeh-drift var(--duration-drift) var(--ease-standard) infinite,
+               bokeh-hue var(--duration-hue) var(--ease-standard) infinite;
+    animation-delay: 0s, 0s;
+}
+
+.bokeh-2 {
+    animation: bokeh-drift var(--duration-drift) var(--ease-standard) infinite,
+               bokeh-hue var(--duration-hue) var(--ease-standard) infinite;
+    animation-delay: 5s, 8s;
+}
+
+.bokeh-3 {
+    animation: bokeh-drift var(--duration-drift) var(--ease-standard) infinite,
+               bokeh-hue var(--duration-hue) var(--ease-standard) infinite;
+    animation-delay: 10s, 16s;
+}
+
+.bokeh-4 {
+    animation: bokeh-drift var(--duration-drift) var(--ease-standard) infinite,
+               bokeh-hue var(--duration-hue) var(--ease-standard) infinite;
+    animation-delay: 15s, 24s;
+}
+
+/* Background subtle movement */
+@keyframes background-drift {
+    0%, 100% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(-6px, 8px, 0);
+    }
+}
+
+.background-image {
+    animation: background-drift 60s var(--ease-standard) infinite;
+}
+
+/* -------------------- Micro-interactions -------------------- */
+/* Button hover effects */
+.btn,
+.bento-card,
+.nav-link,
+.card-link {
+    transition: all var(--duration-quick) var(--ease-standard);
+}
+
+/* Error shake animation */
+@keyframes error-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(var(--translate-shake)); }
+    50% { transform: translateX(calc(var(--translate-shake) * -1)); }
+    75% { transform: translateX(calc(var(--translate-shake) * 0.5)); }
+}
+
+.error-shake {
+    animation: error-shake 360ms var(--ease-standard);
+}
+
+/* Focus states */
+*:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* Glow effect on hover */
+.btn-primary:hover,
+.bento-card:hover {
+    box-shadow: 0 0 20px rgba(74, 144, 226, var(--glow-opacity)),
+                0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* -------------------- Scroll-based Reveals -------------------- */
+/* Fade up animation */
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(var(--translate-reveal));
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Elements start hidden */
+[data-animate="fade-up"] {
+    opacity: 0;
+    transform: translateY(var(--translate-reveal));
+}
+
+/* Revealed state */
+[data-animate="fade-up"].revealed {
+    animation: fade-up var(--duration-very-slow) var(--ease-standard) forwards;
+}
+
+/* Stagger delays for multiple elements */
+[data-animate="fade-up"].revealed:nth-child(1) { animation-delay: 0ms; }
+[data-animate="fade-up"].revealed:nth-child(2) { animation-delay: 80ms; }
+[data-animate="fade-up"].revealed:nth-child(3) { animation-delay: 160ms; }
+[data-animate="fade-up"].revealed:nth-child(4) { animation-delay: 240ms; }
+[data-animate="fade-up"].revealed:nth-child(5) { animation-delay: 320ms; }
+[data-animate="fade-up"].revealed:nth-child(6) { animation-delay: 400ms; }
+[data-animate="fade-up"].revealed:nth-child(7) { animation-delay: 480ms; }
+[data-animate="fade-up"].revealed:nth-child(8) { animation-delay: 560ms; }
+
+/* -------------------- Hero Typography Animation -------------------- */
+/* Hero title letter reveal */
+@keyframes letter-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-title[data-animate="title"] .word {
+    opacity: 0;
+    display: inline-block;
+}
+
+.hero-title[data-animate="title"].revealed .word {
+    animation: letter-reveal var(--duration-very-slow) var(--ease-smooth) forwards;
+}
+
+.hero-title[data-animate="title"].revealed .word:nth-child(1) {
+    animation-delay: 0ms;
+}
+
+.hero-title[data-animate="title"].revealed .word:nth-child(2) {
+    animation-delay: 300ms;
+}
+
+/* Section title scale reveal */
+@keyframes section-title-reveal {
+    from {
+        opacity: 0;
+        transform: scale(var(--scale-reveal));
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.section-title {
+    opacity: 0;
+    transform: scale(var(--scale-reveal));
+}
+
+.section-header.revealed .section-title {
+    animation: section-title-reveal 600ms var(--ease-smooth) forwards;
+}
+
+.section-subtitle {
+    opacity: 0;
+    transform: translateY(var(--translate-reveal));
+}
+
+.section-header.revealed .section-subtitle {
+    animation: fade-up var(--duration-very-slow) var(--ease-standard) forwards;
+    animation-delay: 200ms;
+}
+
+/* -------------------- Parallax Effects -------------------- */
+[data-animate="parallax"] {
+    will-change: transform;
+}
+
+.parallax-foreground {
+    transform: translateY(calc(var(--scroll-offset) * var(--parallax-foreground) * -1));
+}
+
+.parallax-mid {
+    transform: translateY(calc(var(--scroll-offset) * var(--parallax-mid) * -1));
+}
+
+.parallax-background {
+    transform: translateY(calc(var(--scroll-offset) * var(--parallax-background) * -1));
+}
+
+/* -------------------- Navigation Animations -------------------- */
+/* Navigation slide in */
+@keyframes nav-slide-in {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.main-nav {
+    animation: nav-slide-in var(--duration-slow) var(--ease-smooth);
+}
+
+/* Menu open animation */
+@keyframes menu-reveal {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* DISABLED - conflicts with mobile drawer translateX transition causing bounce */
+/*
+.nav-menu.open {
+    animation: menu-reveal var(--duration-normal) var(--ease-smooth);
+}
+*/
+
+/* -------------------- Page Transitions -------------------- */
+@keyframes page-fade-in {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.page-transition {
+    animation: page-fade-in var(--duration-slow) var(--ease-smooth);
+}
+
+/* -------------------- Bento Grid Animations -------------------- */
+.bento-grid {
+    opacity: 0;
+}
+
+.bento-grid.revealed {
+    opacity: 1;
+    transition: opacity var(--duration-slow) var(--ease-standard);
+}
+
+.bento-card {
+    opacity: 0;
+    transform: translateY(var(--translate-reveal));
+}
+
+.bento-grid.revealed .bento-card {
+    animation: fade-up var(--duration-very-slow) var(--ease-standard) forwards;
+}
+
+/* Stagger bento cards */
+.bento-grid.revealed .bento-card:nth-child(1) { animation-delay: 0ms; }
+.bento-grid.revealed .bento-card:nth-child(2) { animation-delay: 100ms; }
+.bento-grid.revealed .bento-card:nth-child(3) { animation-delay: 200ms; }
+.bento-grid.revealed .bento-card:nth-child(4) { animation-delay: 300ms; }
+.bento-grid.revealed .bento-card:nth-child(5) { animation-delay: 400ms; }
+.bento-grid.revealed .bento-card:nth-child(6) { animation-delay: 500ms; }
+.bento-grid.revealed .bento-card:nth-child(7) { animation-delay: 600ms; }
+
+/* -------------------- Stacked Cards Animations -------------------- */
+/* Initial stacked state */
+.stack-card {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+/* Cards stack on top of each other with slight offset */
+.stack-card[data-card="1"] {
+    transform: scale(1) translateY(0);
+}
+
+.stack-card[data-card="2"] {
+    transform: scale(0.98) translateY(0);
+}
+
+.stack-card[data-card="3"] {
+    transform: scale(0.96) translateY(0);
+}
+
+.stack-card[data-card="4"] {
+    transform: scale(0.94) translateY(0);
+}
+
+/* Spread animation when scrolled into view */
+.stack-card.spreading[data-card="1"] {
+    transform: scale(1) translateY(0) translateX(0);
+    opacity: 1;
+}
+
+.stack-card.spreading[data-card="2"] {
+    transform: scale(1) translateY(0) translateX(0);
+    opacity: 1;
+}
+
+.stack-card.spreading[data-card="3"] {
+    transform: scale(1) translateY(0) translateX(0);
+    opacity: 1;
+}
+
+.stack-card.spreading[data-card="4"] {
+    transform: scale(1) translateY(0) translateX(0);
+    opacity: 1;
+}
+
+/* Scale down previous cards as new ones come in */
+.stack-card.passed {
+    transform: scale(0.92) translateY(-20px);
+    opacity: 0.5;
+}
+
+/* -------------------- Loading States -------------------- */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.loading {
+    animation: pulse 2s var(--ease-standard) infinite;
+}
+
+/* -------------------- Scroll Indicator Animation -------------------- */
+@keyframes scroll-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(8px);
+    }
+}
+
+.scroll-indicator svg {
+    animation: scroll-bounce 2s var(--ease-standard) infinite;
+}
+
+/* -------------------- Backdrop Blur Animation -------------------- */
+/* DISABLED - was causing menu items to be blurred when drawer fully open */
+/*
+@supports (backdrop-filter: blur(6px)) {
+    .nav-menu.open::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(6px);
+        z-index: -1;
+    }
+}
+*/
+
+/* -------------------- Utility Classes -------------------- */
+.fade-in {
+    animation: fade-up var(--duration-very-slow) var(--ease-standard);
+}
+
+.slide-in-left {
+    animation: page-fade-in var(--duration-slow) var(--ease-smooth);
+}
+
+.scale-in {
+    animation: section-title-reveal 600ms var(--ease-smooth);
+}
+
+/* -------------------- Performance Optimizations -------------------- */
+/* GPU acceleration hints */
+.bokeh-element,
+.background-layer,
+.stack-card,
+.bento-card,
+[data-animate] {
+    will-change: transform, opacity;
+}
+
+/* Remove will-change after animation completes */
+.animation-complete {
+    will-change: auto;
+}
