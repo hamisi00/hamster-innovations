@@ -503,8 +503,33 @@
             currentState = STATE.UNLOCKED;
             hasCompletedOnce = true;
 
+            // Get section position before collapse
+            const sectionRect = section.getBoundingClientRect();
+            const sectionTop = sectionRect.top + window.scrollY;
+            const sectionBottomBefore = sectionTop + sectionRect.height;
+
+            // Collapse the section height
+            section.classList.add('completed');
+
             // Change back to sticky - allows natural unsticking
             stickyWrapper.classList.remove('position-locked');
+
+            // Calculate height removed and adjust scroll position
+            // Force reflow to get new dimensions
+            section.offsetHeight;
+            const sectionBottomAfter = sectionTop + section.offsetHeight;
+            const heightRemoved = sectionBottomBefore - sectionBottomAfter;
+
+            // Scroll to compensate for the height change
+            // This positions the user at the products section
+            const productsSection = document.querySelector('#products');
+            if (productsSection) {
+                const targetScrollY = productsSection.offsetTop - 120; // Account for nav height
+                window.scrollTo({
+                    top: targetScrollY,
+                    behavior: 'smooth'
+                });
+            }
         }
 
         // Unlock upward (to About section)
